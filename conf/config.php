@@ -1,7 +1,7 @@
 <?php
 //db properties
 $dbhost='localhost';
-$dbuser='';
+$dbuser='root';
 $dbpass='';
 $dbname='hotel_app';
 
