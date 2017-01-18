@@ -31,13 +31,13 @@ function list_rooms() {
 	$result = mysqli_query ( $conn, "SELECT * FROM room" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
 		
-		echo '<td><a href="rooms.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
+		echo '<td><a href="room.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
 					
 		<td>' . $row [room_no] . '</td>	
 		<td>' . $row [room_cat] . '</td>	
 		<td><a > <i class="fa fa-eye"></i></td>			
 					
-		<td><a href="rooms.php?job=delete&id=' . $row [id] . '" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"><i class="fa fa-times fa-2x"></i></a></td>
+		<td><a href="room.php?job=delete&id=' . $row [id] . '" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"><i class="fa fa-times fa-2x"></i></a></td>
 	
 		</tr>';
 		
@@ -147,7 +147,7 @@ function list_rooms_in_home(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM room LIMIT 6" );
+	$result=mysqli_query($conn, "SELECT * FROM room" );
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		$date=date('Y-m-d');
@@ -188,7 +188,7 @@ function list_available_rooms_in_home(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM room" );
+	$result=mysqli_query($conn, "SELECT * FROM room LIMIT 6" );
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		$date=date('Y-m-d');
