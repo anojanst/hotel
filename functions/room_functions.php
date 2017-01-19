@@ -190,7 +190,7 @@ function list_available_rooms_in_home(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM room " );
+	$result=mysqli_query($conn, "SELECT * FROM room" );
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		$date=date('Y-m-d');
