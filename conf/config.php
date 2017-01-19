@@ -2,7 +2,7 @@
 //db properties
 $dbhost='localhost';
 $dbuser='root';
-$dbpass='';
+$dbpass='anojan10';
 $dbname='hotel_app';
 
 
