@@ -1,6 +1,6 @@
 <?php
 $dbhost='localhost';
 $dbuser='root';
-$dbpass='';
+$dbpass='raviprasath6112';
 $dbname='hotel_app';
 ?>

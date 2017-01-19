@@ -62,7 +62,7 @@ function get_rooms_info_by_id($id) {
 	}
 	
 }
-function update_room_cat($id, $category, $price) {
+function update_room_cat($id, $category) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
