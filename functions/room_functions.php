@@ -31,13 +31,13 @@ function list_rooms() {
 	$result = mysqli_query ( $conn, "SELECT * FROM room" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
 		
-		echo '<td><a href="rooms.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
+		echo '<td><a href="room.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
 					
 		<td>' . $row [room_no] . '</td>	
 		<td>' . $row [room_cat] . '</td>	
 		<td><a > <i class="fa fa-eye"></i></td>			
 					
-		<td><a href="rooms.php?job=delete&id=' . $row [id] . '" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"><i class="fa fa-times fa-2x"></i></a></td>
+		<td><a href="room.php?job=delete&id=' . $row [id] . '" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"><i class="fa fa-times fa-2x"></i></a></td>
 	
 		</tr>';
 		
@@ -83,10 +83,10 @@ function get_room_info_by_room_no($room_no) {
 function update_rooms($id, $room_number,$room_cat) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
-	
+
 	mysqli_select_db ($conn, $dbname );
 	$query = "UPDATE room SET
-	room_number='$room_number',
+	room_no='$room_number',
 	room_cat='$room_cat'
 	WHERE id='$id'";
 	
@@ -94,6 +94,8 @@ function update_rooms($id, $room_number,$room_cat) {
 	
 	
 }
+
+
 
 function cancel_rooms($id) {
 	include 'conf/config.php';
@@ -147,7 +149,7 @@ function list_rooms_in_home(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM room LIMIT 6" );
+	$result=mysqli_query($conn, "SELECT * FROM room" );
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		$date=date('Y-m-d');
@@ -208,7 +210,7 @@ function list_available_rooms_in_home(){
 						</a>
 			
 			            <div class="info-box-content">';
-			
+
 			$result1=mysqli_query($conn, "SELECT * FROM room_has_facility WHERE room_no='$row[room_no]' " );
 			while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
 			{

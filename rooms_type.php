@@ -39,7 +39,7 @@ if ($_SESSION ['login'] == 1) {
 			$_SESSION ['id'] = $id = $_REQUEST ['id'];
 			$info = get_rooms_info_by_id ( $id );
 			
-			$smarty->assign ( 'room_type', $info ['room_type'] );
+			$smarty->assign ( 'room_type', $info ['category'] );
 			$smarty->assign ( 'price', $info ['price'] );
 			$smarty->assign ( 'edit', 'on' );
 			

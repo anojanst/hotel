@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.8, created on 2017-01-17 11:06:25
+<?php /* Smarty version Smarty-3.0.8, created on 2017-01-17 12:40:04
          compiled from "./templates/user_home/user_home.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1764091189587deca115b879-53794694%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:971365579587e02945e7bd1-21515869%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '1bcad81bef12e712af583b7b24b1d62d9faf7ae6' => 
     array (
       0 => './templates/user_home/user_home.tpl',
-      1 => 1484647579,
+      1 => 1484653200,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1764091189587deca115b879-53794694',
+  'nocache_hash' => '971365579587e02945e7bd1-21515869',
   'function' => 
   array (
   ),
@@ -74,7 +74,7 @@ list_available_rooms_in_home();<?php $_block_content = ob_get_clean(); $_block_r
           </div>
 	</div>
 
-<div class="col-lg-3 col-xs-12">
+	<div class="col-lg-3 col-xs-12">
 		<div class="box box-info box-solid">
             <div class="box-header with-border">
               	<i class="fa fa-bar-chart"></i>
@@ -97,39 +97,12 @@ list_available_rooms_in_home();<?php $_block_content = ob_get_clean(); $_block_r
        
           </div>
 	</div>
-	<div class="col-lg-6 col-xs-12">
-
-
-		<div class="box box-danger box-solid">
-            <div class="box-header with-border">
-              	<i class="fa fa-building"></i>
-              		<h3 class="box-title">Rooms</h3>
-              <!-- tools box -->
-              	<div class="pull-right box-tools">
-                	<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimize">
-                  	<i class="fa fa-minus"></i></button>
-              	</div>
-              <!-- /. tools -->
-            </div>
-
-		<div class="box-body">
-			<?php $_smarty_tpl->smarty->_tag_stack[] = array('php', array()); $_block_repeat=true; smarty_block_php(array(), null, $_smarty_tpl, $_block_repeat);while ($_block_repeat) { ob_start();?>
-list_rooms_in_home();<?php $_block_content = ob_get_clean(); $_block_repeat=false; echo smarty_block_php(array(), $_block_content, $_smarty_tpl, $_block_repeat);  } array_pop($_smarty_tpl->smarty->_tag_stack);?>
-
-		</div>
-       
-          </div>
-	</div>
-
-
 	
-
-
  
 		
-  <div class="control-sidebar-bg"></div>
-</div>
-    </section>
+  		<div class="control-sidebar-bg"></div>
+	</div>
+</section>
  
 </body>
 

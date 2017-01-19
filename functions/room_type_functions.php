@@ -30,13 +30,13 @@ function list_room_cat() {
 	$result = mysqli_query ( $conn, "SELECT * FROM room_cat" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
 		
-		echo '<td><a href="room_cat.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
+		echo '<td><a href="rooms_type.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
 
 		<td>' . $row [category] . '</td>
 					
 		<td>' . $row [price] . '</td>
 					
-		<td><a href="room_cat.php?job=delete&id=' . $row [id] . '" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"><i class="fa fa-times fa-2x"></i></a></td>
+		<td><a href="rooms_type.php?job=delete&id=' . $row [id] . '" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"><i class="fa fa-times fa-2x"></i></a></td>
 	
 		</tr>';
 		
@@ -52,7 +52,7 @@ function list_room_cat() {
 function get_rooms_info_by_id($id) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
-	
+	echo "SELECT * FROM room_cat WHERE id='$id'";
 	$result = mysqli_query ($conn, "SELECT * FROM room_cat WHERE id='$id'" );
 	
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) 
@@ -60,7 +60,6 @@ function get_rooms_info_by_id($id) {
 	{
 		return $row;
 	}
-	
 	
 }
 function update_room_cat($id, $category, $price) {

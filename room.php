@@ -28,6 +28,7 @@ if ($_SESSION ['login'] == 1) {
 				$room_cat = $_POST ['room_cat'];
 				
 				update_rooms ( $id, $room_no,$room_cat );
+				
 			} else {
 				
 				$room_no=$_POST ['room_no'];
@@ -57,7 +58,7 @@ if ($_SESSION ['login'] == 1) {
 			
 		} elseif ($_REQUEST ['job'] == "edit") {
 			$_SESSION ['id'] = $id = $_REQUEST ['id'];
-			$info = get_room_info_by_id ( $id );
+			$info = get_room_info($id);
 			
 			$smarty->assign ( 'room_no', $info ['room_no'] );
 			$smarty->assign ( 'room_type', $info ['room_type'] );
