@@ -62,7 +62,22 @@
 									<li class="scroll">
 												<a href="facility.php"><i class="fa fa-bed"></i><span>Facility</span></a>
 									</li>
-
+									
+									<li class="treeview">
+											<a href="#"><i class="fa fa-cutlery"></i><span>Meal  </span><span class="pull-right-container">
+												<i class="fa fa-angle-left pull-right"></i></span></a>
+														<ul class="treeview-menu">
+																 <li class="scroll">
+																		<a href="meal.php"><i class="fa fa-cutlery"></i><span> Meal Type</span></a>
+																</li>
+																  <li class="scroll">
+																		<a href="meal_detail.php"><i class="fa fa-cutlery"></i><span> Meal Detail</span></a>
+																</li>	
+														 </ul>
+															
+									</li>	
+									
+									
 									<li class="scroll">
 												<a href="login.php?job=logout"><i class="fa fa-sign-out"></i> <span> Logout</span></a>
 									</li>
