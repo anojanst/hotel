@@ -89,7 +89,14 @@ if ($_SESSION ['login'] == 1) {
 			$smarty->assign ( 'page', "Rooms" );
 			$smarty->display ( 'room/room_grid_view.tpl' );
 		}
-
+		
+		
+		elseif ($_REQUEST ['job'] == "room_view_by_status") {
+		
+			$smarty->assign ( 'page', "Rooms" );
+			$smarty->display ( 'room/room_view_by_status.tpl' );
+		}
+		
 		else {
 			$smarty->assign ( 'room_types', list_room_type() );
 			$smarty->assign ( 'page', "Rooms" );

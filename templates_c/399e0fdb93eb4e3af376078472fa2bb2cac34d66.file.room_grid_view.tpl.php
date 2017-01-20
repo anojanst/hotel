@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.8, created on 2017-01-18 06:36:29
+<?php /* Smarty version Smarty-3.0.8, created on 2017-01-20 05:12:24
          compiled from "./templates/room/room_grid_view.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:1102350213587efeddef7246-08730133%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:145464698558818e2800ed50-66839392%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '399e0fdb93eb4e3af376078472fa2bb2cac34d66' => 
     array (
       0 => './templates/room/room_grid_view.tpl',
-      1 => 1484713927,
+      1 => 1484885541,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '1102350213587efeddef7246-08730133',
+  'nocache_hash' => '145464698558818e2800ed50-66839392',
   'function' => 
   array (
   ),
@@ -50,6 +50,7 @@ list_rooms_in_home();<?php $_block_content = ob_get_clean(); $_block_repeat=fals
 			</div>		   
 	 	</div>
 
+		
 	 </div>
 	</div>
 	</section>

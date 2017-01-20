@@ -1,17 +1,17 @@
-<?php /* Smarty version Smarty-3.0.8, created on 2017-01-06 12:13:38
+<?php /* Smarty version Smarty-3.0.8, created on 2017-01-20 05:07:34
          compiled from "./templates/user_navigation.tpl" */ ?>
-<?php /*%%SmartyHeaderCode:473137609586f7be2e8e582-85602956%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+<?php /*%%SmartyHeaderCode:206344551858818d06b73ca8-99847188%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_smarty_tpl->decodeProperties(array (
   'file_dependency' => 
   array (
     '48b3cc27cbe30d95ec9a0a5c184d25ff5d293ebc' => 
     array (
       0 => './templates/user_navigation.tpl',
-      1 => 1483701215,
+      1 => 1484885191,
       2 => 'file',
     ),
   ),
-  'nocache_hash' => '473137609586f7be2e8e582-85602956',
+  'nocache_hash' => '206344551858818d06b73ca8-99847188',
   'function' => 
   array (
   ),
@@ -76,6 +76,10 @@ $_smarty_tpl->decodeProperties(array (
 
 									<li class="scroll">
 												<a href="room.php"><i class="fa fa-building"></i><span>Room</span></a>
+									</li>
+
+									<li class="scroll">
+												<a href="room.php?job=room_view_by_status"><i class="fa fa-building"></i><span>Rooms by Status</span></a>
 									</li>
 
 									<li class="scroll">
