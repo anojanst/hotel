@@ -58,6 +58,9 @@
 				<li class="scroll">
 							<a href="room.php"><i class="fa fa-building"></i><span>Room</span></a>
 				</li>
+				<li class="scroll">
+							<a href="room.php?job=room_view_by_status"><i class="fa fa-building"></i><span>Rooms by Status</span></a>
+				</li>
 
 				<li class="scroll">
 							<a href="facility.php"><i class="fa fa-bed"></i><span>Facility</span></a>
@@ -66,7 +69,7 @@
 				<li class="scroll">
 							<a href="login.php?job=logout"><i class="fa fa-sign-out"></i> <span> Logout</span></a>
 				</li>
-
 			</ul>           
 		</section>
 	</aside>
+
