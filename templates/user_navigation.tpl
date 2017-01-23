@@ -65,6 +65,9 @@
 				<li class="scroll">
 					<a href="facility.php"><i class="fa fa-bed"></i><span>Facility</span></a>
 				</li>
+				<li class="scroll">
+							<a href="sales.php"><i class="fa fa-balance-scale"></i><span> Sales</span></a>
+				</li>
 				<li class="treeview">
 					<a href="#"><i class="fa fa-cutlery"></i><span>Meal  </span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
