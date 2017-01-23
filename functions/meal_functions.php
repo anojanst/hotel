@@ -208,9 +208,6 @@ function delete_meal_detail($id) {
 	
 	mysqli_query ($conn, $query );
 	
-	
-<<<<<<< HEAD
-=======
 }
 
 
@@ -237,5 +234,5 @@ function get_meal_info_by_id($id) {
 		return $row;
 	}
 	include 'conf/closedb.php';
->>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45
+
 }
