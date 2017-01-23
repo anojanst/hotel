@@ -236,26 +236,21 @@ function list_available_rooms(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM room" );
+
+	$date=date('Y-m-d');
+	$result=mysqli_query($conn, "SELECT * FROM room WHERE room.room_no NOT IN (SELECT room_no FROM room_has_status WHERE date='$date') ORDER BY room_no DESC " );
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		if($_SESSION['selected_date']){
-		$date=$_SESSION['selected_date'];
-		}else{
 		$date=date('Y-m-d');
-		}
-		
-		$room_status_info=get_available_room_status($row['room_no'],$date);
-
+		$room_status_info=get_room_has_status_info($row['room_no'], $date);
 		if($room_status_info[status_id]){
 			$status_info=get_status_info($room_status_info[status_id]);
 			$color=$status_info['color'];
 		}
 		else{
+	
 			$color="green";
 			echo '
-				<div class="col-lg-3 col-xs-4">
-
 				<div class="col-lg-4 col-xs-6">
 					<div class="info-box">
 		
@@ -264,7 +259,7 @@ function list_available_rooms(){
 						</a>
 		
 			            <div class="info-box-content">';
-
+	
 			$result1=mysqli_query($conn, "SELECT * FROM room_has_facility WHERE room_no='$row[room_no]' " );
 			while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
 			{
@@ -276,11 +271,12 @@ function list_available_rooms(){
             			</div>
             		</div>
               	</div>';
-				
+	
 		}
-
 	}
-
+	
+	
+	
 }
 function list_booked_rooms(){
 	include 'conf/config.php';
