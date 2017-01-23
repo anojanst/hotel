@@ -1,4 +1,4 @@
-{include file="header.tpl"}
+{include file="user_header.tpl"}
 	
 	<div id="adbox" style="height: 400px;">
 		<div style="margin-top: 80px; padding-top: 10px; width: 300px; height: 200px; background: #FBFBF0; border-radius: 1px; box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.3); z-index: 9; font-family: arial;"> 
