@@ -1,3 +1,22 @@
+<?php /* Smarty version Smarty-3.0.8, created on 2017-01-23 14:59:13
+         compiled from "./templates/user_navigation.tpl" */ ?>
+<?php /*%%SmartyHeaderCode:928504685885cce96f5290-55142196%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    '48b3cc27cbe30d95ec9a0a5c184d25ff5d293ebc' => 
+    array (
+      0 => './templates/user_navigation.tpl',
+      1 => 1485163748,
+      2 => 'file',
+    ),
+  ),
+  'nocache_hash' => '928504685885cce96f5290-55142196',
+  'function' => 
+  array (
+  ),
+  'has_nocache_code' => false,
+)); /*/%%SmartyHeaderCode%%*/?>
 <body class="sidebar-mini skin-purple sidebar-collapse">
 <div class="wrapper">
 <header class="main-header">
