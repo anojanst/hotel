@@ -41,29 +41,29 @@
 				</li>						
 
 				<li class="scroll">
-							<a href="room_manage.php?job=room_manage_form"><i class="fa fa-cogs"></i><span>Room Management</span></a>
+					<a href="room_manage.php?job=room_manage_form"><i class="fa fa-cogs"></i><span>Room Management</span></a>
 				</li>
 				
 				<li class="scroll">
-							<a href="modules.php"><i class="fa fa-th"></i><span>Module Management</span></a>
+					<a href="modules.php"><i class="fa fa-th"></i><span>Module Management</span></a>
 				</li>
 
 				<li class="scroll">
-							<a href="rooms_type.php"><i class="fa fa-calendar"></i><span>Rooms Type</span></a>
+					<a href="rooms_type.php"><i class="fa fa-calendar"></i><span>Rooms Type</span></a>
 				</li>
 				<li class="scroll">
 					<a href="room_charge.php"><i class="fa fa-calendar"></i><span>Room Charge</span></a>
 				</li>
 
 				<li class="scroll">
-							<a href="room.php"><i class="fa fa-building"></i><span>Room</span></a>
+					<a href="room.php"><i class="fa fa-building"></i><span>Room</span></a>
 				</li>
 				<li class="scroll">
-							<a href="room.php?job=room_view_by_status"><i class="fa fa-building"></i><span>Rooms by Status</span></a>
+					<a href="room.php?job=room_view_by_status"><i class="fa fa-building"></i><span>Rooms by Status</span></a>
 				</li>
 
 				<li class="scroll">
-							<a href="facility.php"><i class="fa fa-bed"></i><span>Facility</span></a>
+					<a href="facility.php"><i class="fa fa-bed"></i><span>Facility</span></a>
 				</li>
 				<li class="scroll">
 							<a href="sales.php"><i class="fa fa-balance-scale"></i><span> Sales</span></a>
@@ -71,19 +71,19 @@
 				<li class="treeview">
 					<a href="#"><i class="fa fa-cutlery"></i><span>Meal  </span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
-								<ul class="treeview-menu">
-										 <li class="scroll">
-												<a href="meal.php"><i class="fa fa-cutlery"></i><span> Meal Type</span></a>
-										</li>
-										  <li class="scroll">
-												<a href="meal_detail.php"><i class="fa fa-cutlery"></i><span> Meal Detail</span></a>
-										</li>	
-								 </ul>
+							<ul class="treeview-menu">
+									 <li class="scroll">
+											<a href="meal.php"><i class="fa fa-cutlery"></i><span> Meal Type</span></a>
+									</li>
+									  <li class="scroll">
+											<a href="meal_detail.php"><i class="fa fa-cutlery"></i><span> Meal Detail</span></a>
+									</li>	
+							 </ul>
 															
 				</li>	
 
 				<li class="scroll">
-							<a href="login.php?job=logout"><i class="fa fa-sign-out"></i> <span> Logout</span></a>
+					<a href="login.php?job=logout"><i class="fa fa-sign-out"></i> <span> Logout</span></a>
 				</li>
 			</ul>           
 		</section>
