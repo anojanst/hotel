@@ -8,6 +8,7 @@
      			   <div class="col-lg-12">
                      <h2><strong>Available Rooms</strong></h2>
                		</div>
+<<<<<<< HEAD
 
 	<form name="room_status_by_date" role="form" action="room.php?job=room_view_by_status" method="post">	
 
@@ -25,6 +26,9 @@
 
 
 	 
+=======
+		 
+>>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45
 		<div class="row">	
  			<div class="col-lg-12" >	
  				<section class="content">
@@ -74,7 +78,10 @@
 			</div>		   
 	 	</div>
 
+<<<<<<< HEAD
 	</form>
+=======
+>>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45
 
 	 </div>
 	</div>
@@ -85,6 +92,7 @@
 {include file="footer.tpl"}
 {include file="user_footer.tpl"}
 
+<<<<<<< HEAD
 {literal}
 <script>
   $(function () {
@@ -96,3 +104,5 @@
  });
 </script>
 {/literal}
+=======
+>>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45

@@ -92,8 +92,11 @@ if ($_SESSION ['login'] == 1) {
 		
 		
 		elseif ($_REQUEST ['job'] == "room_view_by_status") {
+<<<<<<< HEAD
 			
 			$_SESSION['selected_date']=$_POST ['selected_date'];
+=======
+>>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45
 		
 			$smarty->assign ( 'page', "Rooms" );
 			$smarty->display ( 'room/room_view_by_status.tpl' );

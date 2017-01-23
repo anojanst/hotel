@@ -209,4 +209,33 @@ function delete_meal_detail($id) {
 	mysqli_query ($conn, $query );
 	
 	
+<<<<<<< HEAD
+=======
+}
+
+
+function list_meal_for_sale(){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+	
+	$result=mysqli_query($conn, "SELECT * FROM meal ORDER BY id DESC");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+    echo'   <option value="'.$row[id].'">'.$row[meal_name].'('.$row[size].')</option>';
+    }
+    include 'conf/closedb.php';
+    
+}
+
+
+function get_meal_info_by_id($id) {
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+	echo "SELECT * FROM meal WHERE id='$id'";
+	$result = mysqli_query($conn, "SELECT * FROM meal WHERE id='$id'");
+	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+		return $row;
+	}
+	include 'conf/closedb.php';
+>>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45
 }

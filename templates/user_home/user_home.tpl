@@ -1,11 +1,17 @@
 {include file="user_header.tpl"}
 {include file="user_navigation.tpl"}
     <!-- Main content -->
+<<<<<<< HEAD
 
 
 <section class="content">
 
 	<div class="col-lg-6 col-xs-12">
+=======
+<section class="content">
+
+<div class="col-lg-6 col-xs-12">
+>>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45
 
 		<div class="box box-danger box-solid">
             <div class="box-header with-border">
@@ -27,7 +33,11 @@
        </div>
 	</div>
 
+<<<<<<< HEAD
 	<div class="col-lg-3 col-xs-12"> 
+=======
+<div class="col-lg-3 col-xs-12"> 
+>>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45
 		<div class="box box-muted box-solid">
             <div class="box-header with-border">
               	<i class="fa fa-phone"></i>
@@ -46,7 +56,10 @@
 			<h4>Booking Confirmation<small class="label pull-right bg-yellow">2</small></h4>
 			<h4><small class="label pull-right bg-green">1</small></h4>
 			<h4>Under Maintainance <small class="label pull-right bg-navy">1</small></h4>
+<<<<<<< HEAD
 			<h4>Calls <small class="label pull-right bg-navy">1</small></h4>
+=======
+>>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45
 			<a href="call.php"> <button type="button" class="btn btn-block btn-success" "> New call</button> </a>
 		</div>
        
@@ -72,11 +85,15 @@
 			<h4>Booked <small class="label pull-right bg-yellow">2</small></h4>
 			<h4>Vacant <small class="label pull-right bg-green">1</small></h4>
 			<h4>Under Maintainance <small class="label pull-right bg-navy">1</small></h4>
+<<<<<<< HEAD
 			<h4>Grand Hall <small class="label pull-right bg-navy">1</small></h4>
+=======
+>>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45
 		</div>
        
           </div>
 	</div>
+<<<<<<< HEAD
 
 	<div class="col-lg-3 col-xs-12">
           <!-- small box -->
@@ -112,6 +129,12 @@
           </div>
     </div>
 
+=======
+	
+ 
+		
+  		<div class="control-sidebar-bg"></div>
+>>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45
 	</div>
 </section>
  
