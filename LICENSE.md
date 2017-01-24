@@ -1,7 +1,11 @@
 
 The MIT License (MIT)
 
+<<<<<<< HEAD
+Copyright (c) 2017 shdharshan
+=======
 Copyright (c) 2017 The Koders
+>>>>>>> 5a8317de531d70a269bf6a5406de7d70202e5d45
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

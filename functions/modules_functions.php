@@ -105,7 +105,6 @@ function cancel_module($id) {
 function check_access($module_no, $user_id) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
-	
 	$result = mysqli_query ( $conn, "SELECT count(id) FROM user_has_module WHERE user_id='$user_id' AND module_no='$module_no'" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
 		if ($row ['count(id)'] >= 1) {

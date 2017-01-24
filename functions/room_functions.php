@@ -191,8 +191,9 @@ function list_rooms_in_home(){
 function list_available_rooms_in_home(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
-
-	$result=mysqli_query($conn, "SELECT * FROM room" );
+		
+	$date=date('Y-m-d');
+	$result=mysqli_query($conn, "SELECT * FROM room WHERE room.room_no NOT IN (SELECT room_no FROM room_has_status WHERE date='$date') ORDER BY room_no DESC limit 6" );
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		$date=date('Y-m-d');
@@ -202,6 +203,7 @@ function list_available_rooms_in_home(){
 			$color=$status_info['color'];
 		}
 		else{
+
 			$color="green";
 			echo '
 				<div class="col-lg-4 col-xs-6">
@@ -224,9 +226,8 @@ function list_available_rooms_in_home(){
             			</div>
             		</div>
               	</div>';
-			
-		}
 
+		}
 	}
 
 }
@@ -235,16 +236,19 @@ function list_available_rooms(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM room" );
+
+	$date=date('Y-m-d');
+	$result=mysqli_query($conn, "SELECT * FROM room WHERE room.room_no NOT IN (SELECT room_no FROM room_has_status WHERE date='$date') ORDER BY room_no DESC " );
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		$date=date('Y-m-d');
-		$room_status_info=get_available_room_status($row['room_no']);
+		$room_status_info=get_room_has_status_info($row['room_no'], $date);
 		if($room_status_info[status_id]){
 			$status_info=get_status_info($room_status_info[status_id]);
 			$color=$status_info['color'];
 		}
 		else{
+	
 			$color="green";
 			echo '
 				<div class="col-lg-4 col-xs-6">
@@ -255,7 +259,7 @@ function list_available_rooms(){
 						</a>
 		
 			            <div class="info-box-content">';
-
+	
 			$result1=mysqli_query($conn, "SELECT * FROM room_has_facility WHERE room_no='$row[room_no]' " );
 			while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
 			{
@@ -267,11 +271,12 @@ function list_available_rooms(){
             			</div>
             		</div>
               	</div>';
-				
+	
 		}
-
 	}
-
+	
+	
+	
 }
 function list_booked_rooms(){
 	include 'conf/config.php';
@@ -280,8 +285,14 @@ function list_booked_rooms(){
 	$result=mysqli_query($conn, "SELECT * FROM room" );
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		$date=date('Y-m-d');
-		$room_status_info=get_room_booked_status_info($row['room_no']);
+
+		if($_SESSION['selected_date']){
+			$date=$_SESSION['selected_date'];
+		}else{
+			$date=date('Y-m-d');
+		}
+		
+		$room_status_info=get_room_booked_status_info($row['room_no'],$date);
 		if($room_status_info[status_id]){
 			$status_info=get_status_info($room_status_info[status_id]);
 			$color=$status_info['color'];
@@ -327,8 +338,14 @@ function list_occupied_room(){
 	$result=mysqli_query($conn, "SELECT * FROM room" );
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		$date=date('Y-m-d');
-		$room_status_info=get_room_occupied_status_info($row['room_no']);
+
+		if($_SESSION['selected_date']){
+			$date=$_SESSION['selected_date'];
+		}else{
+			$date=date('Y-m-d');
+		}
+		
+		$room_status_info=get_room_occupied_status_info($row['room_no'], $date);
 		if($room_status_info[status_id]){
 			$status_info=get_status_info($room_status_info[status_id]);
 			$color=$status_info['color'];
@@ -380,12 +397,12 @@ function get_room_has_status_info($room_no, $date) {
 
 }
 
-function get_available_room_status($room_no) {
+
+function get_available_room_status($room_no,$date) {
 	include 'conf/main_config.php';
 	include 'conf/opendb.php';
 
-	$result = mysqli_query ($conn, "SELECT * FROM room_has_status WHERE room_no='$room_no'" );
-
+	$result = mysqli_query ($conn, "SELECT * FROM room_has_status WHERE room_no='$room_no' AND date='$date'" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) )
 
 	{
@@ -394,11 +411,12 @@ function get_available_room_status($room_no) {
 
 }
 
-function get_room_booked_status_info($room_no) {
+
+function get_room_booked_status_info($room_no, $date) {
 	include 'conf/main_config.php';
 	include 'conf/opendb.php';
 
-	$result = mysqli_query ($conn, "SELECT * FROM room_has_status WHERE room_no='$room_no' AND status='Booked'" );
+	$result = mysqli_query ($conn, "SELECT * FROM room_has_status WHERE room_no='$room_no' AND date='$date' AND status='Booked'" );
 
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) )
 
@@ -409,11 +427,11 @@ function get_room_booked_status_info($room_no) {
 
 }
 
-function get_room_occupied_status_info($room_no) {
+function get_room_occupied_status_info($room_no, $date) {
 	include 'conf/main_config.php';
 	include 'conf/opendb.php';
 
-	$result = mysqli_query ($conn, "SELECT * FROM room_has_status WHERE room_no='$room_no' AND status='Occupied'" );
+	$result = mysqli_query ($conn, "SELECT * FROM room_has_status WHERE room_no='$room_no' AND date='$date' AND status='Occupied'" );
 
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) )
 

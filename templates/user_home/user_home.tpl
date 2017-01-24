@@ -1,10 +1,10 @@
 {include file="user_header.tpl"}
 {include file="user_navigation.tpl"}
     <!-- Main content -->
+
 <section class="content">
 
 <div class="col-lg-6 col-xs-12">
-
 		<div class="box box-danger box-solid">
             <div class="box-header with-border">
               	<i class="fa fa-building"></i>
@@ -25,7 +25,8 @@
        </div>
 	</div>
 
-<div class="col-lg-3 col-xs-12"> 
+
+	<div class="col-lg-3 col-xs-12"> 
 		<div class="box box-muted box-solid">
             <div class="box-header with-border">
               	<i class="fa fa-phone"></i>
@@ -44,6 +45,9 @@
 			<h4>Booking Confirmation<small class="label pull-right bg-yellow">2</small></h4>
 			<h4><small class="label pull-right bg-green">1</small></h4>
 			<h4>Under Maintainance <small class="label pull-right bg-navy">1</small></h4>
+
+			<h4>Calls <small class="label pull-right bg-navy">1</small></h4>
+
 			<a href="call.php"> <button type="button" class="btn btn-block btn-success" "> New call</button> </a>
 		</div>
        
@@ -69,14 +73,49 @@
 			<h4>Booked <small class="label pull-right bg-yellow">2</small></h4>
 			<h4>Vacant <small class="label pull-right bg-green">1</small></h4>
 			<h4>Under Maintainance <small class="label pull-right bg-navy">1</small></h4>
-		</div>
+
+			<h4>Grand Hall <small class="label pull-right bg-navy">1</small></h4>
+	</div>
        
           </div>
 	</div>
-	
- 
-		
+
+
+	<div class="col-lg-3 col-xs-12">
+          <!-- small box -->
+          <div class="small-box bg-green">
+            <div class="inner">
+              <h3>House</h3>
+
+              <p>Management</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+    </div>
+
+	<div class="col-lg-3 col-xs-12">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>Restaurant</h3>
+
+              <p>Interface</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="#" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+    </div>
   		<div class="control-sidebar-bg"></div>
+
 	</div>
 </section>
  
