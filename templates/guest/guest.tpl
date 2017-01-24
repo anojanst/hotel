@@ -28,7 +28,7 @@
 		<div class="col-lg-4" style="margin-top: 10px;">			
 			
 				<div class="panel-body">
-					<form name="guest_form" role="form" action="call.php?job=save" method="post">
+					<form name="guest_form" role="form" action="guest.php?job=save" method="post">
 			  
 						
 							<div class="row" style="margin-bottom: 10px; margin-left: 20px;">
@@ -56,7 +56,7 @@
 
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
-										<strong>Caller Name</strong>									
+										<strong>Guest Name</strong>									
 										<input class="form-control" name="caller_name" value="{$caller_name}" required placeholder="Caller Name">
 								</div>                                
 							</div>
