@@ -1,4 +1,4 @@
-<?php
+ <?php
 require_once 'conf/smarty-conf.php';
 include 'functions/user_functions.php';
 include 'functions/room_functions.php';
