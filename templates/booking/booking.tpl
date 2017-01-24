@@ -77,6 +77,20 @@
 										<input class="form-control" name="to_date"  id="datepicker4" value="{$to_date}" required placeholder="To Date">
 								</div>                                
 							</div>
+
+							<div class="row" style="margin-bottom: 10px;">
+								<div class="col-lg-12">
+										<strong>Guest Name</strong>									
+										<input class="form-control" name="guest_name"  id="guest_name" value="{$guest_name}" required placeholder="Guest Name">
+								</div>                                
+							</div>
+
+							<div class="row" style="margin-bottom: 10px;">
+								<div class="col-lg-12">
+										<strong>Guest contact number</strong>									
+										<input class="form-control" name="guest_num"  id="guest_num" value="{$guest_name}" required placeholder="Guest contact number">
+								</div>                                
+							</div>
 			
 							
 				 <div class="row">
