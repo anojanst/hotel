@@ -1,12 +1,12 @@
 <?php
-function save_booking( $from_date, $to_date, $booking_ref) {
+function save_booking( $from_date, $to_date, $booking_ref, $booking_status_by) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db ( $conn, $dbname);
 
-	$query = "INSERT INTO booking (id, from_date, to_date, booking_ref)
-	VALUES ('', '$from_date','$to_date','$booking_ref')";
+	$query = "INSERT INTO booking (id, from_date, to_date, booking_ref, booking_status_by)
+	VALUES ('', '$from_date','$to_date','$booking_ref','$booking_status_by')";
 	
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 		
@@ -21,6 +21,23 @@ function save_caller_info_to_booking($caller_id,$booking_ref, $caller_name, $roo
 	
 	$query = "INSERT INTO booking_has_caller (id, caller_id,booking_ref, caller_name,room_no)
 	VALUES ('', '$caller_id', '$booking_ref', '$caller_name','$room_no')";
+
+	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
+
+}
+
+
+function save_guest_info_to_booking($guest_id,$booking_ref, $guest_name, $room_no) {
+
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	mysqli_select_db ( $conn, $dbname );
+	echo "INSERT INTO room_has_guest (id, guest_id,booking_ref, guest_name,room_no)
+	VALUES ('', '$guest_id', '$booking_ref', '$guest_name','$room_no')";
+	
+	$query = "INSERT INTO room_has_guest (id, guest_id,booking_ref, guest_name,room_no)
+	VALUES ('', '$guest_id', '$booking_ref', '$guest_name','$room_no')";
 
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 
@@ -48,7 +65,7 @@ function list_booking() {
 			<table  id="example1" style="width: 100%;" class="table table-bordered table-striped">
                   <thead>
                        <tr>
-                           <th>Caller Name</th>
+                           <th>Name</th>
 						   <th>Contact No</th>
 						   <th>Room No</th>
 						   <th>view</th>
@@ -56,13 +73,19 @@ function list_booking() {
                   </thead>
                   <tbody valign="top">';
 	
-	$result = mysqli_query ( $conn, "SELECT * FROM booking_has_caller" );
+	$result = mysqli_query ( $conn, "SELECT * FROM booking" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
-		$caller_info=get_caller_info_by_caller_id($row[caller_id]);
 		
+		if($row[booking_status_by]==Call){
+					
+		$caller_info=get_caller_info_by_caller_id($row[caller_id]);
+		echo '
+				<td>'.$caller_info[caller_name].' </td>	
+				<td> '.$caller_info[phone].'</td>
+			';
+		}
 		echo '	
-		<td>'.$row[caller_name].' </td>	
-		<td> '.$caller_info[phone].'</td>
+
 		<td> '.$row[room_no].'</td>	
 		<td><a href="booking.php?job=view_booking_detail&booking_ref='.$row[booking_ref].'"> <i class="fa fa-eye"></i></a></td>									
 		</tr>';

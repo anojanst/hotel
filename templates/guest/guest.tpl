@@ -22,6 +22,7 @@
    				 <div class="row">
      			   <div class="col-lg-12">
                      <h2><strong>Rooms </strong></h2>
+						<h4><strong>Welcome Guest </strong></h4>
                		</div>
 		 
 	<div class="row">
@@ -57,7 +58,7 @@
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
 										<strong>Guest Name</strong>									
-										<input class="form-control" name="caller_name" value="{$caller_name}" required placeholder="Caller Name">
+										<input class="form-control" name="guest_name" value="{$guest_name}" required placeholder="Guest Name">
 								</div>                                
 							</div>
 
@@ -159,7 +160,7 @@
     
     <div class="row">
         <div class="col-xs-12">
-                {php} list_call(); {/php}
+               {php} list_guest(); {/php}
             </div>
         </div>
     </div>

@@ -78,21 +78,6 @@
 								</div>                                
 							</div>
 
-							<div class="row" style="margin-bottom: 10px;">
-								<div class="col-lg-12">
-										<strong>Guest Name</strong>									
-										<input class="form-control" name="guest_name"  id="guest_name" value="{$guest_name}" required placeholder="Guest Name">
-								</div>                                
-							</div>
-
-							<div class="row" style="margin-bottom: 10px;">
-								<div class="col-lg-12">
-										<strong>Guest contact number</strong>									
-										<input class="form-control" name="guest_num"  id="guest_num" value="{$guest_name}" required placeholder="Guest contact number">
-								</div>                                
-							</div>
-			
-							
 				 <div class="row">
 					<div class="col-lg-6">
 						<button type="submit" name="ok" value="Save" class="btn btn-block btn-success btn-lg">Save</button>
