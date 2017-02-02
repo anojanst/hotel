@@ -87,12 +87,12 @@
             <div class="inner">
               <h3>House</h3>
 
-              <p>Management</p>
+              <p>Keeping</p>
             </div>
             <div class="icon">
               <i class="ion ion-stats-bars"></i>
             </div>
-            <a href="#" class="small-box-footer">
+            <a href="house_keeping.php?job=house_keeping" class="small-box-footer">
               More info <i class="fa fa-arrow-circle-right"></i>
             </a>
           </div>

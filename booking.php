@@ -3,6 +3,7 @@ require_once 'conf/smarty-conf.php';
 
 include 'functions/modules_functions.php';
 include 'functions/room_functions.php';
+include 'functions/room_manage_functions.php';
 include 'functions/booking_functions.php';
 include 'functions/call_functions.php';
 
@@ -29,7 +30,7 @@ if ($_SESSION ['login'] == 1) {
 		} elseif ($_REQUEST ['job'] == "save") {
 			
 				$booking_status_by=$_SESSION['booking_status_by'];
-			echo $booking_status_by;
+
 				$telephone_num=$_SESSION['telephone_num'];
 	
 				$room_cat=$_POST ['room_cat'];

@@ -65,70 +65,97 @@ function room_vacate_bill($booking_ref, $room_no){
 	$caller_info= get_caller_info_by_booking_id($booking_ref);
 
 	echo'
-	
-	<div class="col-xs-8">
-		
-          <div class="table-responsive">
-           
+	<div class="row">
+		<div class="col-xs-8">
+           <div class="row">
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5"> <strong> Room Number </strong> </font> </div>
                 <div class="col-lg-6"> <font size="5">'.$room_no.' </font></div>
               </div>
-                		
+           </div>
+           <div class="row"> 		
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5"> <strong> Booking No </strong> </font> </div>
                 <div class="col-lg-6"> <font size="5">'.$booking_ref.'</font> </div>
               </div>
-                		
+           </div>
+           <div class="row">     		
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5"> <strong> Caller Name </strong> </font> </div>
                 <div class="col-lg-6"> <font size="5">  '.$caller_info['caller_name'].'</font> </div>
               </div>
-                		
+           </div>
+           <div class="row">     		
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5"> <strong> From Date </strong> </font> </div>
                 <div class="col-lg-6"> <font size="5">  '.$booking_info['from_date'].' </font> </div>
               </div>
-
+           </div>
+			<div class="row">
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5"> <strong> To Date </strong> </font> </div>
                 <div class="col-lg-6"> <font size="5"> '.$date.' </font> </div>
               </div>                  		
-                		                		
+         	</div>
+            <div class="row">               		
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5"> <strong> Occupied Days </strong> </font> </div>
                 <div class="col-lg-6"> <font size="5">  '.$occupied_days.' </font> </div>
               </div>
-                		
+            </div>
+            <div class="row">    		
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5"> <strong> Room Type </strong> </font> </div>
                 <div class="col-lg-6"> <font size="5">  '.$room_info[room_cat].' </font> </div>
               </div>
-                		
+            </div>
+           <div class="row">    		
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5"> <strong> Total Room Charge </font> </div>
                 <div class="col-lg-6"> <font size="5">  '.$total_room_charge.' </font> </div>
               </div>
+           </div>';
 
-              <div class="col-lg-12">
-                <div class="col-lg-6"> <font size="5">  </th>
-                <div class="col-lg-6"> <font size="5">  <button  type="submit" class="btn btn-block btn-danger"> Pay Now </button> </font> </div>
-              </div>                		
-                			         
-    		</div>
+			    $result=mysqli_query($conn,"SELECT * FROM room_requests WHERE booking_ref='$booking_ref'");
+			    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC)){
+			    
+			    echo'	
+			    	<div class="row">
+				    	<div class="col-lg-12">
+					    	<div class="col-lg-6"> <font size="5"> <strong> '.$row[request].' </font> </div>
+					    	<div class="col-lg-6"> <font size="5">  '.$row[price].' </font> </div>
+				    	</div>
+			    	</div>';
+			    $request_total+=$row[request]+$row[price];
+				}
+			    $total = $total_room_charge+$request_total;
+             echo'	<div class="row">
+				    	<div class="col-lg-12">
+					    	<div class="col-lg-6"> <font size="5"> <strong> Total Amount </font> </div>
+					    	<div class="col-lg-6"> <font size="5">  '.number_format($total,2).' </font> </div>
+				    	</div>
+			    	</div><br/>
+             				<div class="row">
+             		 <div class="col-lg-12">
+                <div class="col-lg-6">  </div>
+                <div class="col-lg-3">   <button  type="submit"  class=" btn btn-block btn-danger"> Pay Now </button> </div>
+              	<div class="col-lg-3">  </div>
+				</div>  
+            </div>
        	</form>         		                		
-      </div>          		
-                		
-	
-		';
+      </div>
+     </div>';  
+     }        		
+             		
 
-		save_room_bill($room_no, $booking_ref, $caller_info['caller_name'],$booking_info['from_date'],$date, $occupied_days, $total_room_charge );
+		//save_room_bill($room_no, $booking_ref, $caller_info['caller_name'],$booking_info['from_date'],$date, $occupied_days, $total_room_charge );
 		
-	}
-	cancel_booking ( $_REQUEST ['booking_ref'] );
-	cancel_booking_has_caller($_REQUEST ['booking_ref']);
-	cancel_room_status($_REQUEST ['booking_ref'], $_REQUEST ['room_no']);
-
+	
+	//cancel_booking ( $_REQUEST ['booking_ref'] );
+	//cancel_booking_has_caller($_REQUEST ['booking_ref']);
+	//cancel_room_status($_REQUEST ['booking_ref'], $_REQUEST ['room_no']);
+     include 'conf/closedb.php';
+	
 }
 
 function save_room_bill($room_no, $booking_ref, $caller_name,$from_date,$date, $occupied_days, $total_room_charge ) {

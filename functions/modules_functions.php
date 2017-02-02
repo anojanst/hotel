@@ -75,8 +75,8 @@ function update_module($id, $module_name, $module_no) {
 	
 	mysqli_query ($conn, $query );
 	
-	
 }
+
 function delete_module($id) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';

@@ -57,6 +57,7 @@ if ($_SESSION ['login'] == 1) {
 			$smarty->display ( 'room/room.tpl' );
 			
 		} elseif ($_REQUEST ['job'] == "edit") {
+			
 			$_SESSION ['id'] = $id = $_REQUEST ['id'];
 			$info = get_room_info($id);
 			

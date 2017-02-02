@@ -33,8 +33,6 @@ function save_guest_info_to_booking($guest_id,$booking_ref, $guest_name, $room_n
 	include 'conf/opendb.php';
 
 	mysqli_select_db ( $conn, $dbname );
-	echo "INSERT INTO room_has_guest (id, guest_id,booking_ref, guest_name,room_no)
-	VALUES ('', '$guest_id', '$booking_ref', '$guest_name','$room_no')";
 	
 	$query = "INSERT INTO room_has_guest (id, guest_id,booking_ref, guest_name,room_no)
 	VALUES ('', '$guest_id', '$booking_ref', '$guest_name','$room_no')";
@@ -75,21 +73,29 @@ function list_booking() {
 	
 	$result = mysqli_query ( $conn, "SELECT * FROM booking" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
-		
+		echo $row[booking_status_by];
 		if($row[booking_status_by]==Call){
 					
-		$caller_info=get_caller_info_by_caller_id($row[caller_id]);
+		//$caller_info=get_caller_info_by_caller_id($row[booking_ref]);
+		$caller_info=get_caller_info_by_booking_id($row[booking_ref]);
 		echo '
-				<td>'.$caller_info[caller_name].' </td>	
-				<td> '.$caller_info[phone].'</td>
+		<td>'.$caller_info[caller_name].' </td>	
+		<td> '.$caller_info[phone].'</td>
+		<td> '.$caller_info[room_no].'</td>	
+		<td><a href="booking.php?job=view_booking_detail&booking_ref='.$row[booking_ref].'"> <i class="fa fa-eye"></i></a></td>									
+		</tr>
 			';
-		}
+		}elseif ($row[booking_status_by]==Direct){
+			$guest_info=get_guest_info_by_booking_id($row[booking_ref]);
+			
 		echo '	
-
+		<td>'.$guest_info[guest_name].' </td>	
+		<td> '.$guest_info[phone].'</td>
 		<td> '.$row[room_no].'</td>	
 		<td><a href="booking.php?job=view_booking_detail&booking_ref='.$row[booking_ref].'"> <i class="fa fa-eye"></i></a></td>									
-		</tr>';
-		
+		</tr>				
+			';
+		}
 		$i ++;
 	}
 	

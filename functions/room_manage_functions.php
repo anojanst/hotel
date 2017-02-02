@@ -74,6 +74,17 @@ function get_caller_info_by_booking_id($booking_ref){
 	}
 }
 
+function get_guest_info_by_booking_id($booking_ref){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$result=mysqli_query($conn, "SELECT * FROM room_has_guest WHERE booking_ref='$booking_ref'");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		return $row;
+	}
+}
+
 function cancel_booking_has_caller($booking_ref) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
