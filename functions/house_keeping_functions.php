@@ -116,7 +116,7 @@ function list_room_request_grid() {
 			            <div class="info-box-content">
 			            	<span class="info-box-text">'.$row[request].'</span>
               				<span class="info-box-number">'.$row[detail].'</span>
-              				<span class="info-box-number">'.$row[price].'</span>		
+              						
 						 	<a href="house_keeping.php?job=complete_request&request_ref='.$row[request_ref].'">	<button  type="button" class="btn btn-block btn-danger"> Completed Request </button> </a>
             			</div>
 

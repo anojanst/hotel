@@ -192,23 +192,17 @@ function print_room_vacate_bill($sales_no){
 
 	echo'<table style="width: 65%;" class="table-responsive table-bordered table-striped dt-responsive">
 		<tr>
-			<th>Item</th>
-			<th>Qty</th>
-			<th>Amount</th>
+			<th> </th>
+			<th> </th>
+			<th> </th>
 		</tr>';
 
-	echo'<tr  style="line-height: 30px;">
-            <td></td>
+	echo'<tr style="line-height: 30px;">
+            <td> </td>
             <td>Total</td>
             <td align="right">'.number_format($grand_total,2).'</td>
         </tr>
-            		
-		<tr  style="line-height: 30px;">
-            <td></td>
-            <td>Discount('.$discount.''.$discount_type.')</td>
-            <td align="right">('.number_format($dis,2).')</td>
-        </tr>
-            		
+            		            		
 		<tr  style="line-height: 30px;">
             <td></td>
             <td>Amount after Discount</td>
