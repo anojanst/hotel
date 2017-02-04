@@ -3,6 +3,7 @@ require_once 'conf/smarty-conf.php';
 
 include 'functions/modules_functions.php';
 include 'functions/room_functions.php';
+include 'functions/room_manage_functions.php';
 include 'functions/booking_functions.php';
 include 'functions/call_functions.php';
 
@@ -14,6 +15,7 @@ if ($_SESSION ['login'] == 1) {
 		if ($_REQUEST ['job'] == "booking_form") {
 			
 			$_SESSION['telephone_num']=$telephone_num=$_REQUEST['telephone_num'];
+			$_SESSION['booking_status_by']=$booking_status_by=$_REQUEST['booking_status_by'];
 			
 			$room_info=get_room_info_by_contact_number($telephone_num);
 			
@@ -27,17 +29,14 @@ if ($_SESSION ['login'] == 1) {
 			
 		} elseif ($_REQUEST ['job'] == "save") {
 			
+				$booking_status_by=$_SESSION['booking_status_by'];
+
 				$telephone_num=$_SESSION['telephone_num'];
-				
+	
 				$room_cat=$_POST ['room_cat'];
 				$room_no = $_POST ['room_no'];
-				
-				$info=get_caller_info_by_contact_number($telephone_num);
-				
-				$caller_name=$info[caller_name];
-				$caller_id=$info[id];
-
 				$_SESSION ['booking_ref']= $booking_ref= get_booking_ref();
+
 				
 				$from_date=$_POST ['from_date'];
 				$to_date = $_POST ['to_date'];
@@ -54,7 +53,7 @@ if ($_SESSION ['login'] == 1) {
 				}
 				else{
 					
-					save_booking( $from_date, $to_date, $booking_ref);
+					save_booking( $from_date, $to_date, $booking_ref, $booking_status_by);
 					
 					$status_info= get_room_status_info();
 					$status_id = $status_info['id'];
@@ -66,9 +65,27 @@ if ($_SESSION ['login'] == 1) {
 						$from_date = date ("Y-m-d", strtotime("+1 day", strtotime($from_date)));
 					}
 					
+						if($booking_status_by==Call){
+							$info=get_caller_info_by_contact_number($telephone_num);
+						
+							$caller_name=$info[caller_name];
+							$caller_id=$info[id];
+						
+							save_caller_info_to_booking($caller_id,$booking_ref, $caller_name, $room_no);
+							save_room_has_booking($room_no,$booking_ref);
 					
-					save_caller_info_to_booking($caller_id,$booking_ref, $caller_name, $room_no);
-					save_room_has_booking($room_no,$booking_ref);
+						}
+						elseif($booking_status_by==Direct){
+						
+							$info=get_guest_info_by_contact_number($telephone_num);
+						
+							$guest_name=$info[guest_name];
+							$guest_id=$info[id];
+						
+							save_guest_info_to_booking($guest_id,$booking_ref, $guest_name, $room_no);
+							save_room_has_booking($room_no,$booking_ref);
+						
+					}
 											
 				}
 				

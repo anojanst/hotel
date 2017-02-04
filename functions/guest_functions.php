@@ -1,34 +1,33 @@
 <?php
-function save_call( $telephone_num, $asked_date, $remarks, $room_cat) {
+function save_guest_request( $telephone_num, $asked_date, $remarks, $room_cat) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
-	
+
 	mysqli_select_db ( $conn, $dbname );
 
-	$query = "INSERT INTO calls (id, telephone_num, asked_date, remarks, room_cat)
+	$query = "INSERT INTO guest_request (id, telephone_num, asked_date, remarks, room_cat)
 	VALUES ('', '$telephone_num','$asked_date', '$remarks','$room_cat')";
-	
+
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
-	
-	
+
 }
 
-function save_caller( $caller_name, $address, $district, $country, $telephone_num, $email, $referel, $dob,$nic, $passport ) {
+function save_guest( $guest_name, $address, $district, $country, $telephone_num, $email, $referel, $dob,$nic, $passport ) {
 	
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	mysqli_select_db ( $conn, $dbname );
 	
-	$query = "INSERT INTO caller (id, caller_name, address, district, country, phone, email, referel, dob , nic, passport)
-	VALUES ('', '$caller_name', '$address', '$district', '$country', '$telephone_num','$email', '$referel', '$dob' ,'$nic', '$passport')";
+	$query = "INSERT INTO guest (id, guest_name, address, district, country, phone, email, referel, dob , nic, passport)
+	VALUES ('', '$guest_name', '$address', '$district', '$country', '$telephone_num','$email', '$referel', '$dob' ,'$nic', '$passport')";
 
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 
 }
 
 
-function list_call() {
+function list_guest() {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
@@ -45,15 +44,16 @@ function list_call() {
                   </thead>
                   <tbody valign="top">';
 
-	$result = mysqli_query ( $conn, "SELECT * FROM calls" );
+	$result = mysqli_query ( $conn, "SELECT * FROM guest_request" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
 		
-		echo '	
+		echo '		
+				
 		<td>' . $row [telephone_num] . '</td>	
 		<td>' . $row [asked_date] . '</td>
 		<td>' . $row [remarks] . '</td>	
 		<td><a href="call.php?job=view_caller_detail&id='.$row[id].'"> <i class="fa fa-eye"></i></a></td>
-		<td><a href="booking.php?job=booking_form&telephone_num='.$row[telephone_num].'&booking_status_by=Call"> <button type="button" class="btn btn-block btn-success">Proceed to book</button></a></td>									
+		<td><a href="booking.php?job=booking_form&telephone_num='.$row[telephone_num].'&booking_status_by=Direct"> <button type="button" class="btn btn-block btn-success">Proceed to book</button></a></td>									
 		</tr>';
 		
 		$i ++;
@@ -152,27 +152,6 @@ function get_caller_info_by_contact_number($telephone_num){
 	}
 }
 
-function get_guest_info_by_contact_number($telephone_num){
-	include 'conf/config.php';
-	include 'conf/opendb.php';
-
-	$result=mysqli_query($conn, "SELECT * FROM guest WHERE phone='$telephone_num'");
-	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-	{
-		return $row;
-	}
-}
-
-function get_caller_info_by_caller_id($caller_id){
-	include 'conf/config.php';
-	include 'conf/opendb.php';
-	
-	$result=mysqli_query($conn, "SELECT * FROM caller WHERE id='$caller_id'");
-	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-	{
-		return $row;
-	}
-}
 
 
 function get_room_info_by_contact_number($telephone_num){

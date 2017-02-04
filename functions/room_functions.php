@@ -53,7 +53,7 @@ function list_rooms() {
 function get_room_info($id) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
-	
+
 	$result = mysqli_query ($conn, "SELECT * FROM room WHERE id='$id'" );
 	
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) 
@@ -162,7 +162,7 @@ function list_rooms_in_home(){
 			$color="green";
 		}
 		echo '
-				<div class="col-lg-4 col-xs-6">
+				<div class="col-lg-3 col-xs-4">
 					<div class="info-box">
 				
 						<a href="room_info.php?job=room_info&room_no=' . $row [room_no] . '"  >
@@ -206,7 +206,7 @@ function list_available_rooms_in_home(){
 
 			$color="green";
 			echo '
-				<div class="col-lg-4 col-xs-6">
+				<div class="col-lg-4 col-xs-4">
 					<div class="info-box">
 			
 						<a href="room_info.php?job=room_info&room_no=' . $row [room_no] . '"  >
@@ -251,7 +251,7 @@ function list_available_rooms(){
 	
 			$color="green";
 			echo '
-				<div class="col-lg-4 col-xs-6">
+				<div class="col-lg-3 col-xs-4">
 					<div class="info-box">
 		
 						<a href="room_info.php?job=room_info&room_no=' . $row [room_no] . '"  >
@@ -423,7 +423,6 @@ function get_room_booked_status_info($room_no, $date) {
 	{
 		return $row;
 	}
-
 
 }
 

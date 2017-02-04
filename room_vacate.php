@@ -18,6 +18,19 @@ if ($_SESSION ['login'] == 1) {
 			$smarty->display ( 'room_vacate/room_vacate.tpl' );
 			
 		} 
+
+		elseif($_REQUEST['job']=='room_vacate'){
+						
+			$_SESSION['booking_ref']=$booking_ref=$_REQUEST['booking_ref'];
+			
+			$_SESSION['room_no']=$room_no=$_REQUEST['room_no'];
+
+			
+			$smarty->assign ( 'page', "Bill" );
+			$smarty->display ( 'room_vacate/room_vacate_bill.tpl' );
+			
+		}		
+		
 				
 		else {
 			
