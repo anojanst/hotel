@@ -25,7 +25,7 @@
           <!-- small box -->
           <div class="small-box bg-green">
             <div class="inner">
-              <h3>Open Request</h3>
+              <h3>Open</h3>
 
               <p>Request</p>
             </div>
@@ -42,7 +42,7 @@
           <!-- small box -->
           <div class="small-box bg-red">
             <div class="inner">
-              <h3>Close Request</h3>
+              <h3>Close</h3>
 
               <p>Room</p>
             </div>
