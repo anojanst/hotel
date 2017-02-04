@@ -8,7 +8,7 @@ function list_room_requests() {
 			<table  style="width: 100%;" class="table-responsive table-bordered table-striped dt-responsive">
                   <thead>
                        <tr>
-                           <th>Edit</th>
+                           
 						   <th>Room No</th>
 						   <th>Room Request</th>
 						   <th>Details</th>
@@ -21,8 +21,7 @@ function list_room_requests() {
 	$result = mysqli_query ( $conn, "SELECT * FROM room_requests" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
 		
-		echo '<td><a href="house_keeping.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
-					
+		echo '	
 		<td>' . $row [room_no] . '</td>	
 		<td>' . $row [request] . '</td>
 		<td>' . $row [detail] . '</td>						

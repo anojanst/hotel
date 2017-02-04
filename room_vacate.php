@@ -24,12 +24,22 @@ if ($_SESSION ['login'] == 1) {
 			$_SESSION['booking_ref']=$booking_ref=$_REQUEST['booking_ref'];
 			
 			$_SESSION['room_no']=$room_no=$_REQUEST['room_no'];
-
 			
 			$smarty->assign ( 'page', "Bill" );
 			$smarty->display ( 'room_vacate/room_vacate_bill.tpl' );
 			
-		}		
+		}
+			
+		elseif($_REQUEST['job']=='room_pay'){
+		
+			$_SESSION['booking_ref']=$booking_ref=$_REQUEST['booking_ref'];
+				
+			$_SESSION['room_no']=$room_no=$_REQUEST['room_no'];
+				
+			$smarty->assign ( 'page', "Bill" );
+			$smarty->display ( 'room_vacate/room_vacate_print.tpl' );
+				
+		}	
 		
 				
 		else {

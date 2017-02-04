@@ -112,7 +112,7 @@ function room_vacate_bill($booking_ref, $room_no){
            <div class="row">    		
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5"> <strong> Total Room Charge </font> </div>
-                <div class="col-lg-6"> <font size="5">  '.$total_room_charge.' </font> </div>
+                <div class="col-lg-6"> <font size="5">  '.number_format($total_room_charge,2).' </font> </div>
               </div>
            </div>';
 
@@ -123,7 +123,7 @@ function room_vacate_bill($booking_ref, $room_no){
 			    	<div class="row">
 				    	<div class="col-lg-12">
 					    	<div class="col-lg-6"> <font size="5"> <strong> '.$row[request].' </font> </div>
-					    	<div class="col-lg-6"> <font size="5">  '.$row[price].' </font> </div>
+					    	<div class="col-lg-6"> <font size="5">  '.number_format($row[price],2).' </font> </div>
 				    	</div>
 			    	</div>';
 			    $request_total+=$row[request]+$row[price];
@@ -138,7 +138,7 @@ function room_vacate_bill($booking_ref, $room_no){
              				<div class="row">
              		 <div class="col-lg-12">
                 <div class="col-lg-6">  </div>
-                <div class="col-lg-3">   <button  type="submit"  class=" btn btn-block btn-danger"> Pay Now </button> </div>
+                <div class="col-lg-3">   <a href="room_vacate.php?job=room_pay"><button  type="submit"  class=" btn btn-block btn-danger"> Pay Now </button></a> </div>
               	<div class="col-lg-3">  </div>
 				</div>  
             </div>
@@ -185,3 +185,47 @@ function get_charge_info_by_room_type($room_cat) {
 
 
 }
+
+function print_room_vacate_bill($sales_no){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	echo'<table style="width: 65%;" class="table-responsive table-bordered table-striped dt-responsive">
+		<tr>
+			<th>Item</th>
+			<th>Qty</th>
+			<th>Amount</th>
+		</tr>';
+
+	echo'<tr  style="line-height: 30px;">
+            <td></td>
+            <td>Total</td>
+            <td align="right">'.number_format($grand_total,2).'</td>
+        </tr>
+            		
+		<tr  style="line-height: 30px;">
+            <td></td>
+            <td>Discount('.$discount.''.$discount_type.')</td>
+            <td align="right">('.number_format($dis,2).')</td>
+        </tr>
+            		
+		<tr  style="line-height: 30px;">
+            <td></td>
+            <td>Amount after Discount</td>
+            <td align="right">'.number_format($discount_amount,2).'</td>
+        </tr>';
+	
+
+	echo'<tr  style="line-height: 30px;">
+            <td></td>
+            <td>Net Amount</td>
+            <td align="right">'.number_format($net_total,2).'</td>
+        </tr>';
+		
+
+	echo'</table>';
+	include 'conf/closedb.php';
+
+
+}
+
