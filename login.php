@@ -20,12 +20,23 @@ if ($_REQUEST['job']=="login"){
 		$_SESSION['full_name']=$user_info['full_name'];
 		$_SESSION['email']=$user_info['email'];
 		$_SESSION['filled']=$info['filled'];
-		
-		
+        $_SESSION['department']=$user_info['department'];
 		$smarty->assign('user_name',"$_SESSION[user_name]");
 		$smarty->assign('page',"User Home");
-		$smarty->display("user_home/user_home.tpl");
-		
+        
+        if($_SESSION['department']== restaurant){
+            $smarty->display("user_home/restaurant.tpl");
+        }
+        
+        elseif($_SESSION['department']== house_keeping){
+            $smarty->display("user_home/house_keeping.tpl");
+        }
+         elseif($_SESSION['department']== management){
+            $smarty->display("user_home/management.tpl");
+         }
+        else{
+             $smarty->display("user_home/user_home.tpl"); 
+        }
 	}
 
 	else {

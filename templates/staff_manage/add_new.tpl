@@ -1,8 +1,5 @@
 {include file="user_header.tpl"}
 {include file="user_navigation.tpl"}
-
-
-
 	
 <div id="contents">
 		{if $error_report=='on'}
@@ -48,7 +45,14 @@
 								<div class="col-lg-3">Department : </div>
 
 								<div class="col-lg-6">
-									<input class="form-control" name="department" value="{$department}"  placeholder="Department">
+                                    <select class="form-control" name="department" value="{$department}" required>
+                                        <option value="" disable selected>Department</option>
+                                          <option value="management">Management</option>
+                                        <option value="house_keeping">House keeping</option>
+                                        <option value="reception">Reception</option>
+                                        <option value="kichen">Kichen</option>
+                                        <option value="restaurant">Restaurant</option>
+                                    </select>
 								</div>                                
 							</div>
 
