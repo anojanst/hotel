@@ -19,13 +19,29 @@ if ($_SESSION['login'] == 1) {
             $smarty->assign('page', "Purchase Order");
             $smarty->display('reports/purchase_report.tpl');
         }
+        elseif ($_REQUEST['job']== 'purchased_item_report'){
+            $module_no= 16;
+            if (check_access ($module_no, $_SESSION ['user_id'] ) == 1) {
+                $smarty->assign('page', "Purchase Order");
+                $smarty->display('reports/purchased_item_report.tpl');
+            }
+            else {
+                $user_name = $_SESSION['user_name'];
+                $smarty->assign('org_name', "$_SESSION[org_name]");
+                $smarty->assign('error_report', "on");
+                $smarty->assign('error_message', "Dear $user_name, you don't have permission to access PURCHASE ITEM REPORT.");
+                $smarty->assign('page', "Access Error");
+                $smarty->display('user_home/access_error.tpl');
+	}
+        }
         elseif ($_REQUEST['job']== 'purchased_items'){
-            $_SESSION['purchase_order_no']=$purchase_order_no=$_REQUEST['purchase_order_no'];
+            $_SESSION['purchased_item']=$purchased_item=$_REQUEST['purchased_item'];
+            $_SESSION['from_date']=$from_date=$_REQUEST['from_date'];
+            $_SESSION['to_date']=$to_datem=$_REQUEST['to_date'];
             
-            
-            $smarty->assign('purchase_order_no', "$purchase_order_no");
+            $smarty->assign('search_mode', "on");
             $smarty->assign('page', "Purchase Order");
-            $smarty->display('reports/purchased_items.tpl');
+            $smarty->display('reports/purchased_item_report.tpl');
         }
         else {
             unset($_SESSION['supplier_name']);

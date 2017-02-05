@@ -130,4 +130,96 @@ function list_purchased_items($purchase_order_no){
    
     include 'conf/closedb.php';
 }
+
+function list_purchase_item_vice($purchased_item,$from_date,$to_date){
+    include 'conf/config.php';
+    include 'conf/opendb.php';
     
+    if($purchased_item){
+        $purchased_item_check="AND purchase_item='$purchased_item'";
+    }
+    else{
+        $purchased_item_check="";
+    }
+   
+   
+    if ($to_date && $from_date) {
+        $date_check = "AND date BETWEEN '$from_date' AND '$to_date'";
+    } elseif ($from_date) {
+        $date_check = "AND date>='$from_date'";
+        $limit = "";
+    } elseif ($to_date) {
+        $date_check = "AND date<='$to_date'";
+        $limit = "";
+    } else {
+        $date_check = "";
+        $limit = "LIMIT 50";
+    }
+
+   
+    echo '<div class="box-body">
+            <table  style="width: 100%;" class="table-responsive table-bordered table-striped dt-responsive">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Purchase No</th>
+                        <th>Purchase Date</th>
+                        <th>Purchased Item</th>
+                        <th>Supplier</th>
+                        <th>Qty</th>
+                        <th>Buying Price</th>
+                        <th>Total Amount</th>
+                        <th>Prepared By</th>
+                    </tr>
+                </thead>
+                <tbody>';
+$i=1;
+
+    $result=mysqli_query($conn, "SELECT * FROM purchase_order_has_items WHERE cancel_status='0' $purchased_item_check $date_check  ORDER BY id DESC");
+    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+    {
+        echo '
+        <tr>
+        <td>'.$i.'</td>
+            <td><a href="reports.php?job=purchased_items&purchase_order_no='.$row[purchase_order_no].'" target="_blank" style="color:black; text-decoration:none;">'.$row[purchase_order_no].'</a></td>
+                   
+            <td>'.$row[date].'</td>
+                   
+            <td>'.$row[purchase_item].'</td>';
+        $result1=mysqli_query($conn, "SELECT * FROM purchase_order WHERE cancel_status='0' AND purchase_order_no= ".$row[purchase_order_no]."  ORDER BY id DESC");
+        while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
+        {
+        echo'<td>'.$row1[supplier_name].'</td>';    
+            
+        }
+           echo' <td>'.$row[quantity].''.$row[measure_type].'</td>
+            <td align="right">'.$row[buying_price].'</td>
+            <td align="right">'.$row[total].'</td>
+            <td align="right">'.strtoupper($row[user_name]).'</td>
+            </tr>';
+        $i++;
+    if ($row[measure_type]=='g'){
+        $gqty=0;
+        $gqty+=$row[quantity];
+    }
+    else{
+        $qty +=$row[quantity];
+    }
+    $total=$total+$row[total];
+   
+    }
+   
+        echo '<tr>
+            <td colspan="5" align="left" class="success"><strong>Total</strong></td>
+           
+            <td  class="success"><strong>
+             ' .$qty. 'kg' .$gqty.'g</strong>
+           <td></td>
+            <td align="right" class="success"><strong>
+             ' . number_format($total, 2) . '</strong>
+            </td>
+        </tr>
+    </tbody></table></div>';
+   
+    include 'conf/closedb.php';
+}   

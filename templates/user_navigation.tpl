@@ -103,6 +103,9 @@
 								<li class="scroll">
 									   <a href="reports.php"><i class="fa fa-file-text"></i><span>Purchase Report</span></a>
 								</li>
+                                <li class="scroll">
+									   <a href="reports.php?job=purchased_item_report"><i class="fa fa-file-text"></i><span>Purchase Item Report</span></a>
+								</li>
                             </ul>
                  </li>
 				<li class="scroll">
