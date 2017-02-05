@@ -19,7 +19,7 @@ if ($_SESSION['login'] == 1) {
             $purchase_order_no = $_SESSION['purchase_order_no'];
             $purchase_item = $_POST['purchase_item'];
             $quantity = $_POST['qty'];
-                            $measure_type = $_POST['measure_type'];
+            $measure_type = $_POST['measure_type'];
             $buying_price = $_POST['buying_price'];
             $user_name=$_SESSION['user_name'];
     
