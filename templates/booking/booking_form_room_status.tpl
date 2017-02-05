@@ -37,16 +37,14 @@
 								<div class="col-lg-12">
 									<strong>Room Type</strong>
 
-								<select class="form-control" id="room_cat" name="room_cat" required placeholder="Room Category" >
+								<select class="form-control" id="room_cat" name="room_cat" readonly required placeholder="Room Category" >
 		                    		{if $room_cat}
 										<option value="{$room_cat}" selected>{$room_cat}</option>
 									{else}
 										<option value="" disabled selected>Room Types</option>
 									{/if}
 
-									{section name=room_cat loop=$room_category}
-									<option  value="{$room_category[room_cat]}">{$room_category[room_cat]}</option>
-									{/section}
+									
 								</select>
 
 								</div>                                
@@ -55,15 +53,13 @@
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
 									<strong>Room Number</strong>
-										<select name="room_no" id="room_no" class="form-control">											
-										{if $room_cat}
+										<select name="room_no" id="room_no" readonly class="form-control">											
+										{if $room_no_display}
 											<option value="{$room_no_display}" selected>{$room_no_display}</option>
 										{else}
 											<option value="" disabled selected>Room No</option>
 										{/if}
-										{section name=room_no loop=$room_no}
-											<option  value="{$room_no[room_no]}">{$room_no[room_no]}</option>
-										{/section}
+										
 										</select>
 								</div>                                
 							</div>
@@ -86,9 +82,7 @@
 					<div class="col-lg-6">
 						<button type="submit" name="ok" value="Save" class="btn btn-block btn-success btn-lg">Save</button>
 					</div>
-					<div class="col-lg-6">
-	                   	<button type="reset" class="btn btn-block btn-danger btn-lg">Reset</button>
-					</div>
+					
 				</div>
 				
 

@@ -12,12 +12,12 @@ function list_room_information($room_no) {
 	
 		echo'
 	
-	<div class="col-xs-8">
+	<div class="col-xs-12">
 	
           <div class="table-responsive">
-            <table class="table" style="font-size:20px;">
+            <table class="table" style="font-size:16px;">
               <tr>
-                <th>Room Number:</th>
+                <th width="200">Room Number</th>
                 <td>'.$row[room_no].'</td>
               </tr>
               <tr>

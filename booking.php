@@ -12,7 +12,26 @@ $module_no = 9;
 
 if ($_SESSION ['login'] == 1) {
 	if (check_access ( $module_no, $_SESSION ['user_id'] ) == 1) {
-		if ($_REQUEST ['job'] == "booking_form") {
+		if ($_REQUEST ['job'] == "booking_form_room_status") {
+			
+			$_SESSION['telephone_num']=$telephone_num=$_POST['telephone_num'];
+			$_SESSION['booking_status_by']=$booking_status_by=$_REQUEST['booking_status_by'];
+			
+			$room_info=get_room_info_by_contact_number($telephone_num);
+			
+			$smarty->assign ( 'room_cat', $_REQUEST ['room_cat'] );
+			$smarty->assign ( 'room_no_display', $_REQUEST ['room_no'] );
+			$smarty->assign ( 'from_date', $_REQUEST ['selected_date'] );
+			$smarty->assign ( 'to_date', $_REQUEST ['selected_date'] );
+			
+			$smarty->assign ( 'room_category', list_room_type() );
+			$smarty->assign ( 'room_no', list_room_number_by_type($room_info ['room_cat']) );
+			
+			$smarty->assign ( 'page', "Booking" );
+			$smarty->display ( 'booking/booking_form_room_status.tpl' );
+			
+		}
+		elseif ($_REQUEST ['job'] == "booking_form") {
 			
 			$_SESSION['telephone_num']=$telephone_num=$_REQUEST['telephone_num'];
 			$_SESSION['booking_status_by']=$booking_status_by=$_REQUEST['booking_status_by'];
@@ -89,10 +108,7 @@ if ($_SESSION ['login'] == 1) {
 											
 				}
 				
-			$smarty->assign ( 'room_category', list_room_type() );
-			
-			$smarty->assign ( 'page', "Booking" );
-			$smarty->display ( 'booking/booking.tpl' );
+			header('Location: room.php?job=room_view_by_status_back');
 			
 		} 
 		elseif ($_REQUEST ['job'] == "view_booking_detail") {
