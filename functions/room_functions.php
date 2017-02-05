@@ -232,16 +232,21 @@ function list_available_rooms_in_home(){
 
 }
 
-function list_available_rooms(){
+function list_available_rooms($from_date, $to_date){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-
-	$date=date('Y-m-d');
-	$result=mysqli_query($conn, "SELECT * FROM room WHERE room.room_no NOT IN (SELECT room_no FROM room_has_status WHERE date='$date') ORDER BY room_no DESC " );
+	if($from_date && $to_date){
+		$query="SELECT * FROM room WHERE room.room_no NOT IN (SELECT room_no FROM room_has_status WHERE date BETWEEN '$from_date' AND '$to_date') ORDER BY room.room_no ASC ";
+	}
+	else{
+		$date=date('Y-m-d');
+		$query="SELECT * FROM room WHERE room.room_no NOT IN (SELECT room_no FROM room_has_status WHERE date='$date') ORDER BY room.room_no ASC ";
+	}
+	
+	$result=mysqli_query($conn,  $query);
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		$date=date('Y-m-d');
 		$room_status_info=get_room_has_status_info($row['room_no'], $date);
 		if($room_status_info[status_id]){
 			$status_info=get_status_info($room_status_info[status_id]);
@@ -260,14 +265,14 @@ function list_available_rooms(){
 		
 			            <div class="info-box-content">';
 	
-			$result1=mysqli_query($conn, "SELECT * FROM room_has_facility WHERE room_no='$row[room_no]' " );
-			while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
-			{
-				$info=get_facility_info($row1[facility_id]);
-				echo'<i class="fa fa-square text-'.$info[color].'" style="float: left; margin-left: 1px;"></i>';
-			}
-			echo' <br> <span class="info-box-text" style="line-height: 15px;">Type <br /><strong>'.$row['room_cat'].'</strong></span>
-		
+							$result1=mysqli_query($conn, "SELECT * FROM room_has_facility WHERE room_no='$row[room_no]' " );
+							while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
+							{
+								$info=get_facility_info($row1[facility_id]);
+								echo'<i class="fa fa-square text-'.$info[color].'" style="float: left; margin-left: 1px;"></i>';
+							}
+							echo' <br> <span class="info-box-text" style="line-height: 15px;">Type <br /><strong>'.$row['room_cat'].'</strong></span>
+						
             			</div>
             		</div>
               	</div>';
@@ -278,7 +283,7 @@ function list_available_rooms(){
 	
 	
 }
-function list_booked_rooms(){
+function list_booked_rooms($selected_date){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
@@ -286,8 +291,8 @@ function list_booked_rooms(){
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 
-		if($_SESSION['selected_date']){
-			$date=$_SESSION['selected_date'];
+		if($selected_date){
+			$date=$selected_date;
 		}else{
 			$date=date('Y-m-d');
 		}
@@ -331,7 +336,7 @@ function list_booked_rooms(){
 }
 
 
-function list_occupied_room(){
+function list_occupied_room($selected_date){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
@@ -339,8 +344,8 @@ function list_occupied_room(){
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 
-		if($_SESSION['selected_date']){
-			$date=$_SESSION['selected_date'];
+		if($selected_date){
+			$date=$selected_date;
 		}else{
 			$date=date('Y-m-d');
 		}

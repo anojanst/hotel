@@ -35,8 +35,18 @@
 
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
-										<strong>Telephone Number</strong>									
-										<input class="form-control" type="text" name="telephone_num" value="{$telephone_num}" required placeholder="Telephone Number">
+									<strong>Room Type</strong>
+
+									<select class="form-control"  name="room_cat"  placeholder="room" >
+										{if $room}
+											<option value="{$room}">{$room}</option>
+										{else}
+											<option value="" disabled selected> Room </option>
+										{/if}
+										{section name=room loop=$room_names}
+											<option  value="{$room_names[room]}" >{$room_names[room]}</option>
+										{/section}
+									</select>
 								</div>                                
 							</div>
 
@@ -46,6 +56,15 @@
 										<input class="form-control" name="asked_date"  id="datepicker1" value="{$asked_date}" required placeholder="Asked Date">
 								</div>                                
 							</div>
+
+							<div class="row" style="margin-bottom: 10px;">
+								<div class="col-lg-12">
+										<strong>Telephone Number</strong>									
+										<input class="form-control" type="text" name="telephone_num" value="{$telephone_num}" required placeholder="Telephone Number">
+								</div>                                
+							</div>
+
+							
 
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
@@ -85,7 +104,7 @@
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
 										<strong>Email</strong>									
-										<input class="form-control" name="email" value="{$email}" required placeholder="Email">
+										<input class="form-control" name="email" value="{$email}" placeholder="Email">
 								</div>                                
 							</div>
 
@@ -99,14 +118,14 @@
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
 										<strong>Date of Birth</strong>									
-										<input class="form-control" id="datepicker2" name="dob" value="{$dob}" required placeholder="Date of Birth ">
+										<input class="form-control" id="datepicker2" name="dob" value="{$dob}" placeholder="Date of Birth ">
 								</div>                                
 							</div>
 
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
 										<strong>NIC</strong>									
-										<input class="form-control" name="nic" value="{$nic}" required placeholder="NIC">
+										<input class="form-control" name="nic" value="{$nic}" placeholder="NIC">
 								</div>                                
 							</div>
 
@@ -117,22 +136,7 @@
 								</div>                                
 							</div>
 
-							<div class="row" style="margin-bottom: 10px;">
-								<div class="col-lg-12">
-									<strong>Room Type</strong>
-
-									<select class="form-control"  name="room_cat"  placeholder="room" >
-										{if $room}
-											<option value="{$room}">{$room}</option>
-										{else}
-											<option value="" disabled selected> Room </option>
-										{/if}
-										{section name=room loop=$room_names}
-											<option  value="{$room_names[room]}" >{$room_names[room]}</option>
-										{/section}
-									</select>
-								</div>                                
-							</div>
+							
 
 							
 				 <div class="row">

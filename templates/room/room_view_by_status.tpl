@@ -10,16 +10,24 @@
                		</div>
 
 
-	<form name="room_status_by_date" role="form" action="room.php?job=room_view_by_status" method="post">	
-     		<div class="col-lg-12">
-			<div class="row" style="margin-bottom: 10px;">
-				<div class="col-lg-6" style="margin-left: 25px;">
-					<strong>Asked Date</strong>															
-					<input class="form-control" name="selected_date"  id="datepicker1" required placeholder="Select Date">
-					<button type="submit" class="btn btn-block btn-primary"> Select</button>
+		<div class="col-lg-12">
+			<form name="room_status_by_date" role="form" action="room.php?job=room_view_by_status_back" method="post">	
+     		<div class="row" style="margin-bottom: 10px;">
+				<div class="col-lg-2" style="margin-left: 25px;">
+					<h4><strong>Select Date</strong></h4>															
+				</div>
+				<div class="col-lg-3">
+					<input class="form-control datepicker1" name="from_date" value="{$from_date}" required placeholder="From Date">
 				</div> 
+				<div class="col-lg-3">
+					<input class="form-control datepicker1" name="to_date" value="{$to_date}" required placeholder="To Date">
+				</div>  
+				<div class="col-lg-3">
+					<button type="submit" class="btn btn-block btn-primary"> Select</button>
+				</div>
 			</div>
-            </div>
+			</form>
+        </div>
 		<div class="row">	
  			<div class="col-lg-12" >	
  				<section class="content">
@@ -28,7 +36,7 @@
     
     						<div class="row">
         						<div class="col-xs-12">
-                					{php}list_available_rooms();{/php}
+                					{php}list_available_rooms($_SESSION['from_date'], $_SESSION['to_date'] );{/php}
             					</div>
         					</div>
     					</div>
@@ -45,7 +53,7 @@
     					<h2><strong> Booked Rooms </strong></h2>
     						<div class="row">
         						<div class="col-xs-12">
-                					{php}list_booked_rooms();{/php}
+                					{php}list_booked_rooms($_SESSION['from_date'] );{/php}
             					</div>
         					</div>
     					</div>
@@ -60,7 +68,7 @@
     					<h2><strong> Occupied Rooms </strong></h2>
     						<div class="row">
         						<div class="col-xs-12">
-                					{php}list_occupied_room();{/php}
+                					{php}list_occupied_room($_SESSION['from_date'] );{/php}
             					</div>
         					</div>
     					</div>
@@ -69,7 +77,7 @@
 			</div>		   
 	 	</div>
 
-	</form>
+	
 
 	 </div>
 	</div>
@@ -84,7 +92,7 @@
 <script>
   $(function () {
    
-    $('#datepicker1').datepicker({
+    $('.datepicker1').datepicker({
      format: 'yyyy-mm-dd',
       autoclose: true
     });

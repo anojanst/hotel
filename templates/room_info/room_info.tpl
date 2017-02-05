@@ -57,11 +57,27 @@ $(function() {
 						<div class="row">
         					<div class="col-xs-12">
           						<h2 class="page-header">
-            					<i class="fa fa-globe"></i> Room Information
-            					
+            					<i class="fa fa-globe"></i> Room Information 
           						</h2>
         					</div>
       					</div>
+		
+						<div class="row">
+        					<div class="col-xs-12">
+          						<form action="booking.php?job=booking_form_room_status&room_no={$room_no}&room_cat={$room_type}&selected_date={$selected_date}" method="post">
+									<div class="row" style="margin-bottom: 10px;">
+										<div class="col-lg-4">									
+											<input class="form-control" type="text" name="telephone_num" value="{$telephone_num}" required placeholder="Telephone Number">
+										</div>                                
+										<div class="col-lg-3">
+											<button type="submit" name="ok" value="Save" class="btn btn-block btn-success">Book this room</button>
+										</div>
+									</div>
+								</form>
+        					</div>
+      					</div>
+
+            					
   
       					<div class="row invoice-info">
          					<div class="col-sm-12 invoice-col">
