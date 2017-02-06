@@ -305,16 +305,7 @@ function print_sales_item($sales_no){
 					<td align="right">(0.00)</td>
 				</tr>';
 		}
-		echo'<tr  style="line-height: 30px;">
-            <td></td>
-            <td>Discount('.$discount.''.$discount_type.')</td>
-            <td align="right">('.number_format($dis,2).')</td>
-        </tr>
-		<tr  style="line-height: 30px;">
-            <td></td>
-            <td>Amount after Discount</td>
-            <td align="right">'.number_format($discount_amount,2).'</td>
-        </tr>';
+		
 		$result2=mysqli_query($conn, "SELECT * FROM tax WHERE percentage!='0'");
 		while($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC))
 		{
