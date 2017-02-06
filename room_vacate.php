@@ -7,6 +7,7 @@ include 'functions/booking_functions.php';
 include 'functions/room_vacate_functions.php';
 include 'functions/room_functions.php';
 include 'functions/facility_functions.php';
+include 'functions/sales_functions.php';
 
 $module_no = 10;
 

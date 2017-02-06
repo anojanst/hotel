@@ -66,7 +66,7 @@ function list_guest() {
 	
 }
 
-function list_call_full_detail($id){
+function list_guest_full_detail($id){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
@@ -141,43 +141,6 @@ function list_call_full_detail($id){
 	include 'conf/closedb.php';
 }
 
-function get_caller_info_by_contact_number($telephone_num){
-	include 'conf/config.php';
-	include 'conf/opendb.php';
-	
-	$result=mysqli_query($conn, "SELECT * FROM caller WHERE phone='$telephone_num'");
-	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-	{
-		return $row;
-	}
-}
 
 
-
-function get_room_info_by_contact_number($telephone_num){
-	include 'conf/config.php';
-	include 'conf/opendb.php';
-
-	$result=mysqli_query($conn, "SELECT * FROM calls WHERE telephone_num='$telephone_num'");
-	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-	{
-		return $row;
-	}
-}
-
-function list_room_types() {
-	include 'conf/config.php';
-	include 'conf/opendb.php';
-	
-	$result = mysqli_query ( $conn, "SELECT * FROM room_cat" );
-	$i = 0;
-	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
-		$room_names [$i] = $row ['category'];
-		
-		$i ++;
-	}
-
-	return $room_names;
-
-}
 

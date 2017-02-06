@@ -62,7 +62,7 @@ function get_rooms_info_by_id($id) {
 	}
 	
 }
-function update_room_cat($id, $category) {
+function update_room_cat($id, $category, $price) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
@@ -77,14 +77,12 @@ function update_room_cat($id, $category) {
 	
 }
 
-function cancel_room_cat($id) {
+function delete_room_type($id) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
-	
+
 	mysqli_select_db ($conn, $dbname );
-	$query = "UPDATE room_cat SET
-	cancel_status='1'
-	WHERE id='$id'";
+	$query = "DELETE FROM room_cat WHERE id='$id'";
 	
 	mysqli_query ($conn, $query );
 	

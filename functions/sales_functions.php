@@ -551,6 +551,21 @@ function get_sales_info_by_sales_no($sales_no){
 	include 'conf/closedb.php';
 }
 
+
+function get_sales_info_booking_ref($booking_ref){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$result=mysqli_query($conn, "SELECT * FROM sales WHERE booking_ref='$booking_ref'");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		return $row;
+	}
+	include 'conf/closedb.php';
+}
+
+
+
 function update_sales($id, $sales_no, $date, $customer_name, $prepared_by, $remarks, $total, $updated_by){
 	include 'conf/config.php';
 	include 'conf/opendb.php';

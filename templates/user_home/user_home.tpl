@@ -29,7 +29,7 @@
 		<div class="box box-warning box-solid">
             <div class="box-header with-border">
               	<i class="fa fa-bar-chart"></i>
-              		<h3 class="box-title">Quick Stats</h3>
+              		<h3 class="box-title">Booking</h3>
               <!-- tools box -->
               	<div class="pull-right box-tools">
                 	<button type="button" class="btn btn-box-tool" data-widget="collapse" data-toggle="tooltip" title="Minimize">
