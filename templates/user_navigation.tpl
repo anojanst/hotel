@@ -104,7 +104,22 @@
 									   <a href="reports.php"><i class="fa fa-file-text"></i><span>Purchase Report</span></a>
 								</li>
                                 <li class="scroll">
-									   <a href="reports.php?job=purchased_item_report"><i class="fa fa-file-text"></i><span>Purchase Item Report</span></a>
+								   <a href="reports.php?job=purchased_item_report"><i class="fa fa-file-text"></i><span>Purchase Item Report</span></a>
+								</li>
+                                <li class="scroll">
+									<a href="reports.php?job=occupied_room_report"><i class="fa fa-file-text"></i><span>Occupied Room Report</span></a>
+								</li>
+                                <li class="scroll">
+                                    <a href="reports.php?job=occupied_days_report"><i class="fa fa-file-text"></i><span>Occupied Days Report</span></a>
+								</li>
+                                <li class="scroll">
+                                    <a href="reports.php?job=booked_room_report"><i class="fa fa-file-text"></i><span>Booked Room Report</span></a>
+								</li>
+                                <li class="scroll">
+                                    <a href="reports.php?job=booked_days_report"><i class="fa fa-file-text"></i><span>Booked Days Report</span></a>
+								</li>
+                                <li class="scroll">
+                                    <a href="reports.php?job=sales_report"><i class="fa fa-file-text"></i><span>Sales Report</span></a>
 								</li>
                             </ul>
                  </li>

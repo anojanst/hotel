@@ -21,7 +21,8 @@
             <div class="row">               
                 <form action="reports.php?job=purchase" method="post" class="search">
 					<div class="col-lg-2"> 
-                       <input type="text" class="form-control" id="supplier_name"  name="supplier_name" value="{$supplier_name}" placeholder="Supllier Name">
+                       <input type="text" name="supplier_name" value="{$supplier_name}" list="exampleList" class="form-control" placeholder="Supllier Name">
+                            {php}list_suppliers();{/php}
                     </div>
                     <div class="col-lg-2">
                         <input type="text" class="form-control" id="datepicker1" name="from_date" value="{$from_date}" placeholder="From Date">	

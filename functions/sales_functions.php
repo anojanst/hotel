@@ -314,11 +314,11 @@ function update_saved_sales($sales_no){
 }
 
 
-function save_sales($sales_no, $date, $customer_name,$discount_type, $discount,$prepared_by, $remarks, $total){
+function save_sales($sales_no, $customer_name,$discount_type, $discount,$prepared_by, $remarks, $total){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$date = date("Y-m-d", strtotime($date));
+	$date = date("Y-m-d");
 	
 	$query = "INSERT INTO sales (id, sales_no, customer_name, discount_type, discount, prepared_by, remarks, date, total, due )
 	VALUES ('', '$sales_no', '$customer_name','$discount_type','$discount', '$prepared_by', '$remarks', '$date', '$total', '$total')";
@@ -551,11 +551,11 @@ function get_sales_info_by_sales_no($sales_no){
 	include 'conf/closedb.php';
 }
 
-function update_sales($id, $sales_no, $date, $customer_name, $prepared_by, $remarks, $total, $updated_by){
+function update_sales($id, $sales_no, $customer_name, $prepared_by, $remarks, $total, $updated_by){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$date = date("Y-m-d", strtotime($date));
+	$date = date("Y-m-d");
 
 	mysqli_select_db($conn_for_changing_db, $dbname);
 	$query = "UPDATE sales SET

@@ -166,7 +166,6 @@ if ($_SESSION['login'] == 1) {
 		elseif($_REQUEST['job']=='sales'){
 	
 			if($_REQUEST['ok']=='Save'){
-				$date=$_POST['date'];
 				$remarks=$_POST['remarks'];
 				$customer_name=$_POST['customer_name'];
 				$discount_type=$_POST['discount_type'];
@@ -174,20 +173,19 @@ if ($_SESSION['login'] == 1) {
 				$prepared_by=$_POST['prepared_by'];
 				$sales_no=$_POST['sales_no'];
 				$total=get_total_sales($_SESSION['sales_no']);
-				save_sales($sales_no, $date, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total);
+				save_sales($sales_no, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total);
 				//add_sales_ledger($sales_no);
 			}
 			else {
 	
 				$id=$_SESSION['id'];
-				$date=$_POST['date'];
 				$remarks=$_POST['remarks'];
 				$customer_name=$_POST['customer_name'];
 				$prepared_by=$_POST['prepared_by'];
 				$updated_by=$_POST['updated_by'];
 				$sales_no=$_POST['sales_no'];
 				$total=get_total_sales($_SESSION['sales_no']);
-				update_sales($id, $sales_no, $date, $customer_name, $prepared_by, $remarks, $total, $updated_by);
+				update_sales($id, $sales_no, $customer_name, $prepared_by, $remarks, $total, $updated_by);
 				//update_sales_ledger($sales_no);
 				unset($_SESSION['edit']);
 			}
