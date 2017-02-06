@@ -15,8 +15,11 @@
 	<div class="nav-tabs-custom">
 		<div class="tab-content">
 			<div class="row">
-				<div class="col-lg-12">
-					<h3><strong>Sales</strong></h3>
+				<div class="col-lg-9">
+					<p><strong>Sales</strong></p>
+				</div>
+				<div class="col-lg-3">
+					<a href="restaurant.php" class="btn btn-sm btn-danger col-lg-12">Back To Restaurant</a>
 				</div>
 			</div>
 			<div class="row">
@@ -26,60 +29,66 @@
 					</div>
 				{/if}
 			</div>
+			<div class="row">				
+				<form name="select_item_form"  action="sales.php?job=select" method="post" >
+					<div class="col-lg-3">
+						<select class="form-control"  name="id" tabindex="1" required >
+							<option value="" disabled selected>Meal Name</option>
+							{php}list_meal_for_sale();{/php}                              
+						</select>
+					</div>
+					<div class="col-lg-4">
+						<button type="submit"  class="btn btn-danger" name="ok" style="margin-right: 11px;" value="Submit"  tabindex="6">Submit</button>
+											
+					</div>
+				</form>
+			</div>
 			<div class="row">
 				<div class="col-lg-9">
-					<div class="row">
-						<div class="col-lg-4">
-							<form name="select_item_form"  action="sales.php?job=select" method="post" >
-								<select class="form-control"  name="id" tabindex="1" required >
-									<option value="" disabled selected>Meal Name</option>
-									{php}list_meal_for_sale();{/php}                              
-								</select>
-						</div>
-						<div class="col-lg-4">
-							<button type="submit"  class="btn btn-danger" name="ok" style="margin-right: 11px;" value="Submit"  tabindex="6">Submit</button>
-											
-						</div>
-							</form>
-					</div><br>
-				<div class="row">
-					<div class="col-lg-12">
-						<table class="table table-bordered table-striped">
-							<thead>
-								<tr>
-									<th>Delete</th>
-									<th>Meal Name</th>
-									<th>Price</th>
-									<th>Quantity</th>
-									<th>Total</th>
-									<th>Update</th>
-								</tr>
-							</thead>
-							<tbody>
-							{php}list_item_by_sales($_SESSION['sales_no']);{/php} 
-							</tbody>
-						</table>
-					</div>
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr style="background-color: #e0e0e0;">
+								<th>Delete</th>
+								<th>Meal Name</th>
+								<th>Price</th>
+								<th>Quantity</th>
+								<th>Total</th>
+								<th>Update</th>
+							</tr>
+						</thead>
+						<tbody>
+							{php}list_item_by_sales($_SESSION['sales_no']);{/php}
+							<tr style="background-color: #e0e0e0;">
+								<th></th>
+								<th></th>
+								<th></th>
+								<th></th>
+								<td align="right"><strong>{$total}</strong></td>
+								<th></th>
+							</tr>
+						</tbody>
+						
+						
+					</table>
 				</div>
-			</div>
-				<div class="col-lg-3">
+				<div class="col-lg-3" style="margin-top: 20px;">
 					<form class="product" name="sales_form" action="sales.php?job=sales" method="post" >
-						<input type="text" name="sales_no" value="{$sales_no}" size="25" required readonly="readonly" placeholder="Sales No" tabindex="3"/>
-						<input type="text" class="auto1" name="customer_name" size="25" placeholder="Customer" tabindex="4"/>
-						<select class="auto1"  name="discount_type" value = "{$dicount_type}" style="width: 203px;" tabindex="1" required >
+						<input type="text" class="form-control" name="sales_no" value="{$sales_no}" required readonly="readonly" placeholder="Sales No" tabindex="3"/>
+						<input type="text" class="form-control" name="customer_name" placeholder="Customer" tabindex="4"/>
+						<select class="form-control"  name="discount_type" value = "{$dicount_type}" tabindex="1">
 							<option value="" disabled selected>Discount Type</option>
 							<option value="%" >Percentage(%)</option>
 							<option value=".00" >Amount(.00)</option>
 						</select>
-						<input type="text" class="auto1" name="discount" size="25" placeholder="Discount" tabindex="5"/>
-						<input type="text" name="prepared_by" value="{$prepared_by}" size="25" placeholder="Prepared by" required readonly="readonly"/>
+						<input type="text" class="form-control" name="discount" placeholder="Discount" tabindex="5"/>
+						<input type="text" class="form-control" name="prepared_by" value="{$prepared_by}" placeholder="Prepared by" required readonly="readonly"/>
 						{if $edit_mode=='on'}
-						<input type="text" name="updated_by" value="{$updated_by}" size="25" placeholder=" Updated by" required readonly="readonly"/>
+						<input type="text" class="form-control" name="updated_by" value="{$updated_by}" placeholder=" Updated by" required readonly="readonly"/>
 						{/if}
-						{$total}
+						
 						<div id="cus_amount"></div>
 						<div id="balance"></div>
-						<button  type="submit"  class="btn btn-success" name="ok" style="margin-right: 11px;" value="Save"  tabindex="6">Finish the Bill & Print</button>					
+						<button  type="submit"  class="btn btn-success col-lg-12" name="ok" style="margin-right: 11px;" value="Save"  tabindex="6">Finish the Bill & Print</button>					
 					</form>
 				</div>
 			</div>

@@ -10,14 +10,49 @@ $module_no = 14;
 if ($_SESSION['login'] == 1) {
 	if (check_access($module_no, $_SESSION['user_id']) == 1) {
 
-		if ($_REQUEST['job']=='select'){
-			$selected_item=$_POST['id'];
-		
+		if ($_REQUEST['job']=='order_type'){
+			unset($_SESSION['sales_no']);
 			
-			if (!isset($_SESSION['sales_no'])) {
-				$_SESSION['sales_no']=$sales_no=get_sales_no();
+			$_SESSION['order_type']=$order_type=$_POST['order_type'];
+			$_SESSION['ref_no']=$ref_no=$_POST['ref_no'];
+			
+			$smarty->assign('prepared_by',"$_SESSION[user_name]");
+
+			$smarty->assign('page',"sales");
+			$smarty->display('sales/sales.tpl');
+		}
+		
+		elseif($_REQUEST['job']=='complete_sales'){
+	
+			if($_REQUEST['sales_no']){
+				$sales_no=$_SESSION['sales_no']=$_REQUEST['sales_no'];
 			}
 			else{
+				$sales_no=$_SESSION['sales_no'];
+			}
+			$sales_info=get_sales_info_by_sales_no($sales_no);
+			$item_info=get_meal_info_from_sales_has_items($id, $sales_no);
+			
+			$smarty->assign('sales_no',"$_SESSION[sales_no]");			
+			$smarty->assign('prepared_by',"$_SESSION[user_name]");
+			$smarty->assign('total',get_total_sales($_SESSION['sales_no']));
+			$smarty->assign('org_name',"$_SESSION[org_name]");
+			$smarty->assign('page',"sales");
+			$smarty->display('sales/sales.tpl');
+		}
+		
+		elseif ($_REQUEST['job']=='select'){
+			$selected_item=$_POST['id'];
+					
+			if (!isset($_SESSION['sales_no'])) {
+				$_SESSION['sales_no']=$sales_no=get_sales_no();
+				$order_type=$_SESSION['order_type'];
+				$ref_no=$_SESSION['ref_no'];
+			}
+			else{
+				$order_type_info=get_order_type_info($_SESSION['sales_no']);
+				$order_type=$order_type_info['order_type'];
+				$ref_no=$order_type_info['ref_no'];
 			}
 			
 			$sales_no=$_SESSION['sales_no'];	
@@ -27,9 +62,12 @@ if ($_SESSION['login'] == 1) {
             $stock=$info['meal_name'];
             $price=$info['price'];
 			$item_total=(1*$price);
+			
+			if($order_type=="Order From Room"){
+				$booking_ref=get_booking_ref_for_restaurant_order($ref_no);
+			}
 				
-					
-			add_sales_item($selected_item, $stock, $price, $_SESSION['sales_no'],$item_total);
+			add_sales_item($selected_item, $stock, $price, $_SESSION['sales_no'],$item_total, $order_type, $ref_no, $booking_ref);
 			$total_to_ledger=($price)-($discount);
 
 			$smarty->assign('customer_name',"$sales_info[customer_name]");
@@ -58,8 +96,12 @@ if ($_SESSION['login'] == 1) {
 			$user_name=$_SESSION['user_name'];
 			$item_total=($quantity*$price);
 			//$stock=get_total_stock($_REQUEST['meal_id']);
-	
-			$sales_no=$_SESSION['sales_no'];
+			if($_REQUEST['sales_no']){
+				$sales_no=$_SESSION['sales_no']=$_REQUEST['sales_no'];
+			}
+			else{
+				$sales_no=$_SESSION['sales_no'];
+			}
 			$sales_info=get_sales_info_by_sales_no($sales_no);
 			$item_info=get_meal_info_from_sales_has_items($id, $sales_no);
 				
@@ -174,7 +216,17 @@ if ($_SESSION['login'] == 1) {
 				$prepared_by=$_POST['prepared_by'];
 				$sales_no=$_POST['sales_no'];
 				$total=get_total_sales($_SESSION['sales_no']);
-				save_sales($sales_no, $date, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total);
+				
+				
+				$order_type_info=get_order_type_info($_SESSION['sales_no']);
+				$order_type=$order_type_info['order_type'];
+				$ref_no=$order_type_info['ref_no'];
+				
+				if($order_type=="Order From Room"){
+					$booking_ref=get_booking_ref_for_restaurant_order($ref_no);
+				}
+			
+				save_sales($sales_no, $date, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref);
 				//add_sales_ledger($sales_no);
 			}
 			else {
