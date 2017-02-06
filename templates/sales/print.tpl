@@ -22,5 +22,5 @@
 		</div>
 	</div>	
 <div>
-<a href="sales.php"><button class="btn btn-success">New Sales</button></a>
+<a href="restaurant.php"><button class="btn btn-success">New Sales</button></a>
 </div>

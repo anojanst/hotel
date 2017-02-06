@@ -228,7 +228,7 @@ function list_meal_for_sale(){
 function get_meal_info_by_id($id) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
-	echo "SELECT * FROM meal WHERE id='$id'";
+	
 	$result = mysqli_query($conn, "SELECT * FROM meal WHERE id='$id'");
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 		return $row;
