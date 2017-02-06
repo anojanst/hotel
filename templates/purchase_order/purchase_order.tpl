@@ -48,7 +48,7 @@
 			<div class="row">
 				<form name="purchase_item_form" action="purchase_order.php?job=purchase_item" method="post" class="product">
 					<div class="col-lg-3">		 
-						<input type="text" class="form-control" name="purchase_item" id="product_name" value="{$purchase_item}" placeholder="Item" required/>									
+						<input type="text" class="form-control" name="purchase_item" id="purchase_item" value="{$purchase_item}" placeholder="Item" required/>									
 					</div>
 					<div class="col-lg-1">
 						<input type="text" class="form-control" name="qty" value="{$qty}" placeholder="Qty" required/>

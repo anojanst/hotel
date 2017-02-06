@@ -42,7 +42,7 @@
 
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
-									Full Name
+                                    Module No
 									  <input class="form-control" name="module_no" value="{$module_no}" required placeholder="Module No">
 	                  
 								</div>                                

@@ -17,18 +17,7 @@ function check_non_saved_purchase_order($user_name){
 	include 'conf/closedb.php';
 }
 
-function non_save_purchase_order_info($user_name){
-	include 'conf/config.php';
-	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT MIN(purchase_order_no) FROM purchase_order_has_items WHERE user_name='$user_name' AND saved='0'");
-	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-	{
-		return $row['MIN(purchase_order_no)'];
-	}
-
-	include 'conf/closedb.php';
-}
 
 function get_purchase_no(){
 	include 'conf/config.php';
@@ -48,7 +37,13 @@ function save_purchase_item($purchase_order_no,$purchase_item,$quantity,$buying_
 	include 'conf/opendb.php';
 
 	$date = date("Y-m-d");
-	$total = $quantity*$buying_price;
+    if($measure_type=='g'){
+        $total = ($quantity/1000)*$buying_price;
+        
+    }
+    else{
+        $total = $quantity*$buying_price;
+    }
 	mysqli_select_db($conn_for_changing_db, $dbname);
 	$query = "INSERT INTO purchase_order_has_items (id,purchase_item, quantity, measure_type, buying_price, date, purchase_order_no, user_name, total)
 	VALUES ('','$purchase_item', '$quantity','$measure_type', '$buying_price', '$date', '$purchase_order_no', '$user_name', '$total')";
@@ -365,42 +360,3 @@ function get_purchase_order_item_id($purchase_order_no) {
 }
 
 
-function list_purchased_items(){
-	include 'conf/config.php';
-	include 'conf/opendb.php';
-	
-	echo '<div class="box-body">
-			<table id="example1" class="table table-bordered table-striped">
-				<thead>
-					<tr>
-						<th>Purchase Order No</th>
-						<th>Purchase Order Date</th>
-						<th>Suppier Name</th>
-						<th>Purchase Total</th>
-						<th>Remarks</th>
-						<th>Prepared By</th>       
-					</tr>
-				</thead>
-				<tbody>';
-	$result=mysqli_query($conn, "SELECT * FROM purchase_order WHERE confirmed='1'");
-	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-	{
-		echo '
-			<tr>
-				<td align="center">'.$row[purchase_order_no].'</td>
-						
-				<td>'.$row[date].'</td>
-						
-				<td>'.$row[supplier_name].'</td>
-				
-				<td align="right">'.$row[total].'</td>
-			
-				<td>'.$row[remarks].'</td>
-				
-				<td>'.strtoupper($row[prepared_by]).'</td>
-				</tr>';
-	}
-	echo '</tbody></table></div>';
-
-	include 'conf/closedb.php';
-}
