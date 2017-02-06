@@ -19,7 +19,8 @@ if ($_SESSION ['login'] == 1) {
 			
 			$smarty->assign ( 'room_no', $room_no );
 			$smarty->assign ( 'room_type', $room_info['room_cat'] );
-			$smarty->assign ( 'selected_date', $_SESSION['selected_date'] );
+			$smarty->assign ( 'from_date', $_SESSION['from_date'] );
+			$smarty->assign ( 'to_date', $_SESSION['to_date'] );
 			$smarty->assign ( 'page', "Room Info" );
 			$smarty->display ( 'room_info/room_info.tpl' );
 			

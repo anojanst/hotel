@@ -47,7 +47,7 @@ if ($_SESSION ['login'] == 1) {
 			$smarty->display ( 'rooms_type/rooms_type.tpl' );
 			
 		} elseif ($_REQUEST ['job'] == "delete") {
-			cancel_rooms_type ( $_REQUEST ['id'] );
+			delete_room_type($_REQUEST ['id']);
 			
 			$smarty->assign ( 'page', "Rooms_Type" );
 			$smarty->display ( 'rooms_type/rooms_type.tpl' );

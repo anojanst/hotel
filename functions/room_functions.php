@@ -83,6 +83,10 @@ function get_room_info_by_room_no($room_no) {
 function update_rooms($id, $room_number,$room_cat) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
+echo "UPDATE room SET
+	room_no='$room_number',
+	room_cat='$room_cat'
+	WHERE id='$id'";
 
 	mysqli_select_db ($conn, $dbname );
 	$query = "UPDATE room SET
@@ -97,14 +101,12 @@ function update_rooms($id, $room_number,$room_cat) {
 
 
 
-function cancel_rooms($id) {
+function delete_room($id) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db ($conn, $dbname );
-	$query = "UPDATE rooms SET
-	cancel_status='1'
-	WHERE id='$id'";
+	$query = "DELETE FROM room WHERE id='$id'";
 	
 	mysqli_query ($conn, $query );
 	

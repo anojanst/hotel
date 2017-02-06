@@ -72,7 +72,7 @@ if ($_SESSION ['login'] == 1) {
 			$smarty->display ( 'room/room.tpl' );
 			
 		} elseif ($_REQUEST ['job'] == "delete") {
-			cancel_rooms ( $_REQUEST ['id'] );
+			delete_room ( $_REQUEST ['id'] );
 			
 			$smarty->assign ( 'room_types', list_room_type() );
 			$smarty->assign ( 'page', "Rooms" );
@@ -90,8 +90,7 @@ if ($_SESSION ['login'] == 1) {
 			$smarty->assign ( 'page', "Rooms" );
 			$smarty->display ( 'room/room_grid_view.tpl' );
 		}
-		
-		
+				
 		elseif ($_REQUEST ['job'] == "room_view_by_status") {
 			
 			

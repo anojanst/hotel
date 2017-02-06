@@ -10,9 +10,9 @@ function list_all_booking() {
                            <th>Booking Number</th>
 						   <th>From Date</th>
 						   <th>To Date</th>
-							<th>Caller</th>
+							<th>Name</th>
 							<th>Room Number</th>
-						   <th> </th>
+						   	<th> </th>
 							<th> </th>
 							<th> </th>
 							<th>view</th>
@@ -24,28 +24,36 @@ function list_all_booking() {
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
 		
 		$caller_info=get_caller_info_by_booking_id($row[booking_ref]);
+		$guest_name=get_guest_info_by_booking_id($row[booking_ref]);
 				
 		echo '	
 		<td>'.$row[booking_ref].' </td>	
 		<td>'.$row[from_date].'</td>
-		<td> '.$row[to_date].'</td>	
-		<td>'.$caller_info[caller_name].'</td>
-		<td> '.$caller_info[room_no].'</td> 
+		<td> '.$row[to_date].'</td>';
+		
+		if($caller_info[caller_name]){
+			echo'<td>'.$caller_info[caller_name].'</td>';
+		}
+		else{
+			echo'<td>'.$guest_name[guest_name].'</td>';			
+		}
+		
+		echo'<td> '.$row[room_no].'</td> 
 		<td> ';
 
-				$staus_info=get_room_status_info_by_room_no($caller_info['room_no']);
+				$staus_info=get_room_status_info_by_room_no($row['room_no']);
 					if ($staus_info [status_id] == '2'){
 					echo' 
-							<a href="room_manage.php?job=update_occupied&room_no='.$caller_info[room_no].'"> <button type="button" class="btn btn-block btn-warning"> Occupied </button></a>';
+							<a href="room_manage.php?job=update_occupied&room_no='.$row[room_no].'"> <button type="button" class="btn btn-block btn-warning"> Occupied </button></a>';
 					}
 					else{
 	
 						}
 					
 		echo'	</td>	
-		<td><a href="room_manage.php?job=delete&booking_ref=' . $row [booking_ref] . '&room_no='.$caller_info[room_no].'" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"> <button type="button" class="btn btn-block btn-danger"> Cancel whole booking </button></a></td>
+		<td><a href="room_manage.php?job=delete&booking_ref=' . $row [booking_ref] . '&room_no='.$row[room_no].'" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"> <button type="button" class="btn btn-block btn-danger"> Cancel whole booking </button></a></td>
 
-		<td><a href="room_manage.php?job=booking_view_by_date&booking_ref=' . $row [booking_ref] . '&room_no='.$caller_info[room_no].'"> <button type="button" class="btn btn-block btn-danger"> Cancel booking </button></a></td>			
+		<td><a href="room_manage.php?job=booking_view_by_date&booking_ref=' . $row [booking_ref] . '&room_no='.$row[room_no].'"> <button type="button" class="btn btn-block btn-danger"> Cancel booking </button></a></td>			
 				
 		<td><a href="booking.php?job=view_booking_detail&booking_ref='.$row[booking_ref].'"> <i class="fa fa-eye"></i></a></td>
 

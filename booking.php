@@ -6,6 +6,7 @@ include 'functions/room_functions.php';
 include 'functions/room_manage_functions.php';
 include 'functions/booking_functions.php';
 include 'functions/call_functions.php';
+include 'functions/guest_functions.php';
 
 
 $module_no = 9;
@@ -15,20 +16,32 @@ if ($_SESSION ['login'] == 1) {
 		if ($_REQUEST ['job'] == "booking_form_room_status") {
 			
 			$_SESSION['telephone_num']=$telephone_num=$_POST['telephone_num'];
-			$_SESSION['booking_status_by']=$booking_status_by=$_REQUEST['booking_status_by'];
-			
+			$_SESSION['booking_status_by']='Direct';
+
 			$room_info=get_room_info_by_contact_number($telephone_num);
+			
 			
 			$smarty->assign ( 'room_cat', $_REQUEST ['room_cat'] );
 			$smarty->assign ( 'room_no_display', $_REQUEST ['room_no'] );
-			$smarty->assign ( 'from_date', $_REQUEST ['selected_date'] );
-			$smarty->assign ( 'to_date', $_REQUEST ['selected_date'] );
+			$smarty->assign ( 'from_date', $_REQUEST ['from_date'] );
+			$smarty->assign ( 'to_date', $_REQUEST ['to_date'] );
 			
 			$smarty->assign ( 'room_category', list_room_type() );
 			$smarty->assign ( 'room_no', list_room_number_by_type($room_info ['room_cat']) );
 			
-			$smarty->assign ( 'page', "Booking" );
-			$smarty->display ( 'booking/booking_form_room_status.tpl' );
+			if(check_guest_reg_status($telephone_num)==1)
+			{
+				
+				$smarty->assign ( 'page', "Booking" );
+				$smarty->display ( 'booking/booking_form_room_status.tpl' );
+			}
+			else{
+				
+				$smarty->assign ( 'telephone_num', $_SESSION['telephone_num'] );
+				$smarty->assign ( 'page', "Booking" );
+				$smarty->display ( 'guest/guest.tpl' );								
+			}
+
 			
 		}
 		elseif ($_REQUEST ['job'] == "booking_form") {
@@ -47,11 +60,11 @@ if ($_SESSION ['login'] == 1) {
 			$smarty->display ( 'booking/booking.tpl' );
 			
 		} elseif ($_REQUEST ['job'] == "save") {
-			
+
 				$booking_status_by=$_SESSION['booking_status_by'];
 
 				$telephone_num=$_SESSION['telephone_num'];
-	
+								
 				$room_cat=$_POST ['room_cat'];
 				$room_no = $_POST ['room_no'];
 				$_SESSION ['booking_ref']= $booking_ref= get_booking_ref();
@@ -72,7 +85,7 @@ if ($_SESSION ['login'] == 1) {
 				}
 				else{
 					
-					save_booking( $from_date, $to_date, $booking_ref, $booking_status_by);
+					save_booking( $from_date, $to_date, $booking_ref,$room_no, $booking_status_by);
 					
 					$status_info= get_room_status_info();
 					$status_id = $status_info['id'];
@@ -84,7 +97,7 @@ if ($_SESSION ['login'] == 1) {
 						$from_date = date ("Y-m-d", strtotime("+1 day", strtotime($from_date)));
 					}
 					
-						if($booking_status_by==Call){
+						if($booking_status_by=="Call"){
 							$info=get_caller_info_by_contact_number($telephone_num);
 						
 							$caller_name=$info[caller_name];
@@ -94,13 +107,13 @@ if ($_SESSION ['login'] == 1) {
 							save_room_has_booking($room_no,$booking_ref);
 					
 						}
-						elseif($booking_status_by==Direct){
-						
+						elseif($booking_status_by=="Direct"){
+							
 							$info=get_guest_info_by_contact_number($telephone_num);
 						
 							$guest_name=$info[guest_name];
 							$guest_id=$info[id];
-						
+							
 							save_guest_info_to_booking($guest_id,$booking_ref, $guest_name, $room_no);
 							save_room_has_booking($room_no,$booking_ref);
 						
@@ -108,7 +121,10 @@ if ($_SESSION ['login'] == 1) {
 											
 				}
 				
-			header('Location: room.php?job=room_view_by_status_back');
+				$smarty->assign ( 'page', "Booking" );
+				$smarty->display ( 'booking/booking.tpl' );
+				
+				header('Location: room.php?job=room_view_by_status_back');
 			
 		} 
 		elseif ($_REQUEST ['job'] == "view_booking_detail") {
