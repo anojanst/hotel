@@ -31,10 +31,17 @@
 			</div>
 			<div class="row">				
 				<form name="select_item_form"  action="sales.php?job=select" method="post" >
+
 					<div class="col-lg-3">
-						<select class="form-control"  name="id" tabindex="1" required >
+						<select name="meal_type" id="meal_type" class="form-control" required >
 							<option value="" disabled selected>Meal Name</option>
-							{php}list_meal_for_sale();{/php}                              
+							{php}list_meal_type_for_sale();{/php}                              
+						</select>
+					</div>
+
+					<div class="col-lg-3">
+						<select name="meal" id="meal" class="form-control" required >
+							<option disabled selected>Please select the meal type first</option>                         
 						</select>
 					</div>
 					<div class="col-lg-4">

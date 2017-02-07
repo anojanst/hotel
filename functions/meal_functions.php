@@ -210,6 +210,18 @@ function delete_meal_detail($id) {
 	
 }
 
+function list_meal_type_for_sale(){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$result=mysqli_query($conn, "SELECT * FROM meal_type ORDER BY id DESC");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		echo'   <option value="'.$row[id].'">'.$row[meal].'</option>';
+	}
+	include 'conf/closedb.php';
+
+}
 
 function list_meal_for_sale(){
 	include 'conf/config.php';

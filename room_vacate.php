@@ -33,9 +33,27 @@ if ($_SESSION ['login'] == 1) {
 			
 		elseif($_REQUEST['job']=='room_pay'){
 		
-			$_SESSION['booking_ref']=$booking_ref=$_REQUEST['booking_ref'];
+			$booking_ref=$_SESSION['booking_ref'];
 				
-			$_SESSION['room_no']=$room_no=$_REQUEST['room_no'];
+			$room_no=$_SESSION['room_no'];
+			
+			$room_charge= $_REQUEST['room_charge'];
+			
+			$request_charges= $_REQUEST['request_charges'];
+			
+			$sales_bills= $_REQUEST['sales_bills'];
+			
+			$occupied_days= $_REQUEST['occupied_days'];
+			
+			$date=date('Y-m-d');
+			
+			$caller_info= get_caller_info_by_booking_id($booking_ref);
+			$booking_info= get_booking_date_info_by_booking_ref($booking_ref);
+			
+			save_room_bill($room_no, $booking_ref, $caller_info['caller_name'],$booking_info['from_date'],$date, $occupied_days, $room_charge, $request_charges, $sales_bills);
+			cancel_booking ($booking_ref);
+			//cancel_booking_has_caller($_REQUEST ['booking_ref']);
+			cancel_room_status($booking_ref, $room_no);
 				
 			$smarty->assign ( 'page', "Bill" );
 			$smarty->display ( 'room_vacate/room_vacate_print.tpl' );

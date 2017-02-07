@@ -3,6 +3,7 @@ require_once 'conf/smarty-conf.php';
 
 include 'functions/modules_functions.php';
 include 'functions/guest_functions.php';
+include 'functions/call_functions.php';
 
 
 $module_no = 10;
