@@ -63,10 +63,10 @@ if ($_SESSION['login'] == 1) {
 			$stock=$info['liquor'].' ('. $size .')';
 			
 			if($size=="25 ml"){
-				$price=$info['25_price'];
+				$price=$info['price_25'];
 			}
 			elseif($size=="50 ml"){
-				$price=$info['50_price'];
+				$price=$info['price_50'];
 			}
 			else{
 				$price=$info['price'];

@@ -44,5 +44,5 @@
 	</div>
 </div>
 <div>
-<a href="restaurant.php"><button class="btn btn-success">New Sales</button></a>
+<a href="bar.php"><button class="btn btn-success">New Sales</button></a>
 </div>
