@@ -1,12 +1,12 @@
 <?php
-function save_booking( $from_date, $to_date, $booking_ref, $booking_status_by) {
+function save_booking( $from_date, $to_date, $booking_ref, $room_no,$booking_status_by) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db ( $conn, $dbname);
 
-	$query = "INSERT INTO booking (id, from_date, to_date, booking_ref, booking_status_by)
-	VALUES ('', '$from_date','$to_date','$booking_ref','$booking_status_by')";
+	$query = "INSERT INTO booking (id, from_date, to_date, booking_ref, room_no,booking_status_by)
+	VALUES ('', '$from_date','$to_date','$booking_ref','$room_no','$booking_status_by')";
 	
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 		
@@ -73,29 +73,38 @@ function list_booking() {
 	
 	$result = mysqli_query ( $conn, "SELECT * FROM booking" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
-		echo $row[booking_status_by];
-		if($row[booking_status_by]==Call){
-					
-		//$caller_info=get_caller_info_by_caller_id($row[booking_ref]);
+				
 		$caller_info=get_caller_info_by_booking_id($row[booking_ref]);
+		$guest_info=get_guest_info_by_booking_id($row[booking_ref]);
+
+		if($caller_info[caller_name]){
+			echo'<td>'.$caller_info[caller_name].'</td>';
+		}
+		else{
+			echo'<td>'.$guest_info[guest_name].'</td>';
+		}
+		echo $caller_info[phone];
+		echo 11;
+		if($caller_info[phone]){
+			echo'<td>'.$caller_info[phone].'</td>';
+		}
+		else{
+			echo'<td>'.$guest_info[phone].'</td>';
+		}
+		
+		if($caller_info[room_no]){
+			echo'<td>'.$caller_info[room_no].'</td>';
+		}
+		else{
+			echo'<td>'.$guest_info[room_no].'</td>';
+		}
+		
 		echo '
-		<td>'.$caller_info[caller_name].' </td>	
-		<td> '.$caller_info[phone].'</td>
-		<td> '.$caller_info[room_no].'</td>	
+
 		<td><a href="booking.php?job=view_booking_detail&booking_ref='.$row[booking_ref].'"> <i class="fa fa-eye"></i></a></td>									
 		</tr>
 			';
-		}elseif ($row[booking_status_by]==Direct){
-			$guest_info=get_guest_info_by_booking_id($row[booking_ref]);
-			
-		echo '	
-		<td>'.$guest_info[guest_name].' </td>	
-		<td> '.$guest_info[phone].'</td>
-		<td> '.$row[room_no].'</td>	
-		<td><a href="booking.php?job=view_booking_detail&booking_ref='.$row[booking_ref].'"> <i class="fa fa-eye"></i></a></td>									
-		</tr>				
-			';
-		}
+					
 		$i ++;
 	}
 	
@@ -238,9 +247,7 @@ function list_booking_by_date($booking_ref){
                   <thead>
                        <tr>
                            <th>Booking Number</th>
-						   <th>From Date</th>
-						   <th>To Date</th>
-							<th>Caller</th>
+						   <th>Date</th>
 							<th>Room Number</th>
 							<th> </th>
 							
@@ -258,8 +265,6 @@ function list_booking_by_date($booking_ref){
 		echo '
 		<td>'.$row[booking_ref].' </td>
 		<td>'.$row[date].'</td>
-		<td> '.$row['room_no'].'</td>
-		<td>'.$caller_info[caller_name].'</td>
 		<td> '.$caller_info[room_no].'</td>';
 		
 		if($row['date']==$booking_info['from_date']||$row['date']==$booking_info['to_date']){		
@@ -317,6 +322,24 @@ function check_room_status_to_date($to_date, $room_no) {
 	include 'conf/opendb.php';
 
 	if(mysqli_num_rows(mysqli_query($conn, "SELECT id FROM room_has_status WHERE date ='$to_date' AND room_no='$room_no'"))){
+		return 1;
+	}
+	else{
+		return 0;
+	}
+
+	include 'conf/closedb.php';
+}
+
+
+
+function check_guest_reg_status($telephone_num) {
+
+	$password=md5($password);
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	if(mysqli_num_rows(mysqli_query($conn, "SELECT id FROM guest WHERE phone ='$telephone_num'"))){
 		return 1;
 	}
 	else{

@@ -32,3 +32,22 @@
 		});
 	});
 </script>
+
+<script>
+	$(function() {
+	
+		$("#meal_type").change(function() {
+		  $("#meal").load("ajax/meal_by_meal_type.php?choice=" + encodeURIComponent($("#meal_type").val()));					
+		});
+	});
+</script>
+
+<script>
+	$(function() {
+	
+		$("#liquor_type").change(function() {
+		  $("#liquor").load("ajax/liquor_by_liquor_type.php?choice=" + encodeURIComponent($("#liquor_type").val()));
+		  $("#size").load("ajax/size_by_liquor_type.php?choice=" + encodeURIComponent($("#liquor_type").val()));					
+		});
+	});
+</script>

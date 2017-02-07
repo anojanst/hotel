@@ -4,19 +4,19 @@ function last_incomplete_bill(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE `cancel_status` = 0 AND `saved` = 0 ORDER BY `sales_no` ASC LIMIT 1");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE `cancel_status` = 0 AND `saved` = 0 ORDER BY `bar_sales_no` ASC LIMIT 1");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 
-		echo'<div class="col-lg-3"><strong>Sales No: </strong>'.$row[sales_no].'</div>
-			 <div class="col-lg-5"><strong>Sales Time: </strong>'.$row[on_update].'</div>
+		echo'<div class="col-lg-3"><strong>Bar sales No: </strong>'.$row[bar_sales_no].'</div>
+			 <div class="col-lg-5"><strong>Bar sales Time: </strong>'.$row[on_update].'</div>
 			 <div class="col-lg-4"><strong>Table No: </strong>'.$row[ref_no].'</div>
 			
 			<table class="table table-bordered table-striped">
 			<thead>
 				<tr style="background-color: #e0e0e0;">
 					<th>Delete</th>
-					<th>Meal Name</th>
+					<th>Liquor Name</th>
 					<th>Price</th>
 					<th>Quantity</th>
 					<th>Total</th>
@@ -24,22 +24,22 @@ function last_incomplete_bill(){
 				</tr>
 			</thead>
 			<tbody>';
-		$result1=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE sales_no='$row[sales_no]' AND cancel_status='0' ORDER BY id ASC");
+		$result1=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE bar_sales_no='$row[bar_sales_no]' AND cancel_status='0' ORDER BY id ASC");
 		while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
 		{
 			echo'<tr height="50">
-			<form name="update_item" action="sales.php?job=update_item&meal_id='.$row1[meal_id].'&sales_no='.$row[sales_no].'" method="post">
-				<td align="center"><a href="sales.php?job=delete_item&id='.$row1[id].'" ><button class="btn btn-sm btn-danger">Delete</button></a></td>'."
-				<td>".$row1[meal_name]."</td>
+			<form name="update_item" action="bar_sales.php?job=update_item&liquor_id='.$row1[liquor_id].'&bar_sales_no='.$row[bar_sales_no].'" method="post">
+				<td align="center"><a href="bar_sales.php?job=delete_item&id='.$row1[id].'" ><button class="btn btn-sm btn-danger">Delete</button></a></td>'."
+				<td>".$row1[liquor]."</td>
 				<td align='right'><input type='text' name='price' value=".$row1[price]." size='10' style='color: #000; font: 14px/30px Arial, Helvetica, sans-serif; height: 25px; line-height: 25px; border: 1px solid #d5d5d5; padding: 0 4px; text-align: right;' readonly/></td>
 				<td align='right'><input type='text' name='quantity' value=".$row1[quantity]." size='6' style='color: #000; font: 14px/30px Arial, Helvetica, sans-serif; height: 25px; line-height: 25px; border: 1px solid #d5d5d5; padding: 0 4px; text-align: right;'/></td>
 				<td align='right'>".$row1[total]."</td>
 				<td align='right'><input type='submit' name='update' value='Update' size='9' class='btn btn-sm btn-success'/></td>
 			</form></tr>";
 		}
-		$total=get_total_sales($row['sales_no']);
+		$total=get_total_bar_sales($row['bar_sales_no']);
 		echo'<tr height="30">
-				<td colspan="4" style="background-color: #e0e0e0;"><a href="sales.php?job=complete_sales&sales_no='.$row[sales_no].'"><div class="col-lg-12 btn btn-primary">Complete Bill</div></a></td>
+				<td colspan="4" style="background-color: #e0e0e0;"><a href="bar_sales.php?job=complete_bar_sales&bar_sales_no='.$row[bar_sales_no].'"><div class="col-lg-12 btn btn-primary">Complete Bill</div></a></td>
 				<td align="right" style="background-color: #e0e0e0;">'.$total.'</td>				
 				<td align="right" style="background-color: #e0e0e0;"></td>
 			</tr>
@@ -54,15 +54,15 @@ function all_incomplete_bill(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE `cancel_status` = 0 AND `saved` = 0 ORDER BY `sales_no` ASC LIMIT 1, 100");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE `cancel_status` = 0 AND `saved` = 0 ORDER BY `bar_sales_no` ASC LIMIT 1, 100");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		$total=get_total_sales($row['sales_no']);
+		$total=get_total_bar_sales($row['bar_sales_no']);
 		echo'<div class="col-lg-6 col-xs-12" style=" margin-left: -12px;">
 				<div class="info-box">
 			
-					<a href="sales.php?job=complete_sales&sales_no=' . $row [sales_no] . '"  >
-						<span class="info-box-icon bg-green">'.$row['sales_no'].'</span>
+					<a href="bar_sales.php?job=complete_bar_sales&bar_sales_no=' . $row [bar_sales_no] . '"  >
+						<span class="info-box-icon bg-green">'.$row['bar_sales_no'].'</span>
 					</a>
 								
 					<div class="info-box-content">
@@ -90,17 +90,17 @@ function all_incomplete_bill(){
 	include 'conf/closedb.php';
 }
 
-function list_item_by_sales($sales_no){
+function list_item_by_bar_sales($bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE sales_no='$sales_no' AND cancel_status='0' ORDER BY id ASC");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE bar_sales_no='$bar_sales_no' AND cancel_status='0' ORDER BY id ASC");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		echo'<tr>
-		<form name="update_item" action="sales.php?job=update_item&meal_id='.$row[meal_id].'" method="post">
-            <td align="center" ><a href="sales.php?job=delete_item&id='.$row[id].'" ><img src="images/close.png" alt="Delete" /></a></td>'."
-            <td>".$row[meal_name]."</td>
+		<form name="update_item" action="bar_sales.php?job=update_item&liquor_id='.$row[liquor_id].'" method="post">
+            <td align="center" ><a href="bar_sales.php?job=delete_item&id='.$row[id].'" ><img src="images/close.png" alt="Delete" /></a></td>'."
+            <td>".$row[liquor]."</td>
             <td align='right'><input type='text' name='price' value=".$row[price]." size='10' style='color: #000; font: 14px/30px Arial, Helvetica, sans-serif; height: 25px; line-height: 25px; border: 1px solid #d5d5d5; padding: 0 4px; text-align: right;' readonly/></td>
             <td align='right'><input type='text' name='quantity' value=".$row[quantity]." size='6' style='color: #000; font: 14px/30px Arial, Helvetica, sans-serif; height: 25px; line-height: 25px; border: 1px solid #d5d5d5; padding: 0 4px; text-align: right;'/></td>
             <td align='right'>".$row[total]."</td>
@@ -112,12 +112,12 @@ function list_item_by_sales($sales_no){
 }
 
 
-function get_total_sales($sales_no){
+function get_total_bar_sales($bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 
-	$result=mysqli_query($conn, "SELECT sum(total) as total FROM sales_has_items WHERE sales_no='$sales_no' AND cancel_status='0'");
+	$result=mysqli_query($conn, "SELECT sum(total) as total FROM bar_sales_has_items WHERE bar_sales_no='$bar_sales_no' AND cancel_status='0'");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		$total=$row[total];
@@ -128,24 +128,24 @@ function get_total_sales($sales_no){
 	include 'conf/closedb.php';
 }
 
-function add_sales_item($selected_item, $stock, $price, $sales_no, $item_total, $order_type, $ref_no, $booking_ref){
+function add_bar_sales_item($selected_item, $size, $stock, $price, $bar_sales_no, $item_total, $order_type, $ref_no, $booking_ref){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	$date = date("Y-m-d");
 
-	$query = "INSERT INTO sales_has_items (id, meal_id, meal_name, price, date, sales_no, quantity, user_name, total, order_type, ref_no, booking_ref)
-	VALUES ('', '$selected_item', '$stock', '$price', '$date', '$sales_no', '1', '$_SESSION[user_name]', '$item_total', '$order_type', '$ref_no', '$booking_ref')";
+	$query = "INSERT INTO bar_sales_has_items (id, liquor_id, liquor, size, price, date, bar_sales_no, quantity, user_name, total, order_type, ref_no, booking_ref)
+	VALUES ('', '$selected_item', '$stock', '$size', '$price', '$date', '$bar_sales_no', '1', '$_SESSION[user_name]', '$item_total', '$order_type', '$ref_no', '$booking_ref')";
 	mysqli_query($conn, $query) or die (mysqli_error($conn));
 
 	include 'conf/closedb.php';
 }
 
-function check_non_saved_sales_order($user_name){
+function check_non_saved_bar_sales_order($user_name){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT count(id) FROM sales_has_items WHERE user_name='$user_name' AND saved='0'");
+	$result=mysqli_query($conn, "SELECT count(id) FROM bar_sales_has_items WHERE user_name='$user_name' AND saved='0'");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		if ($row['count(id)'] >=1) {
@@ -159,37 +159,37 @@ function check_non_saved_sales_order($user_name){
 	include 'conf/closedb.php';
 }
 
-function non_save_sales_info($user_name){
+function non_save_bar_sales_info($user_name){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT MIN(sales_no) FROM sales_has_items WHERE user_name='$user_name' AND saved='0'");
+	$result=mysqli_query($conn, "SELECT MIN(bar_sales_no) FROM bar_sales_has_items WHERE user_name='$user_name' AND saved='0'");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		return $row['MIN(sales_no)'];
+		return $row['MIN(bar_sales_no)'];
 	}
 
 	include 'conf/closedb.php';
 }
 
-function get_sales_no(){
+function get_bar_sales_no(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT MAX(sales_no) FROM sales_has_items");
+	$result=mysqli_query($conn, "SELECT MAX(bar_sales_no) FROM bar_sales_has_items");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		return $row['MAX(sales_no)']+1;
+		return $row['MAX(bar_sales_no)']+1;
 	}
 
 	include 'conf/closedb.php';
 }
 
-function check_added_items($id, $sales_no){
+function check_added_items($id, $bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT count(id) FROM sales_has_items WHERE id='$id' AND sales_no='$sales_no' AND cancel_status='0'");
+	$result=mysqli_query($conn, "SELECT count(id) FROM bar_sales_has_items WHERE id='$id' AND bar_sales_no='$bar_sales_no' AND cancel_status='0'");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		if ($row['count(id)'] >=1) {
@@ -203,40 +203,40 @@ function check_added_items($id, $sales_no){
 	include 'conf/closedb.php';
 }
 
-function update_sales_item($id, $quantity, $item_total, $price, $sales_no){
+function update_bar_sales_item($id, $quantity, $item_total, $price, $bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	$query = "UPDATE sales_has_items SET
+	$query = "UPDATE bar_sales_has_items SET
 	quantity='$quantity',
 	price='$price',
 	total='$item_total',
 	saved='0'
-	WHERE meal_id='$id' AND cancel_status='0' AND sales_no='$sales_no'";
+	WHERE liquor_id='$id' AND cancel_status='0' AND bar_sales_no='$bar_sales_no'";
 	mysqli_query($conn, $query);
 
 	include 'conf/closedb.php';
 }
 
-function update_sales_item_for_repeative_adding($id, $quantity, $item_total){
+function update_bar_sales_item_for_repeative_adding($id, $quantity, $item_total){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	$query = "UPDATE sales_has_items SET
+	$query = "UPDATE bar_sales_has_items SET
 	quantity='$quantity',
 	total='$item_total',
 	saved='0'
-	WHERE meal_id='$id' AND cancel_status='0'";
+	WHERE liquor_id='$id' AND cancel_status='0'";
 	mysqli_query($conn, $query);
 
 	include 'conf/closedb.php';
 }
 
-function get_quantity($vehicle_id, $sales_no){
+function get_quantity($vehicle_id, $bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	$result=mysqli_query($conn, "SELECT sum(quantity) as tot FROM sales_has_items WHERE vehicle_id='$vehicle_id' AND sales_no='$sales_no' AND cancel_status='0'");
+	$result=mysqli_query($conn, "SELECT sum(quantity) as tot FROM bar_sales_has_items WHERE vehicle_id='$vehicle_id' AND bar_sales_no='$bar_sales_no' AND cancel_status='0'");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		$total=$row[tot];
@@ -249,7 +249,7 @@ function get_quantity($vehicle_id, $sales_no){
 }
 
 
-function print_sales_item($sales_no){
+function print_bar_sales_item($bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
@@ -261,10 +261,10 @@ function print_sales_item($sales_no){
 			<td align="right"><strong>Amount</strong></td>
 		</tr>';
 	
-	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE sales_no='$sales_no' AND cancel_status='0' ORDER BY id ASC");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE bar_sales_no='$bar_sales_no' AND cancel_status='0' ORDER BY id ASC");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		$result1=mysqli_query($conn, "SELECT * FROM sales WHERE sales_no='$sales_no'");
+		$result1=mysqli_query($conn, "SELECT * FROM bar_sales WHERE bar_sales_no='$bar_sales_no'");
 		while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
 		{
 			$discount = $row1['discount'];
@@ -282,7 +282,7 @@ function print_sales_item($sales_no){
 		$total=($row[quantity]*$row[price]);
 		echo'<tr>		
 		<td>'.$row[quantity].'</td>
-		<td>'.$row[meal_name].'</td>
+		<td>'.$row[liquor].'</td>
 		<td align="right">'.$row[price].'</td>
 		<td align="right">'.number_format($total,2).'</td>
 		</tr>';
@@ -333,10 +333,10 @@ function print_sales_item($sales_no){
         </tr>';
 
 			
-			$query = "UPDATE sales SET
+			$query = "UPDATE bar_sales SET
 			amount_after_discount = '$discount_amount',
 			net_total ='$net_total'
-			WHERE sales_no='$sales_no'";
+			WHERE bar_sales_no='$bar_sales_no'";
 			mysqli_query($conn, $query);
 			
 
@@ -346,13 +346,13 @@ function print_sales_item($sales_no){
 
 }
 
-function net_total($sales_no){
+function net_total($bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	$net_total=0;
 
-	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE sales_no='$sales_no' AND cancel_status='0' ORDER BY id ASC");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE bar_sales_no='$bar_sales_no' AND cancel_status='0' ORDER BY id ASC");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		$total=$row[quantity]*$row[selling_price];
@@ -365,11 +365,11 @@ function net_total($sales_no){
 	include 'conf/closedb.php';
 }
 
-function get_meal_info_from_sales_has_items($id, $sales_no){
+function get_liquor_info_from_bar_sales_has_items($id, $bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE meal_id='$id' AND sales_no='$sales_no'");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE liquor_id='$id' AND bar_sales_no='$bar_sales_no'");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		return $row;
@@ -377,11 +377,11 @@ function get_meal_info_from_sales_has_items($id, $sales_no){
 	include 'conf/closedb.php';
 }
 
-function get_meal_info_from_sales_has_items_by_id($id){
+function get_liquor_info_from_bar_sales_has_items_by_id($id){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE id='$id'");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE id='$id'");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		return $row;
@@ -393,7 +393,7 @@ function cancel_item($id){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	$query = "UPDATE sales_has_items SET
+	$query = "UPDATE bar_sales_has_items SET
 	cancel_status='1',
 	canceled_by='$_SESSION[user_name]',
 	saved='0'
@@ -403,49 +403,49 @@ function cancel_item($id){
 	include 'conf/closedb.php';
 }
 
-function update_saved_sales($sales_no){
+function update_saved_bar_sales($bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	$query = "UPDATE sales_has_items SET
+	$query = "UPDATE bar_sales_has_items SET
 	saved='1'
-	WHERE sales_no='$sales_no'";
+	WHERE bar_sales_no='$bar_sales_no'";
 	mysqli_query($conn, $query);
 
 	include 'conf/closedb.php';
 }
 
 
-function save_sales($sales_no, $date, $customer_name,$discount_type, $discount,$prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref){
+function save_bar_sales($bar_sales_no, $date, $customer_name,$discount_type, $discount,$prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	$date = date("Y-m-d");
 	
-	$query = "INSERT INTO sales (id, sales_no, customer_name, discount_type, discount, prepared_by, remarks, date, total, due, order_type, ref_no, booking_ref)
-	VALUES ('', '$sales_no', '$customer_name','$discount_type','$discount', '$prepared_by', '$remarks', '$date', '$total', '$total', '$order_type', '$ref_no', '$booking_ref')";
+	$query = "INSERT INTO bar_sales (id, bar_sales_no, customer_name, discount_type, discount, prepared_by, remarks, date, total, due, order_type, ref_no, booking_ref)
+	VALUES ('', '$bar_sales_no', '$customer_name','$discount_type','$discount', '$prepared_by', '$remarks', '$date', '$total', '$total', '$order_type', '$ref_no', '$booking_ref')";
 	mysqli_query($conn, $query) or die (mysqli_error($conn));
 
 	include 'conf/closedb.php';
 }
 
 
-function list_sales_search($sales_no_search, $customer_search){
+function list_bar_sales_search($bar_sales_no_search, $customer_search){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	if($sales_no_search && $customer_search){
+	if($bar_sales_no_search && $customer_search){
 		$and="AND ";
 	}
 	else{
 		$and="";
 	}
 	
-	if($sales_no_search){
-		$sales_no_check="sales_no LIKE '%$sales_no_search'";
+	if($bar_sales_no_search){
+		$bar_sales_no_check="bar_sales_no LIKE '%$bar_sales_no_search'";
 	}
 	else{
-		$sales_no_check="";
+		$bar_sales_no_check="";
 	}
 
 	if($customer_search){
@@ -455,32 +455,32 @@ function list_sales_search($sales_no_search, $customer_search){
 		$customer_check="";
 	}
 	
-	if($sales_no_search || $customer_search){
+	if($bar_sales_no_search || $customer_search){
 	
 	echo '<table class="inventory_table" style="width: 900px; border-bottom: 2px solid silver; margin-bottom: 30px; margin-top: 0x;">
 	<thead valign="top">
 	<th>Edit</th>
 	<th>Print</th>
-	<th>Sales No</th>
-	<th>Sales Date</th>
+	<th>Bar_sales No</th>
+	<th>Bar_sales Date</th>
 	<th>Customer Name</th>
-	<th>Sales Total</th>
+	<th>Bar_sales Total</th>
 	<th>Remarks</th>
 	<th>Prepared By</th>
 	<th>Delete</th>
 	</thead>
 	<tbody valign="top">';
 
-	$result=mysqli_query($conn, "SELECT * FROM sales WHERE $customer_check $and $sales_no_check AND cancel_status='0' ORDER BY id DESC");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales WHERE $customer_check $and $bar_sales_no_check AND cancel_status='0' ORDER BY id DESC");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		echo '
 		<tr>
-			<td><a href="sales.php?job=edit&id='.$row[id].'"  ><img src="images/edit.png" alt="Edit" /></a></td>
+			<td><a href="bar_sales.php?job=edit&id='.$row[id].'"  ><img src="images/edit.png" alt="Edit" /></a></td>
 
-			<td><a href="sales.php?job=print_preview&id='.$row[id].'"  ><img src="images/print.png" alt="Print" width="24" height="24" /></a></td>
+			<td><a href="bar_sales.php?job=print_preview&id='.$row[id].'"  ><img src="images/print.png" alt="Print" width="24" height="24" /></a></td>
 			
-			<td>'.$row[sales_no].'</td>
+			<td>'.$row[bar_sales_no].'</td>
 					
 			<td>'.$row[date].'</td>
 					
@@ -492,7 +492,7 @@ function list_sales_search($sales_no_search, $customer_search){
 			
 			<td>'.strtoupper($row[prepared_by]).'</td>
 		
-			<td><a href="#" onclick="javascript:showConfirm(\'Are you sure you want to delete this entry?\',\'\',\'Yes\',\'sales.php?job=delete&id='.$row[id].'\',\'No\',\'sales.php?job=search\')"><img src="images/close.png" alt="Delete" /></a></td>
+			<td><a href="#" onclick="javascript:showConfirm(\'Are you sure you want to delete this entry?\',\'\',\'Yes\',\'bar_sales.php?job=delete&id='.$row[id].'\',\'No\',\'bar_sales.php?job=search\')"><img src="images/close.png" alt="Delete" /></a></td>
 		</tr>';
 	}
 	echo '</tbody></table>';
@@ -502,22 +502,22 @@ function list_sales_search($sales_no_search, $customer_search){
 }
 
 
-function list_sales_search_report($customer_search, $sales_no_search){
+function list_bar_sales_search_report($customer_search, $bar_sales_no_search){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	if($sales_no_search && $customer_search){
+	if($bar_sales_no_search && $customer_search){
 		$and="AND ";
 	}
 	else{
 		$and="";
 	}
 	
-	if($sales_no_search){
-		$sales_no_check="sales_no='$sales_no_search'";
+	if($bar_sales_no_search){
+		$bar_sales_no_check="bar_sales_no='$bar_sales_no_search'";
 	}
 	else{
-		$sales_no_check="";
+		$bar_sales_no_check="";
 	}
 
 	if($customer_search){
@@ -527,15 +527,15 @@ function list_sales_search_report($customer_search, $sales_no_search){
 		$customer_check="";
 	}
 	
-	if($sales_no_search || $customer_search){
+	if($bar_sales_no_search || $customer_search){
 	
 	echo '<table class="inventory_table" style="width: 900px; border-bottom: 2px solid silver; margin-bottom: 30px; margin-top: 0x;">
 	<thead valign="top">
 	<th>No</th>
-	<th>Sales No</th>
-	<th>Sales Date</th>
+	<th>Bar_sales No</th>
+	<th>Bar_sales Date</th>
 	<th>Customer Name</th>
-	<th>Sales Total</th>
+	<th>Bar_sales Total</th>
 	<th>Due</th>
 	<th>Paid</th>
 	<th>Remarks</th>
@@ -543,13 +543,13 @@ function list_sales_search_report($customer_search, $sales_no_search){
 	</thead>
 	<tbody valign="top">';
 $i=1;
-	$result=mysqli_query($conn, "SELECT * FROM sales WHERE $customer_check $and $sales_no_check AND cancel_status='0' ORDER BY id DESC");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales WHERE $customer_check $and $bar_sales_no_check AND cancel_status='0' ORDER BY id DESC");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		echo '
 		<tr>
 		<td>'.$i.'</td>
-			<td>'.$row[sales_no].'</td>
+			<td>'.$row[bar_sales_no].'</td>
 					
 			<td>'.$row[date].'</td>
 					
@@ -577,17 +577,17 @@ $i=1;
 	include 'conf/closedb.php';
 }
 
-function list_sales(){
+function list_bar_sales(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 		echo '<table class="inventory_table" style="width: 900px; border-bottom: 2px solid silver; margin-bottom: 30px; margin-top: 0x;">
 	<thead valign="top">
 	<th>No</th>
-	<th>Sales No</th>
-	<th>Sales Date</th>
+	<th>Bar_sales No</th>
+	<th>Bar_sales Date</th>
 	<th>Customer Name</th>
-	<th>Sales Total</th>
+	<th>Bar_sales Total</th>
 	<th>Due</th>
 	<th>Paid</th>
 	<th>Remarks</th>
@@ -596,13 +596,13 @@ function list_sales(){
 	<tbody valign="top">';
 
 	$i=1;
-	$result=mysqli_query($conn, "SELECT * FROM sales WHERE cancel_status='0' ORDER BY id DESC");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales WHERE cancel_status='0' ORDER BY id DESC");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		echo '
 		<tr>
 			<td>'.$i.'</td>
-			<td>'.$row[sales_no].'</td>
+			<td>'.$row[bar_sales_no].'</td>
 					
 			<td>'.$row[date].'</td>
 					
@@ -629,11 +629,11 @@ function list_sales(){
 	include 'conf/closedb.php';
 }
 
-function get_sales_info($id){
+function get_bar_sales_info($id){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM sales WHERE id='$id'");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales WHERE id='$id'");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		return $row;
@@ -641,11 +641,11 @@ function get_sales_info($id){
 	include 'conf/closedb.php';
 }
 
-function get_sales_info_by_sales_no($sales_no){
+function get_bar_sales_info_by_bar_sales_no($bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM sales WHERE sales_no='$sales_no'");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales WHERE bar_sales_no='$bar_sales_no'");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		return $row;
@@ -653,11 +653,11 @@ function get_sales_info_by_sales_no($sales_no){
 	include 'conf/closedb.php';
 }
 
-function get_order_type_info($sales_no){
+function get_order_type_info($bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE sales_no='$sales_no' AND cancel_status='0' ORDER BY `sales_no` ASC LIMIT 1");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE bar_sales_no='$bar_sales_no' AND cancel_status='0' ORDER BY `bar_sales_no` ASC LIMIT 1");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		return $row;
@@ -680,11 +680,11 @@ function get_booking_ref_for_restaurant_order($room_no){
 }
 
 
-function get_sales_info_booking_ref($booking_ref){
+function get_bar_sales_info_booking_ref($booking_ref){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM sales WHERE booking_ref='$booking_ref'");
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales WHERE booking_ref='$booking_ref'");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		return $row;
@@ -694,15 +694,15 @@ function get_sales_info_booking_ref($booking_ref){
 
 
 
-function update_sales($id, $sales_no, $date, $customer_name, $prepared_by, $remarks, $total, $updated_by){
+function update_bar_sales($id, $bar_sales_no, $date, $customer_name, $prepared_by, $remarks, $total, $updated_by){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	$date = date("Y-m-d");
 
 	mysqli_select_db($conn_for_changing_db, $dbname);
-	$query = "UPDATE sales SET
-	sales_no='$sales_no',
+	$query = "UPDATE bar_sales SET
+	bar_sales_no='$bar_sales_no',
 	date='$date',
 	customer_name='$customer_name',
 	customer_amount='$customer_amount',
@@ -718,27 +718,27 @@ function update_sales($id, $sales_no, $date, $customer_name, $prepared_by, $rema
 	include 'conf/closedb.php';
 }
 
-function  calncel_items_for_sales_no($sales_no){
+function  calncel_items_for_bar_sales_no($bar_sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db($conn_for_changing_db, $dbname);
-	$query = "UPDATE sales_has_items SET
+	$query = "UPDATE bar_sales_has_items SET
 	cancel_status='1',
 	canceled_by='$_SESSION[user_name]',
 	saved='1'
-	WHERE sales_no='$sales_no'";
+	WHERE bar_sales_no='$bar_sales_no'";
 	mysqli_query($conn, $query);
 
 	include 'conf/closedb.php';
 }
 
-function cancel_sales($id){
+function cancel_bar_sales($id){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db($conn_for_changing_db, $dbname);
-	$query = "UPDATE sales SET
+	$query = "UPDATE bar_sales SET
 	cancel_status='1',
 	canceled_by='$_SESSION[user_name]'
 	WHERE id='$id'";
@@ -747,11 +747,11 @@ function cancel_sales($id){
 	include 'conf/closedb.php';
 }
 
-function get_sales_item_id($sales_no) {
+function get_bar_sales_item_id($bar_sales_no) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT MAX(id) FROM sales_has_items WHERE  cancel_status='0' ");
+	$result=mysqli_query($conn, "SELECT MAX(id) FROM bar_sales_has_items WHERE  cancel_status='0' ");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		return $row['MAX(id)'];

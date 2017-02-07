@@ -1,0 +1,1 @@
+[07-Feb-2017 08:29:29 America/New_York] PHP Warning:  mysqli_fetch_array() expects parameter 1 to be mysqli_result, boolean given in /home/thekoxco/public_html/asvika/ajax/meal_by_meal_type.php on line 12

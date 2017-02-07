@@ -35,49 +35,66 @@
 					<a href="#"><i class="fa fa-cubes"></i><span>System Management </span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
 							<ul class="treeview-menu">
-									 <li><a href='staff_manage.php'><i class="fa fa-cubes"></i> Staff Management </span></a></li>
+								<li><a href='staff_manage.php'><i class="fa fa-cubes"></i> Staff Management </span></a></li>
+
+								<li class="scroll">
+									<a href="modules.php"><i class="fa fa-th"></i><span>Module Management</span></a>
+								</li>	
 										
 							 </ul>
+
 				</li>						
 
-				<li class="scroll">
-
-					<a href="room_manage.php?job=room_manage_form"><i class="fa fa-cogs"></i><span>Room Management</span></a>
-				</li>
-				
-				<li class="scroll">
-					<a href="modules.php"><i class="fa fa-th"></i><span>Module Management</span></a>
-				</li>
-
-				<li class="scroll">
-					<a href="rooms_type.php"><i class="fa fa-calendar"></i><span>Rooms Type</span></a>
-
-				</li>
-				<li class="scroll">
-					<a href="room_charge.php"><i class="fa fa-calendar"></i><span>Room Charge</span></a>
-				</li>
-
-				<li class="scroll">
-
-							<a href="room.php"><i class="fa fa-building"></i><span>Room</span></a>
-				</li>
-				<li class="scroll">
-							<a href="room.php?job=room_view_by_status"><i class="fa fa-building"></i><span>Rooms by Status</span></a>
-				</li>
-
-				<li class="scroll">
-							<a href="room_vacate.php?job=room_vacate_form"><i class="fa fa-book"></i><span>Rooms Vacate</span></a>
-				</li> 
-
-				<li class="scroll">
-							<a href="facility.php"><i class="fa fa-bed"></i><span>Facility</span></a
-				</li>
-				
-				<li class="scroll">
-					<a href="sales.php"><i class="fa fa-balance-scale"></i><span> Sales</span></a>
-				</li>
 				<li class="treeview">
-					<a href="#"><i class="fa fa-cutlery"></i><span>Meal  </span><span class="pull-right-container">
+					<a href="#"><i class="fa fa-money"></i><span>Billings </span><span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i></span></a>
+							<ul class="treeview-menu">
+								<li class="scroll">
+									<a href="sales.php"><i class="fa fa-balance-scale"></i><span> Sales</span></a>
+								</li>										
+							</ul>
+				</li>	
+				
+				<li class="treeview">
+					<a href="#"><i class="fa fa-building"></i><span>Room Management </span><span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i></span></a>
+							<ul class="treeview-menu">
+								<li>
+									<a href="room_manage.php?job=room_manage_form"><i class="fa fa-cogs"></i><span>Room Management</span></a>
+								</li>	
+
+								<li class="scroll">
+									<a href="rooms_type.php"><i class="fa fa-calendar"></i><span>Rooms Type</span></a>
+								</li>
+
+								<li class="scroll">
+									<a href="room_charge.php"><i class="fa fa-calendar"></i><span>Room Charge</span></a>
+								</li>								
+
+								<li class="scroll">
+									<a href="room.php"><i class="fa fa-building"></i><span>Room</span></a>
+								</li>								
+
+
+								<li class="scroll">
+									<a href="room.php?job=room_view_by_status"><i class="fa fa-building"></i><span>Rooms by Status</span></a>
+								</li>								
+
+								<li class="scroll">
+									<a href="room_vacate.php?job=room_vacate_form"><i class="fa fa-book"></i><span>Rooms Vacate</span></a>
+								</li> 								
+	
+								<li class="scroll">
+									<a href="facility.php"><i class="fa fa-bed"></i><span>Facility</span></a
+								</li>										
+							</ul>
+
+								
+				</li>
+
+				
+				<li class="treeview">
+					<a href="#"><i class="fa fa-cutlery"></i><span> Restaurant</span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
 							<ul class="treeview-menu">
 								<li class="scroll">
@@ -94,14 +111,41 @@
 					<a href="tax.php"><i class="fa fa-bed"></i><span>Tax</span></a>
 				</li>
 				<li class="scroll">
-					<a href="purchase_order.php"><i class="fa fa-shopping-cart"></i><span>Purchase</span></a>
+					<a href="purchase_order.php"><i class="fa fa-shopping-cart"></i><span>Expenses</span></a>
 				</li>
+
+				<li class="scroll">
+					<a href="house_keeping.php?job=house_keeping"><i class="fa fa-hospital-o"></i><span>House Keeping</span></a>
+				</li>
+
+				<li class="scroll">
+					<a href="restaurant.php"><i class="fa fa-spoon"></i><span>Restaurant</span></a>
+				</li>
+
                 <li class="treeview">
 					<a href="#"><i class="fa fa-file-text"></i><span>Reports</span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
 							<ul class="treeview-menu">
 								<li class="scroll">
 									   <a href="reports.php"><i class="fa fa-file-text"></i><span>Purchase Report</span></a>
+								</li>
+                                <li class="scroll">
+								   <a href="reports.php?job=purchased_item_report"><i class="fa fa-file-text"></i><span>Expenses Item Report</span></a>
+								</li>
+                                <li class="scroll">
+									<a href="reports.php?job=occupied_room_report"><i class="fa fa-file-text"></i><span>Occupied Room Report</span></a>
+								</li>
+                                <li class="scroll">
+                                    <a href="reports.php?job=occupied_days_report"><i class="fa fa-file-text"></i><span>Occupied Days Report</span></a>
+								</li>
+                                <li class="scroll">
+                                    <a href="reports.php?job=booked_room_report"><i class="fa fa-file-text"></i><span>Booked Room Report</span></a>
+								</li>
+                                <li class="scroll">
+                                    <a href="reports.php?job=booked_days_report"><i class="fa fa-file-text"></i><span>Booked Days Report</span></a>
+								</li>
+                                <li class="scroll">
+                                    <a href="reports.php?job=sales_report"><i class="fa fa-file-text"></i><span>Sales Report</span></a>
 								</li>
                             </ul>
                  </li>

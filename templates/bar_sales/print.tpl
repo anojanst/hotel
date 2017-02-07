@@ -24,7 +24,7 @@
 	
 	<div class="row" style="margin-top: 25px;">
 		<div class="col-xs-6">
-			<strong>Sales No : </strong>{$sales_no}
+			<strong>Bar Sales No : </strong>{$bar_sales_no}
 		</div>
 		<div class="col-xs-6">
 			<strong>Date : </strong>{$date}	
@@ -33,7 +33,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			
-			{php}print_sales_item($_SESSION['print_no']);{/php}
+			{php}print_bar_sales_item($_SESSION['print_no']);{/php}
 			
 		</div>
 	</div>

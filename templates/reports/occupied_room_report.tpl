@@ -15,15 +15,12 @@
         <div class="tab-content">
             <div class="row">
                 <div class="col-lg-12">
-                    <h4><strong>Purchase Report</strong></h4>
+                    <h4><strong>Occupied Room Report</strong></h4>
+                    
                 </div>
             </div>
             <div class="row">               
-                <form action="reports.php?job=purchase" method="post" class="search">
-					<div class="col-lg-2"> 
-                       <input type="text" name="supplier_name" value="{$supplier_name}" list="exampleList" class="form-control" placeholder="Supllier Name">
-                            {php}list_suppliers();{/php}
-                    </div>
+                <form action="reports.php?job=occupied_room" method="post" class="search">
                     <div class="col-lg-2">
                         <input type="text" class="form-control" id="datepicker1" name="from_date" value="{$from_date}" placeholder="From Date">	
                     </div>      
@@ -39,7 +36,7 @@
 			<div class="row">
 				<div class="col-xs-12">
 					{if $search=="on"}
-					{php}list_purchase($_SESSION[supplier_name],$_SESSION[from_date],$_SESSION[to_date]);{/php}
+					{php}list_occupied_dates($_SESSION[from_date],$_SESSION[to_date]);{/php}
 					{/if}
 				</div>
 			</div>

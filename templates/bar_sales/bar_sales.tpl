@@ -16,10 +16,10 @@
 		<div class="tab-content">
 			<div class="row">
 				<div class="col-lg-9">
-					<p><strong>Sales</strong></p>
+					<p><strong>Bar sales</strong></p>
 				</div>
 				<div class="col-lg-3">
-					<a href="restaurant.php" class="btn btn-sm btn-danger col-lg-12">Back To Restaurant</a>
+					<a href="bar.php" class="btn btn-sm btn-danger col-lg-12">Back To Bar</a>
 				</div>
 			</div>
 			<div class="row">
@@ -30,18 +30,24 @@
 				{/if}
 			</div>
 			<div class="row">				
-				<form name="select_item_form"  action="sales.php?job=select" method="post" >
+				<form name="select_item_form"  action="bar_sales.php?job=select" method="post" >
 
-					<div class="col-lg-3">
-						<select name="meal_type" id="meal_type" class="form-control" required >
-							<option value="" disabled selected>Meal Name</option>
-							{php}list_meal_type_for_sale();{/php}                              
+					<div class="col-lg-2">
+						<select name="liquor_type" id="liquor_type" class="form-control" required >
+							<option value="" disabled selected>Liquor Type</option>
+							{php}list_liquor_type_for_bar_sale();{/php}                              
 						</select>
 					</div>
 
-					<div class="col-lg-3">
-						<select name="meal" id="meal" class="form-control" required >
-							<option disabled selected>Please select the meal type first</option>                         
+					<div class="col-lg-2">
+						<select name="liquor" id="liquor" class="form-control" required >
+							<option disabled selected>select the liquor type first</option>                         
+						</select>
+					</div>
+					
+					<div class="col-lg-2">
+						<select name="size" id="size" class="form-control" required >
+							<option disabled selected>select the liquor type first</option>                         
 						</select>
 					</div>
 					<div class="col-lg-4">
@@ -56,7 +62,7 @@
 						<thead>
 							<tr style="background-color: #e0e0e0;">
 								<th>Delete</th>
-								<th>Meal Name</th>
+								<th>Liquor Name</th>
 								<th>Price</th>
 								<th>Quantity</th>
 								<th>Total</th>
@@ -64,7 +70,7 @@
 							</tr>
 						</thead>
 						<tbody>
-							{php}list_item_by_sales($_SESSION['sales_no']);{/php}
+							{php}list_item_by_bar_sales($_SESSION['bar_sales_no']);{/php}
 							<tr style="background-color: #e0e0e0;">
 								<th></th>
 								<th></th>
@@ -79,8 +85,8 @@
 					</table>
 				</div>
 				<div class="col-lg-3" style="margin-top: 20px;">
-					<form class="product" name="sales_form" action="sales.php?job=sales" method="post" >
-						<input type="text" class="form-control" name="sales_no" value="{$sales_no}" required readonly="readonly" placeholder="Sales No" tabindex="3"/>
+					<form class="product" name="bar_sales_form" action="bar_sales.php?job=bar_sales" method="post" >
+						<input type="text" class="form-control" name="bar_sales_no" value="{$bar_sales_no}" required readonly="readonly" placeholder="Bar_sales No" tabindex="3"/>
 						<input type="text" class="form-control" name="customer_name" placeholder="Customer" tabindex="4"/>
 						<select class="form-control"  name="discount_type" value = "{$dicount_type}" tabindex="1">
 							<option value="" disabled selected>Discount Type</option>

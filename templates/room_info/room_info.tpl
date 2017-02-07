@@ -64,7 +64,7 @@ $(function() {
 		
 						<div class="row">
         					<div class="col-xs-12">
-          						<form action="booking.php?job=booking_form_room_status&room_no={$room_no}&room_cat={$room_type}&selected_date={$selected_date}" method="post">
+          						<form action="booking.php?job=booking_form_room_status&room_no={$room_no}&room_cat={$room_type}&from_date={$from_date}&to_date={$to_date}" method="post">
 									<div class="row" style="margin-bottom: 10px;">
 										<div class="col-lg-4">									
 											<input class="form-control" type="text" name="telephone_num" value="{$telephone_num}" required placeholder="Telephone Number">

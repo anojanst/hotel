@@ -3,6 +3,7 @@ require_once 'conf/smarty-conf.php';
 include 'functions/room_type_functions.php';
 include 'functions/room_functions.php';
 include 'functions/facility_functions.php';
+include 'functions/sales_functions.php';
 
 
 

@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-lg-4" style="margin-top: 10px;">					
                             <div class="panel-body">
-                                <form name="tax_type_form" role="form" action="room_charge.php?job=save" method="post">						
+                                <form name="tax_type_form" role="form" action="tax.php?job=save" method="post">						
                                     <div class="row" style="margin-bottom: 10px; margin-left: 20px;">
                                         <div class="row" style="margin-bottom: 10px;">
                                             <div class="col-lg-12">

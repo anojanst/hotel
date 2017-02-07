@@ -61,6 +61,40 @@
             </a>
           </div>
 	</div>
+	
+	<div class="col-lg-3 col-xs-12">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>Restaurant</h3>
+
+              <p>Interface</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="restaurant.php" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+	</div>
+	
+	<div class="col-lg-3 col-xs-12">
+          <!-- small box -->
+          <div class="small-box bg-yellow">
+            <div class="inner">
+              <h3>Restaurant</h3>
+
+              <p>Interface</p>
+            </div>
+            <div class="icon">
+              <i class="ion ion-stats-bars"></i>
+            </div>
+            <a href="restaurant.php" class="small-box-footer">
+              More info <i class="fa fa-arrow-circle-right"></i>
+            </a>
+          </div>
+	</div>
 
 	<div class="col-lg-3 col-xs-12">
 		<div class="box box-warning box-solid">
