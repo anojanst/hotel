@@ -32,3 +32,14 @@
 		});
 	});
 </script>
+
+<script>
+	$(function() {
+	
+		$("#meal_type").change(function() {
+		  $("#meal").load("ajax/meal_by_meal_type.php?choice=" + encodeURIComponent($("#meal_type").val()));
+					
+		});
+	});
+</script>
+

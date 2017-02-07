@@ -37,10 +37,6 @@
 							<ul class="treeview-menu">
 								<li><a href='staff_manage.php'><i class="fa fa-cubes"></i> Staff Management </span></a></li>
 
-								<li>
-									<a href="room_manage.php?job=room_manage_form"><i class="fa fa-cogs"></i><span>Room Management</span></a>
-								</li>	
-
 								<li class="scroll">
 									<a href="modules.php"><i class="fa fa-th"></i><span>Module Management</span></a>
 								</li>	
@@ -50,7 +46,7 @@
 				</li>						
 
 				<li class="treeview">
-					<a href="#"><i class="fa fa-cubes"></i><span>Billings </span><span class="pull-right-container">
+					<a href="#"><i class="fa fa-money"></i><span>Billings </span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
 							<ul class="treeview-menu">
 								<li class="scroll">
@@ -63,6 +59,10 @@
 					<a href="#"><i class="fa fa-building"></i><span>Room Management </span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
 							<ul class="treeview-menu">
+								<li>
+									<a href="room_manage.php?job=room_manage_form"><i class="fa fa-cogs"></i><span>Room Management</span></a>
+								</li>	
+
 								<li class="scroll">
 									<a href="rooms_type.php"><i class="fa fa-calendar"></i><span>Rooms Type</span></a>
 								</li>
@@ -118,6 +118,10 @@
 							</ul>
 															
 				</li>	
+
+				<li class="scroll">
+					<a href="call.php"><i class="fa fa-phone"></i><span> Calls </span></a>
+				</li>
 				
 				<li class="scroll">
 					<a href="tax.php"><i class="fa fa-bed"></i><span>Tax</span></a>
@@ -125,6 +129,15 @@
 				<li class="scroll">
 					<a href="purchase_order.php"><i class="fa fa-shopping-cart"></i><span>Purchase</span></a>
 				</li>
+
+				<li class="scroll">
+					<a href="house_keeping.php?job=house_keeping"><i class="fa fa-hospital-o"></i><span>House Keeping</span></a>
+				</li>
+
+				<li class="scroll">
+					<a href="restaurant.php"><i class="fa fa-spoon"></i><span>Restaurant</span></a>
+				</li>
+
                 <li class="treeview">
 					<a href="#"><i class="fa fa-file-text"></i><span>Reports</span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
