@@ -230,13 +230,14 @@ function room_vacate_bill($booking_ref, $room_no){
 	
 }
 
-function save_room_bill($room_no, $booking_ref, $caller_name,$from_date,$date, $occupied_days, $total_room_charge ) {
+function save_room_bill($room_no, $booking_ref, $caller_name,$from_date,$date, $occupied_days, $room_charge, $request_charges, $sales_bills ) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
+	$full_total = $room_charge + $request_charges + $sales_bills;
 	mysqli_select_db ( $conn, $dbname );
-	$query = "INSERT INTO room_has_bill (id, booking_ref,caller_name,from_date, to_date, occupied_days, room_charge)
-	VALUES ('', '$booking_ref', '$caller_name','$from_date','$date', '$occupied_days', '$total_room_charge')";
+	$query = "INSERT INTO room_has_bill (id, booking_ref,caller_name,from_date, to_date, occupied_days, room_charge,request_charges, sales_bills, full_total)
+	VALUES ('', '$booking_ref', '$caller_name','$from_date','$date', '$occupied_days', '$room_charge','$request_charges', '$sales_bills','$full_total')";
 
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 
@@ -258,11 +259,13 @@ function get_charge_info_by_room_type($room_cat) {
 
 }
 
-function print_room_vacate_bill($sales_no){
+function print_room_vacate_bill(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
-	
+
+	$date=date('Y-m-d');
+		
 	
 	echo'<table style="width: 65%;" class="table-responsive table-bordered table-striped dt-responsive">
 		<tr>
@@ -274,20 +277,20 @@ function print_room_vacate_bill($sales_no){
 	echo'<tr style="line-height: 30px;">
             <td> </td>
             <td>Total</td>
-            <td align="right">'.number_format($grand_total,2).'</td>
+            <td align="right"> </td>
         </tr>
             		            		
 		<tr  style="line-height: 30px;">
             <td></td>
             <td>Amount after Discount</td>
-            <td align="right">'.number_format($discount_amount,2).'</td>
+            <td align="right"> </td>
         </tr>';
 	
 
 	echo'<tr  style="line-height: 30px;">
             <td></td>
             <td>Net Amount</td>
-            <td align="right">'.number_format($net_total,2).'</td>
+            <td align="right"> </td>
         </tr>';
 		
 

@@ -4,8 +4,7 @@ include '../conf/opendb.php';
 //Include The Database Connection File 
 
 	$choice = $_GET['choice'];
-		echo 123;
-		echo "SELECT * FROM room WHERE room_cat LIKE '$choice%'";
+
 	$query = "SELECT * FROM room WHERE room_cat LIKE '$choice%'";
 	echo $query;
 	$result = mysqli_query($conn, $query);

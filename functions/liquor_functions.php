@@ -1,11 +1,11 @@
 <?php
-function save_liquors($meal) {
+function save_liquors($liquor) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db ( $conn, $dbname );
-	$query = "INSERT INTO liquor_type (id, meal)
-	VALUES ('', '$meal')";
+	$query = "INSERT INTO liquor_type (id, liquor_type)
+	VALUES ('', '$liquor')";
 	
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 	
@@ -20,7 +20,7 @@ function list_liquors() {
                   <thead>
                        <tr>
                            <th>Edit</th>
-						   <th>Meal Type</th>
+						   <th>Liquor Type</th>
                            <th>Delete</th>
                        </tr>
                   </thead>
@@ -31,7 +31,7 @@ function list_liquors() {
 		
 		echo '<td><a href="liquor.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
 					
-		<td>' . $row [meal] . '</td>	
+		<td>' . $row [liquor_type] . '</td>	
 		<td><a href="liquor.php?job=delete&id=' . $row [id] . '" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"><i class="fa fa-times fa-2x"></i></a></td>
 	
 		</tr>';
@@ -62,13 +62,13 @@ function get_liquors_info($id) {
 
 
 
-function update_liquors($id, $meal) {
+function update_liquors($id, $liquor) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	mysqli_select_db ($conn, $dbname );
 	$query = "UPDATE liquor_type SET
-	meal='$meal'
+	liquor_type='$liquor'
 	WHERE id='$id'";
 	
 	mysqli_query ($conn, $query );
@@ -99,25 +99,24 @@ function list_liquor() {
 	$result = mysqli_query ( $conn, "SELECT * FROM liquor_type " );
 	$i = 0;
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
-		$meal_names [$i] = $row ['meal'];
-
+		$liquor_names [$i] = $row [liquor_type];
 		$i ++;
 	}
 	
-	
-	return $meal_names;
+	//var_dump($liquor_names);
+	return $liquor_names;
 
 }
 
 
-function save_liquor_details( $meal, $meal_name, $size, $price) {
+function save_liquor_details( $liqure, $liqure_name, $price_25, $price_50, $price) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db ( $conn, $dbname );
-	$query = "INSERT INTO liquor(id, meal, meal_name, size, price)
-	VALUES ('', '$meal', '$meal_name', '$size', '$price')";
-	
+	$query = "INSERT INTO liquor(id, liquor_type, liquor, price_25, price_50, price)
+	VALUES ('', '$liqure', '$liqure_name', '$price_25', '$price_50', '$price')";
+	echo $query;
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 	
 	
@@ -131,10 +130,11 @@ function list_liquor_details() {
                   <thead>
                        <tr>
                            <th>Edit</th>
-						   <th>Meal Type</th>
-                           <th>Meal Name</th>
-                           <th>Size</th>
-                           <th>Price</th>
+						   <th>Liqure Type</th>
+                           <th>Liqure Name</th>
+                           <th>Price 25</th>
+                           <th>Price 50</th>
+                           <th>Price Full</th>
                            <th>Delete</th>
                        </tr>
                   </thead>
@@ -145,9 +145,10 @@ function list_liquor_details() {
 		
 		echo '<td><a href="liquor_detail.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
 					
-		<td>' . $row [meal] . '</td>
-        <td>' . $row [meal_name] . '</td>
-        <td>' . $row [size] . '</td>
+		<td>' . $row [liquor_type] . '</td>
+        <td>' . $row [liquor] . '</td>
+        <td>' . $row [price_25] . '</td>
+        <td>' . $row [price_50] . '</td>
         <td>' . $row [price] . '</td>
 		<td><a href="liquor_detail.php?job=delete&id=' . $row [id] . '" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"><i class="fa fa-times fa-2x"></i></a></td>
 	
@@ -179,15 +180,16 @@ function get_liquor_details_info($id) {
 
 
 
-function update_liquor_details ( $id, $liquor_type, $liquor, $size, $price ) {
+function update_liquor_details ($id, $liquor, $liquor_name, $price_25, $price_50, $price) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	mysqli_select_db ($conn, $dbname );
 	$query = "UPDATE liquor SET
-	liquor_type='$liquor_type',
-    liquor='$liquor',
-    size='$size',
+	liquor_type='$liquor',
+    liquor='$liquor_name',
+    price_25='$price_25',
+    price_50='$price_50',
     price='$price'
 	WHERE id='$id'";
 	
@@ -210,20 +212,8 @@ function delete_liquor_detail($id) {
 	
 }
 
-function list_liquor_type_for_bar_sale(){
-	include 'conf/config.php';
-	include 'conf/opendb.php';
 
-	$result=mysqli_query($conn, "SELECT * FROM liquor_type ORDER BY id DESC");
-	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-	{
-		echo'<option value="'.$row[liquor_type].'">'.$row[liquor_type].'</option>';
-	}
-	include 'conf/closedb.php';
-
-}
-
-function list_liquor_for_bar_sale(){
+function list_liquor_for_sale(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
@@ -246,5 +236,18 @@ function get_liquor_info_by_id($id) {
 		return $row;
 	}
 	include 'conf/closedb.php';
+
+}
+function list_liquor_type_for_bar_sale(){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$result=mysqli_query($conn, "SELECT * FROM liquor_type ORDER BY id DESC");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		echo'<option value="'.$row[liquor_type].'">'.$row[liquor_type].'</option>';
+	}
+	include 'conf/closedb.php';
+
 
 }

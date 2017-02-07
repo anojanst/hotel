@@ -234,6 +234,100 @@ function list_available_rooms_in_home(){
 
 }
 
+function list_occupied_rooms_in_home(){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$date=date('Y-m-d');
+	$result=mysqli_query($conn, "SELECT * FROM room WHERE room.room_no IN (SELECT room_no FROM room_has_status WHERE date='$date' AND status='Occupied') ORDER BY room_no DESC limit 6" );
+	
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		$date=date('Y-m-d');
+		$room_status_info=get_room_has_status_info($row['room_no'], $date);
+		if($room_status_info[status_id]){
+			$status_info=get_status_info($room_status_info[status_id]);
+			$color=$status_info['color'];
+			
+			echo '
+				<div class="col-lg-4 col-xs-4">
+					<div class="info-box">
+			
+						<a href="room_info.php?job=room_info&room_no=' . $row [room_no] . '"  >
+			            	<span class="info-box-icon bg-'.$color.'">'.$row['room_no'].'</span>
+						</a>
+			
+			            <div class="info-box-content">';
+			
+			$result1=mysqli_query($conn, "SELECT * FROM room_has_facility WHERE room_no='$row[room_no]' " );
+			while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
+			{
+				$info=get_facility_info($row1[facility_id]);
+				echo'<i class="fa fa-square text-'.$info[color].'" style="float: left; margin-left: 1px;"></i>';
+			}
+			echo' <br> <span class="info-box-text" style="line-height: 15px;">Type <br /><strong>'.$row['room_cat'].'</strong></span>
+			
+            			</div>
+            		</div>
+              	</div>';
+				
+		}
+		else{
+
+			$color="green";
+			
+		}
+	}
+
+}
+
+function list_booked_rooms_in_home(){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$date=date('Y-m-d');
+	$result=mysqli_query($conn, "SELECT * FROM room WHERE room.room_no IN (SELECT room_no FROM room_has_status WHERE date='$date' AND status='Booked') ORDER BY room_no DESC limit 6" );
+
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		$date=date('Y-m-d');
+		$room_status_info=get_room_has_status_info($row['room_no'], $date);
+		if($room_status_info[status_id]){
+			$status_info=get_status_info($room_status_info[status_id]);
+			$color=$status_info['color'];
+			
+			echo '
+				<div class="col-lg-4 col-xs-4">
+					<div class="info-box">
+			
+						<a href="room_info.php?job=room_info&room_no=' . $row [room_no] . '"  >
+			            	<span class="info-box-icon bg-'.$color.'">'.$row['room_no'].'</span>
+						</a>
+			
+			            <div class="info-box-content">';
+			
+			$result1=mysqli_query($conn, "SELECT * FROM room_has_facility WHERE room_no='$row[room_no]' " );
+			while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
+			{
+				$info=get_facility_info($row1[facility_id]);
+				echo'<i class="fa fa-square text-'.$info[color].'" style="float: left; margin-left: 1px;"></i>';
+			}
+			echo' <br> <span class="info-box-text" style="line-height: 15px;">Type <br /><strong>'.$row['room_cat'].'</strong></span>
+			
+            			</div>
+            		</div>
+              	</div>';
+		}
+		else{
+
+			$color="green";
+			
+
+		}
+	}
+
+}
+
 function list_available_rooms($from_date, $to_date){
 	include 'conf/config.php';
 	include 'conf/opendb.php';

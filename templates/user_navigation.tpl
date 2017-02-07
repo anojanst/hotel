@@ -87,14 +87,12 @@
 								<li class="scroll">
 									<a href="facility.php"><i class="fa fa-bed"></i><span>Facility</span></a
 								</li>										
-							</ul>
-
-								
+							</ul>	
 				</li>
 
 				
 				<li class="treeview">
-					<a href="#"><i class="fa fa-cutlery"></i><span> Restaurant</span><span class="pull-right-container">
+					<a href="#"><i class="fa fa-cutlery"></i><span> Restaurant Menu</span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
 							<ul class="treeview-menu">
 								<li class="scroll">
@@ -105,7 +103,25 @@
 								</li>	
 							</ul>
 															
+				</li>
+                
+                <li class="treeview">
+					<a href="#"><i class="fa fa-glass"></i><span> Bar Menu</span><span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i></span></a>
+							<ul class="treeview-menu">
+								<li class="scroll">
+									   <a href="liquor.php"><i class="fa fa-glass"></i><span> Liquor Type</span></a>
+								</li>
+								<li class="scroll">
+										<a href="liquor_detail.php"><i class="fa fa-glass"></i><span> Liquor Detail</span></a>
+								</li>	
+							</ul>
+															
 				</li>	
+
+				<li class="scroll">
+					<a href="call.php"><i class="fa fa-phone"></i><span> Calls </span></a>
+				</li>
 				
 				<li class="scroll">
 					<a href="tax.php"><i class="fa fa-bed"></i><span>Tax</span></a>
@@ -130,7 +146,7 @@
 									   <a href="reports.php"><i class="fa fa-file-text"></i><span>Purchase Report</span></a>
 								</li>
                                 <li class="scroll">
-								   <a href="reports.php?job=purchased_item_report"><i class="fa fa-file-text"></i><span>Expenses Item Report</span></a>
+								   <a href="reports.php?job=purchased_item_report"><i class="fa fa-file-text"></i><span>Purchase Item Report</span></a>
 								</li>
                                 <li class="scroll">
 									<a href="reports.php?job=occupied_room_report"><i class="fa fa-file-text"></i><span>Occupied Room Report</span></a>
