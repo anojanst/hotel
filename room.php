@@ -114,12 +114,12 @@ if ($_SESSION ['login'] == 1) {
 			$smarty->display ( 'room/room.tpl' );
 		}
 }
-else{
-	$smarty->assign ( 'error_report', "on" );
-	$smarty->assign ( 'error_message', "Dear $_SESSION[user_name], you don't have permission to Rooms Type Management." );
-	$smarty->assign ( 'page', "Access Error" );
-	$smarty->display ( 'user_home/access_error.tpl' );
-}
+    else{
+        $smarty->assign ( 'error_report', "on" );
+        $smarty->assign ( 'error_message', "Dear $_SESSION[user_name], you don't have permission to Rooms Type Management." );
+        $smarty->assign ( 'page', "Access Error" );
+        $smarty->display ( 'user_home/access_error.tpl' );
+    }
 }
 	
 

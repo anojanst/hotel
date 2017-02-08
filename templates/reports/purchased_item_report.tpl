@@ -19,7 +19,7 @@
                 </div>
             </div>
             <div class="row">               
-                <form action="reports.php?job=purchased_items" method="post" class="search">
+                <form action="reports.php?job=purchased_item_vice" method="post" class="search">
 					<div class="col-lg-2">
                          <input type="text" name="purchased_item" value="{$purchased_item}" list="exampleList" class="form-control" placeholder="Purchased Item">
                             {php}list_items();{/php}

@@ -3,22 +3,21 @@
     <!-- Main content -->
 
 <section class="content">
-	
 	<div class="col-lg-3 col-xs-12">
-          <!-- small box -->
-          <div class="small-box bg-maroon">
-            <div class="inner">
-              <h3>House</h3>
+        <!-- small box -->
+        <div class="small-box bg-maroon">
+          <div class="inner">
+            <h3>House</h3>
 
-              <p>Keeping</p>
-            </div>
-            <div class="icon">
-              <i class="ion ion-stats-bars"></i>
-            </div>
-            <a href="house_keeping.php?job=house_keeping" class="small-box-footer">
-              More info <i class="fa fa-arrow-circle-right"></i>
-            </a>
+            <p>Keeping</p>
           </div>
+          <div class="icon">
+            <i class="ion ion-stats-bars"></i>
+          </div>
+          <a href="house_keeping.php?job=house_keeping" class="small-box-footer">
+            More info <i class="fa fa-arrow-circle-right"></i>
+          </a>
+        </div>
 	</div>
 
 	<div class="col-lg-3 col-xs-12">
@@ -26,7 +25,6 @@
           <div class="small-box bg-yellow">
             <div class="inner">
               <h3>Restaurant</h3>
-
               <p>Interface</p>
             </div>
             <div class="icon">
@@ -150,13 +148,12 @@
             </div>
 
 				<div class="box-body">
-					<h4>Total Rooms <small class="label pull-right bg-aqua">10</small></h4>
-					<h4>Occupied <small class="label pull-right bg-red">6</small></h4>
-					<h4>Booked <small class="label pull-right bg-yellow">2</small></h4>
-					<h4>Vacant <small class="label pull-right bg-green">1</small></h4>
-					<h4>Under Maintainance <small class="label pull-right bg-navy">1</small></h4>
-
-					<h4>Grand Hall <small class="label pull-right bg-navy">1</small></h4>
+					<h4>Total Rooms <small class="label pull-right bg-aqua">{php} $total_rooms = total_rooms_count(); echo $total_rooms;{/php}</small></h4>
+					<h4>Occupied <small class="label pull-right bg-red">{php}$occupied_rooms = occupied_rooms_count(); echo $occupied_rooms;{/php}</small></h4>
+					<h4>Booked <small class="label pull-right bg-yellow">{php}$booked_rooms=booked_rooms_count(); echo $booked_rooms;{/php}</small></h4>
+					<h4>Under Maintainance <small class="label pull-right bg-navy">{php}$maintainance_rooms=maintainance_rooms_count(); echo $maintainance_rooms;{/php}</small></h4>
+                    <h4>Available <small class="label pull-right bg-green">{php}$available_rooms = available_rooms_count(); echo $available_rooms; {/php}</small></h4>
+					<!--<h4>Grand Hall <small class="label pull-right bg-navy">1</small></h4>-->
 				</div>
        
           </div>

@@ -287,30 +287,30 @@ function list_occupied_dates($from_date,$to_date){
         while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
         {         
 
-        $result=mysqli_query($conn, "SELECT * FROM room_has_status WHERE status='Occupied' AND room_no='$row1[room_no]' AND date BETWEEN '$from_date' AND '$to_date' ORDER BY date ASC");
-        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-        {
-            echo '
-            <tr>
-            
-            <td>'.$row[room_no].'</td>
-            
-            <td>'.$row[date].'</a></td>';
-             $caller_info=get_caller_name_by_booking_ref($row[booking_ref]);
-             $guest_info=get_guest_name_by_booking_ref($row[booking_ref]);
-        
-             if($caller_info['caller_name']){
-              echo '<td>'.$caller_info['caller_name'].'</a></td>';  
-             }
-             else{
-                echo '<td>'.$guest_info['guest_name'].'</a></td>';  
+            $result=mysqli_query($conn, "SELECT * FROM room_has_status WHERE status='Occupied' AND room_no='$row1[room_no]' AND date BETWEEN '$from_date' AND '$to_date' ORDER BY date ASC");
+            while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+            {
+                echo '
+                <tr>
                 
-             }
+                <td>'.$row[room_no].'</td>
                 
-            echo'<td>'.$row[updated_by].'</a></td>';   
-        }
+                <td>'.$row[date].'</a></td>';
+                 $caller_info=get_caller_name_by_booking_ref($row[booking_ref]);
+                 $guest_info=get_guest_name_by_booking_ref($row[booking_ref]);
+            
+                 if($caller_info['caller_name']){
+                  echo '<td>'.$caller_info['caller_name'].'</a></td>';  
+                 }
+                 else{
+                    echo '<td>'.$guest_info['guest_name'].'</a></td>';  
+                    
+                 }
+                    
+                echo'<td>'.$row[updated_by].'</a></td>';   
+            }
         $i++;
-    }
+        }
     include 'conf/closedb.php';
 }
 
@@ -400,29 +400,29 @@ function list_booked_dates($from_date,$to_date){
         {  
                
 
-        $result=mysqli_query($conn, "SELECT * FROM room_has_status WHERE status='Booked' AND room_no='$row1[room_no]' AND date BETWEEN '$from_date' AND '$to_date' ORDER BY date ASC");
-        while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-        {
-            echo '
-            <tr>
-            <td>'.$row[room_no].'</td>
-            <td>'.$row[date].'</a></td>';
-             $caller_info=get_caller_name_by_booking_ref($row[booking_ref]);
-             $guest_info=get_guest_name_by_booking_ref($row[booking_ref]);
-    
-             if($caller_info['caller_name']){
-              echo '<td>'.$caller_info['caller_name'].'</a></td>';  
-             }
-             else{
-                echo '<td>'.$guest_info['guest_name'].'</a></td>';  
-                
-             }
-                
-            echo'<td>'.$row[updated_by].'</a></td>';   
-                
-        }
+            $result=mysqli_query($conn, "SELECT * FROM room_has_status WHERE status='Booked' AND room_no='$row1[room_no]' AND date BETWEEN '$from_date' AND '$to_date' ORDER BY date ASC");
+            while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+            {
+                echo '
+                <tr>
+                <td>'.$row[room_no].'</td>
+                <td>'.$row[date].'</a></td>';
+                 $caller_info=get_caller_name_by_booking_ref($row[booking_ref]);
+                 $guest_info=get_guest_name_by_booking_ref($row[booking_ref]);
+        
+                if($caller_info['caller_name']){
+                  echo '<td>'.$caller_info['caller_name'].'</a></td>';  
+                }
+                else{
+                    echo '<td>'.$guest_info['guest_name'].'</a></td>';  
+                    
+                }
+                    
+                echo'<td>'.$row[updated_by].'</a></td>';   
+                    
+            }
   
-    }
+        }
     include 'conf/closedb.php';
 }
 
@@ -442,29 +442,31 @@ function list_booked_rooms($date){
                     </tr>
                 </thead>
                 <tbody>';
-       
-               
-$i=1;
-    $result=mysqli_query($conn, "SELECT * FROM room_has_status WHERE status='Booked' AND date='$date' ORDER BY room_no ASC");
-    while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
-    {
-        echo '
-        <tr>
-        <td>'.$row[room_no].'</a></td>';
-         $caller_info=get_caller_name_by_booking_ref($row[booking_ref]);
-         $guest_info=get_guest_name_by_booking_ref($row[booking_ref]);
-
-         if($caller_info['caller_name']){
-          echo '<td>'.$caller_info['caller_name'].'</a></td>';  
-         }
-         else{
-            echo '<td>'.$guest_info['guest_name'].'</a></td>';  
-            
-         }
-            
-        echo'<td>'.$row[updated_by].'</a></td>';   
-            
-   }
+    
+         
+      
+            $result=mysqli_query($conn, "SELECT * FROM room_has_status WHERE status='Booked' AND date='$date' ORDER BY room_no ASC");
+            while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+            {
+                echo '
+                <tr>
+                <td>'.$row[room_no].'</a></td>';
+                 $caller_info=get_caller_name_by_booking_ref($row[booking_ref]);
+                 $guest_info=get_guest_name_by_booking_ref($row[booking_ref]);
+        
+                 if($caller_info['caller_name']){
+                  echo '<td>'.$caller_info['caller_name'].'</a></td>';  
+                 }
+                 else{
+                    echo '<td>'.$guest_info['guest_name'].'</a></td>';  
+                    
+                 }
+                    
+                echo'<td>'.$row[updated_by].'</a></td>';   
+                    
+            }
+        
+    
     include 'conf/closedb.php';
 }
 

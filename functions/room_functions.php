@@ -285,6 +285,7 @@ function list_booked_rooms_in_home(){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
+        
 	$date=date('Y-m-d');
 	
 	$result=mysqli_query($conn, "SELECT * FROM room WHERE room.room_no IN (SELECT room_no FROM room_has_status WHERE date='$date' AND status='Booked') ORDER BY room_no DESC limit 6" );
@@ -680,4 +681,75 @@ function list_room_full_detail($id){
 	include 'conf/closedb.php';
 }
 
+function total_rooms_count(){
+    include 'conf/config.php';
+	include 'conf/opendb.php';
+    
+    $result=mysqli_query($conn, "SELECT COUNT(id) AS total_rooms FROM room");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+     $total_rooms=$row[total_rooms];
+    }
+    return $total_rooms;
+    include 'conf/closedb.php';
+}
 
+
+function occupied_rooms_count(){
+    include 'conf/config.php';
+	include 'conf/opendb.php';
+    
+    
+    $date=date("Y-m-d");
+    $result=mysqli_query($conn, "SELECT COUNT(id) AS occupied_rooms FROM room_has_status WHERE date='$date' AND status='Occupied'");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+     $occupied_rooms=$row[occupied_rooms];
+    }
+    return $occupied_rooms;
+    include 'conf/closedb.php';
+}
+
+function booked_rooms_count(){
+    include 'conf/config.php';
+	include 'conf/opendb.php';
+    
+    
+    $date=date("Y-m-d");
+    $result=mysqli_query($conn, "SELECT COUNT(id) AS booked_rooms FROM room_has_status WHERE date='$date' AND status='Booked'");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+     $booked_rooms=$row[booked_rooms];
+    }
+    return $booked_rooms;
+    include 'conf/closedb.php';
+}
+
+function maintainance_rooms_count(){
+    include 'conf/config.php';
+	include 'conf/opendb.php';
+    
+    
+    $date=date("Y-m-d");
+    $result=mysqli_query($conn, "SELECT COUNT(id) AS maintainance_rooms FROM room_has_status WHERE date='$date' AND status='Maintainance'");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+     $maintainance_rooms=$row[maintainance_rooms];
+    }
+    return $maintainance_rooms;
+    include 'conf/closedb.php';
+}
+
+function available_rooms_count(){
+    include 'conf/config.php';
+	include 'conf/opendb.php';
+    
+    $total_rooms = total_rooms_count();
+    $occupied_rooms = occupied_rooms_count();
+    $booked_rooms = booked_rooms_count();
+    $maintainance_rooms = maintainance_rooms_count();
+    
+    $available_rooms= $total_rooms-($occupied_rooms+$booked_rooms+$maintainance_rooms);
+    return $available_rooms;
+    include 'conf/closedb.php';
+}
