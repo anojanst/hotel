@@ -137,6 +137,28 @@ function get_total($purchase_order_no){
 	include 'conf/closedb.php';
 }
 
+function update_stock($purchase_order_no){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+
+	$result=mysqli_query($conn, "SELECT * FROM purchase_order_has_items WHERE purchase_order_no='$purchase_order_no' AND cancel_status='0'");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		$info=get_store_info($row[purchase_item]);
+		$new_qty=$info['qty']+$row['quantity'];
+		
+		$query = "UPDATE store SET
+		qty='$new_qty'
+		WHERE item='$row[purchase_item]'";
+		mysqli_query($conn, $query);
+	}
+
+
+
+	include 'conf/closedb.php';
+}
+
 
 function save_purchase_order($purchase_order_no, $supplier_name, $prepared_by, $total){
 	include 'conf/config.php';

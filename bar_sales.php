@@ -224,7 +224,8 @@ if ($_SESSION['login'] == 1) {
 				$discount_type=$_POST['discount_type'];
 				$discount=$_POST['discount'];				
 				$prepared_by=$_POST['prepared_by'];
-				$bar_sales_no=$_POST['bar_sales_no'];
+				$bar_sales_no=$_POST['bar_sales_no'];				
+				$service_charge=$_POST['service_charge'];
 				$total=get_total_bar_sales($_SESSION['bar_sales_no']);
 				
 				
@@ -236,7 +237,7 @@ if ($_SESSION['login'] == 1) {
 					$booking_ref=get_booking_ref_for_restaurant_order($ref_no);
 				}
 			
-				save_bar_sales($bar_sales_no, $date, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref);
+				save_bar_sales($bar_sales_no, $date, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge);
 				//add_bar_sales_ledger($bar_sales_no);
 			}
 			else {

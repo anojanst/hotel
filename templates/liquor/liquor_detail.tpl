@@ -41,6 +41,7 @@
 									{/if}
 									{section name=liquor_type loop=$liquor_names}
 									<option  value="{$liquor_names[liquor_type]}">{$liquor_names[liquor_type]}</option>
+									
 									{/section}
 								</select>
                                 </div>                                
@@ -49,7 +50,14 @@
                             <div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
 									Liquor Name
-									<input class="form-control" name="liquor_name" value="{$liquor_name}" required placeholder="Liquor Name">
+									<select class="form-control" name="liquor_name" required>
+										{if $liquor_name}
+											<option value="{$liquor_name}">{$liquor_name}</option>
+										{else}
+											<option value="" disabled selected>Liquor</option>
+										{/if}
+										{php}list_store_for_bar();{/php}
+									</select>
 								</div>                                
 							</div>
                             

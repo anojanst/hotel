@@ -43,7 +43,7 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12" style="margin-top: 8px;">
-                            <select class="form-control"  name="order_type" tabindex="1" required >
+                            <select class="form-control"  name="order_type" id="order_type" tabindex="1" required >
                                 <option value="Dine In">Dine In</option>
                                 <option value="Order From Room">Order From Room</option>
                                 <option value="Take Away">Take Away</option>
@@ -58,7 +58,29 @@
                     </div>
                     <div class="row">
                         <div class="col-lg-12" style="margin-top: 8px;">
-                            <input type="text" class="form-control" name="ref_no" />
+							<select name="ref_no" id="ref_no" class="form-control" required >
+								<option disabled selected>Select Table</option>
+								<option value="1">Table 1</option>
+								<option value="2">Table 2</option>
+								<option value="3">Table 3</option>
+								<option value="4">Table 4</option>
+								<option value="5">Table 5</option>
+								<option value="6">Table 6</option>
+								<option value="7">Table 7</option>
+								<option value="8">Table 8</option>
+								<option value="9">Table 9</option>
+								<option value="10">Table 10</option
+								<option value="11">Table 11</option>
+								<option value="12">Table 12</option>
+								<option value="13">Table 13</option>
+								<option value="14">Table 14</option>
+								<option value="15">Table 15</option>
+								<option value="16">Table 16</option>
+								<option value="17">Table 17</option>
+								<option value="18">Table 18</option>
+								<option value="19">Table 19</option>
+								<option value="20">Table 20</option>                         
+							</select>
                         </div>
                     </div>
                     <div class="row">

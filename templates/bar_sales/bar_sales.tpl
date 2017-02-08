@@ -98,7 +98,11 @@
 						{if $edit_mode=='on'}
 						<input type="text" class="form-control" name="updated_by" value="{$updated_by}" placeholder=" Updated by" required readonly="readonly"/>
 						{/if}
-						
+						<select class="form-control"  name="service_charge" value = "{$service_charge}" tabindex="1">
+							<option value="" disabled selected>Service Charge</option>
+							<option value="Keep" >Keep</option>
+							<option value="Skip" >Skip</option>
+						</select>
 						<div id="cus_amount"></div>
 						<div id="balance"></div>
 						<button  type="submit"  class="btn btn-success col-lg-12" name="ok" style="margin-right: 11px;" value="Save"  tabindex="6">Finish the Bill & Print</button>					

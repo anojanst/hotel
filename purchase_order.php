@@ -1,6 +1,7 @@
 <?php
 require_once 'conf/smarty-conf.php';
 include'functions/purchase_order_functions.php';
+include'functions/store_functions.php';
 include'functions/modules_functions.php';
 include'functions/employees_functions.php';
 
@@ -48,6 +49,8 @@ if ($_SESSION['login'] == 1) {
                     $purchase_order_no = $_POST['purchase_order_no'];
                     $total = get_total($_SESSION['purchase_order_no']);
                     save_purchase_order($purchase_order_no, $supplier_name, $prepared_by, $total);
+					
+					update_stock($purchase_order_no);
                             //add_purchase_order_ledger($purchase_order_no);
                 }
                 else {
