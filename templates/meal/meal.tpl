@@ -30,47 +30,45 @@
                                             <input class="form-control" name="meal" value="{$meal}" required placeholder="Meal Type">
                                         </div>                                
                                     </div>
-                    <div class="row">
-                       <div class="col-lg-6">
-                        {if $edit=='on'}
-                           <button type="submit" name="ok" value="Update" class="btn btn-block btn-success btn-lg">Update</button>
-           
-                       {else}
-                           <button type="submit" name="ok" value="Save" class="btn btn-block btn-success btn-lg">Save</button>
-                       </div>
-                       <div class="col-lg-6">
-                       {/if}
-                           <button type="reset" class="btn btn-block btn-danger btn-lg">Reset</button>
-                       </div>
-                   </div>
-				</div>
-			 	</form>
-		 </div>
-	</div>
-
-
- <div class="col-lg-6" style="margin-top: 10px;">	
- <section class="content">
-    <div class="nav-tabs-custom">
-    <div class="tab-content">
-    <div class="row">
-        <div class="col-lg-12">
-            <h4><strong>List Meal</strong></h4>
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-xs-12">
-                {php} list_meals(); {/php}
+                                    <div class="row" style="margin-bottom: 10px; margin-left: 20px;">
+                                       <div class="col-lg-6">
+                                        {if $edit=='on'}
+                                           <button type="submit" name="ok" value="Update" class="btn btn-block btn-success btn-lg">Update</button>
+                           
+                                       {else}
+                                           <button type="submit" name="ok" value="Save" class="btn btn-block btn-success btn-lg">Save</button>
+                                       </div>
+                                       <div class="col-lg-6">
+                                       {/if}
+                                           <button type="reset" class="btn btn-block btn-danger btn-lg">Reset</button>
+                                       </div>
+                                   </div>
+                            </div>
+                                </form>
+                        </div>
+                        <div class="col-lg-6" style="margin-top: 10px;">	
+                            <section class="content">
+                                <div class="nav-tabs-custom">
+                                    <div class="tab-content">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <h4><strong>List Meal</strong></h4>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-xs-12">
+                                                    {php} list_meals(); {/php}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                           </section>
+                        </div>	  
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
-    </div>
-</section>
-</div>	  
-	 </div>
-	 </div>
-	</div>
-	</section>
-	</div>
+    </section>
+</div>
 
 {include file="user_footer.tpl"}

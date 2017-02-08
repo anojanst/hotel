@@ -16,7 +16,6 @@
             <div class="row">
                 <div class="col-lg-12">
                     <h4><strong>Booked Room Report</strong></h4>
-                    <h4><strong>Room No</strong> : <strong>{$room_no}</strong></h4>
                 </div>
             </div>
             <div class="row">               

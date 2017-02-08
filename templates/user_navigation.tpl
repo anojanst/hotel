@@ -1,35 +1,51 @@
 <body class="sidebar-mini skin-purple sidebar-collapse">
 <div class="wrapper">
-<header class="main-header">
-    <!-- Logo -->
-    <a href="index.php" class="logo">
-        <!-- mini logo for sidebar mini 50x50 pixels -->
-        <span class="logo-mini"><b>H</b>M</span>
-        <!-- logo for regular state and mobile devices -->
-        <span class="logo-lg"><b>Hotel Management</b></span>
-    </a>
-    <!-- Header Navbar: style can be found in header.less -->
-    <nav class="navbar navbar-static-top">
-        <!-- Sidebar toggle button-->
-        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
-            <span class="sr-only">Toggle navigation</span>
+    <header class="main-header">
+        <!-- Logo -->
+        <a href="index.php" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>H</b>M</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>Hotel Management</b></span>
         </a>
-    
-        <div class="navbar-custom-menu">
-            <ul class="nav navbar-nav">
-              <!-- Messages: style can be found in dropdown.less-->
-              
-            </ul>
-        </div>
-    </nav>
-</header>
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+        
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                  <!-- Messages: style can be found in dropdown.less-->
+                  
+                </ul>
+            </div>
+        </nav>
+    </header>
 
 <div class="content-wrapper">
 	<aside class="main-sidebar">
     	<section class="sidebar">
 			<ul class="sidebar-menu">
-				<li class="active treeview">
-					 <a href="user_home.php" ><i class="fa fa-dashboard"></i><span>Dashboard</span></a>
+				
+                <li class="treeview">
+					<a href="#"><i class="fa fa-dashboard"></i><span>Dashboard </span><span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i></span></a>
+							<ul class="treeview-menu">
+								<li><a href='management.php'><i class="fa fa-user"></i>Management </span></a></li>
+                                <li><a href="login.php?job=login"><i class="fa fa-desktop"></i>Front Desk</span></a></li>
+								<li class="scroll">
+									<a href="house_keeping.php"><i class="fa fa-th"></i><span>House Keeping</span></a>
+								</li>
+                                <li class="scroll">
+									<a href="restaurant.php"><i class="fa fa-cutlery"></i><span>Restaurant</span></a>
+								</li>	
+								<li class="scroll">
+									<a href="bar.php"><i class="fa fa-glass"></i><span>Bar</span></a>
+								</li>			
+							 </ul>
+
 				</li>
 				<li class="treeview">
 					<a href="#"><i class="fa fa-cubes"></i><span>System Management </span><span class="pull-right-container">
@@ -40,21 +56,13 @@
 								<li class="scroll">
 									<a href="modules.php"><i class="fa fa-th"></i><span>Module Management</span></a>
 								</li>	
-										
+								<li class="scroll">
+                                    <a href="tax.php"><i class="fa fa-money"></i><span>Tax</span></a>
+                                </li>		
 							 </ul>
 
-				</li>						
-
-				<li class="treeview">
-					<a href="#"><i class="fa fa-money"></i><span>Billings </span><span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i></span></a>
-							<ul class="treeview-menu">
-								<li class="scroll">
-									<a href="sales.php"><i class="fa fa-balance-scale"></i><span> Sales</span></a>
-								</li>										
-							</ul>
-				</li>	
-				
+				</li>
+                
 				<li class="treeview">
 					<a href="#"><i class="fa fa-building"></i><span>Room Management </span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
@@ -90,42 +98,43 @@
 							</ul>	
 				</li>
 
-				
 				<li class="treeview">
-					<a href="#"><i class="fa fa-cutlery"></i><span> Restaurant Menu</span><span class="pull-right-container">
+					<a href="#"><i class="fa fa-bars"></i><span>Menu </span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
 							<ul class="treeview-menu">
-								<li class="scroll">
-									   <a href="meal.php"><i class="fa fa-cutlery"></i><span> Meal Type</span></a>
-								</li>
-								<li class="scroll">
-										<a href="meal_detail.php"><i class="fa fa-cutlery"></i><span> Meal Detail</span></a>
-								</li>	
-							</ul>
-															
-				</li>
-                
-                <li class="treeview">
-					<a href="#"><i class="fa fa-glass"></i><span> Bar Menu</span><span class="pull-right-container">
-						<i class="fa fa-angle-left pull-right"></i></span></a>
-							<ul class="treeview-menu">
-								<li class="scroll">
-									   <a href="liquor.php"><i class="fa fa-glass"></i><span> Liquor Type</span></a>
-								</li>
-								<li class="scroll">
-										<a href="liquor_detail.php"><i class="fa fa-glass"></i><span> Liquor Detail</span></a>
-								</li>	
-							</ul>
-															
-				</li>	
+                                <li class="treeview">
+                                    <a href="#"><i class="fa fa-cutlery"></i><span> Restaurant Menu</span><span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i></span></a>
+                                            <ul class="treeview-menu">
+                                                <li class="scroll">
+                                                       <a href="meal.php"><i class="fa fa-cutlery"></i><span> Meal Type</span></a>
+                                                </li>
+                                                <li class="scroll">
+                                                        <a href="meal_detail.php"><i class="fa fa-cutlery"></i><span> Meal Detail</span></a>
+                                                </li>	
+                                            </ul>
+                                                                            
+                                </li>
+                                <li class="treeview">
+                                    <a href="#"><i class="fa fa-glass"></i><span> Bar Menu</span><span class="pull-right-container">
+                                        <i class="fa fa-angle-left pull-right"></i></span></a>
+                                            <ul class="treeview-menu">
+                                                <li class="scroll">
+                                                       <a href="liquor.php"><i class="fa fa-glass"></i><span> Liquor Type</span></a>
+                                                </li>
+                                                <li class="scroll">
+                                                        <a href="liquor_detail.php"><i class="fa fa-glass"></i><span> Liquor Detail</span></a>
+                                                </li>	
+                                            </ul>
+                                                                            
+                                </li>
+                            </ul>
+                </li>
 
 				<li class="scroll">
 					<a href="call.php"><i class="fa fa-phone"></i><span> Calls </span></a>
 				</li>
 				
-				<li class="scroll">
-					<a href="tax.php"><i class="fa fa-bed"></i><span>Tax</span></a>
-				</li>
 				<li class="scroll">
 					<a href="purchase_order.php"><i class="fa fa-shopping-cart"></i><span>Expenses</span></a>
 				</li>
