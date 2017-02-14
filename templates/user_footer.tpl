@@ -51,3 +51,12 @@
 		});
 	});
 </script>
+
+<script>
+	$(function() {
+	
+		$("#order_type").change(function() {
+		  $("#ref_no").load("ajax/ref_no_by_order_type.php?choice=" + encodeURIComponent($("#order_type").val()));					
+		});
+	});
+</script>

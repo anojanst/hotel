@@ -6,7 +6,7 @@ include '../conf/opendb.php';
 	$choice = $_GET['choice'];
 
 	
-	if($choice=="Beer"){
+	if($choice=="Beer" OR $choice=="Soda"){
 		echo '<option value="full" selected>Full Bottle</option>';
 	}
 	

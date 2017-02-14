@@ -264,21 +264,7 @@ function print_bar_sales_item($bar_sales_no){
 	$result=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE bar_sales_no='$bar_sales_no' AND cancel_status='0' ORDER BY id ASC");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		$result1=mysqli_query($conn, "SELECT * FROM bar_sales WHERE bar_sales_no='$bar_sales_no'");
-		while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
-		{
-			$discount = $row1['discount'];
-			$discount_type=$row1['discount_type'];
-			if($row1['discount_type']=="%"){
-				$discount_amount = $row1['total']-($row1['total']*($row1['discount']/100)) ;
-				$dis=$row1['total']*($row1['discount']/100);
-			}
-			else{
-				$discount_amount = $row1['total']-$row1['discount'];
-				$dis=$row1['discount'];
-			}
-			
-		}	
+		
 		$total=($row[quantity]*$row[price]);
 		echo'<tr>		
 		<td>'.$row[quantity].'</td>
@@ -288,6 +274,22 @@ function print_bar_sales_item($bar_sales_no){
 		</tr>';
 		$grand_total+=$total;			
 	}
+	
+	$result1=mysqli_query($conn, "SELECT * FROM bar_sales WHERE bar_sales_no='$bar_sales_no'");
+	while($row1 = mysqli_fetch_array($result1, MYSQLI_ASSOC))
+	{
+		$discount = $row1['discount'];
+		$discount_type=$row1['discount_type'];
+		if($row1['discount_type']=="%"){
+			$discount_amount = $row1['total']-($row1['total']*($row1['discount']/100)) ;
+			$dis=$row1['total']*($row1['discount']/100);
+		}
+		else{
+			$discount_amount = $row1['total']-$row1['discount'];
+			$dis=$row1['discount'];
+		}
+		$_SESSION['service_charge']=$row1['service_charge'];
+	}	
 	echo'<tr  style="line-height: 30px;">
             <td></td>
             <td>Total</td>
@@ -311,7 +313,14 @@ function print_bar_sales_item($bar_sales_no){
 				</tr>';
 		}
 		
-		$result2=mysqli_query($conn, "SELECT * FROM tax WHERE percentage!='0'");
+		if($_SESSION[service_charge]=="Skip"){
+			
+			$result2=mysqli_query($conn, "SELECT * FROM tax WHERE percentage!='0' AND tax_type!='Service Charge'");
+		}
+		else{
+			$result2=mysqli_query($conn, "SELECT * FROM tax WHERE percentage!='0'");
+		}
+		
 		while($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC))
 		{
 			$tax_total = $discount_amount*($row2[percentage]/100);
@@ -341,6 +350,8 @@ function print_bar_sales_item($bar_sales_no){
 			
 
 	echo'</table>';
+	
+	unset($_SESSION['service_charge']);
 	include 'conf/closedb.php';
 
 
@@ -416,14 +427,14 @@ function update_saved_bar_sales($bar_sales_no){
 }
 
 
-function save_bar_sales($bar_sales_no, $date, $customer_name,$discount_type, $discount,$prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref){
+function save_bar_sales($bar_sales_no, $date, $customer_name,$discount_type, $discount,$prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	$date = date("Y-m-d");
 	
-	$query = "INSERT INTO bar_sales (id, bar_sales_no, customer_name, discount_type, discount, prepared_by, remarks, date, total, due, order_type, ref_no, booking_ref)
-	VALUES ('', '$bar_sales_no', '$customer_name','$discount_type','$discount', '$prepared_by', '$remarks', '$date', '$total', '$total', '$order_type', '$ref_no', '$booking_ref')";
+	$query = "INSERT INTO bar_sales (id, bar_sales_no, customer_name, discount_type, discount, prepared_by, remarks, date, total, due, order_type, ref_no, booking_ref, service_charge)
+	VALUES ('', '$bar_sales_no', '$customer_name','$discount_type','$discount', '$prepared_by', '$remarks', '$date', '$total', '$total', '$order_type', '$ref_no', '$booking_ref', '$service_charge')";
 	mysqli_query($conn, $query) or die (mysqli_error($conn));
 
 	include 'conf/closedb.php';

@@ -8,8 +8,9 @@ include 'functions/room_type_functions.php';
 include 'functions/room_functions.php';
 include 'functions/facility_functions.php';
 include 'functions/liquor_functions.php';
+include 'functions/store_functions.php';
 
-$module_no = 23;
+$module_no = 1;
 
 if ($_SESSION ['login'] == 1) {
 	if (check_access ( $module_no, $_SESSION ['user_id'] ) == 1) {

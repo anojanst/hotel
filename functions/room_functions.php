@@ -287,6 +287,7 @@ function list_booked_rooms_in_home(){
 
         
 	$date=date('Y-m-d');
+	
 	$result=mysqli_query($conn, "SELECT * FROM room WHERE room.room_no IN (SELECT room_no FROM room_has_status WHERE date='$date' AND status='Booked') ORDER BY room_no DESC limit 6" );
 
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
