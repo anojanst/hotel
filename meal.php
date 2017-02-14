@@ -22,13 +22,15 @@ if ($_SESSION ['login'] == 1) {
 		} elseif ($_REQUEST ['job'] == "save") {
 			if ($_REQUEST ['ok'] == 'Update') {
 				
-				$id = $_SESSION ['id'];			
+				$id = $_SESSION ['id'];
+                $meal_no=$_POST ['meal_no'];
     			$meal=$_POST ['meal'];
-				update_meals ( $id, $meal );
+				update_meals ( $id, $meal, $meal_no);
 			} else {
 				
+                $meal_no=$_POST ['meal_no'];
     			$meal=$_POST ['meal'];
-				save_meals( $meal);
+				save_meals( $meal,$meal_no);
 			}
 			$smarty->assign ( 'page', "Meals" );
 			$smarty->display ( 'meal/meal.tpl' );
@@ -38,7 +40,7 @@ if ($_SESSION ['login'] == 1) {
 			$info = get_meals_info($id);
 			
 			$smarty->assign ( 'meal', $info ['meal'] );
-						
+			$smarty->assign ( 'meal_no', $info ['meal_no'] );			
 			$smarty->assign ( 'edit', 'on' );			
 			$smarty->assign ( 'page', "Meals" );
 			$smarty->display ( 'meal/meal.tpl' );

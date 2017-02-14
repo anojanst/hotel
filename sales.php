@@ -42,7 +42,7 @@ if ($_SESSION['login'] == 1) {
 		}
 		
 		elseif ($_REQUEST['job']=='select'){
-			$selected_item=$_POST['meal'];
+			$selected_item=$_POST['meal_no'];
 					
 			if (!isset($_SESSION['sales_no'])) {
 				$_SESSION['sales_no']=$sales_no=get_sales_no();
@@ -58,7 +58,7 @@ if ($_SESSION['login'] == 1) {
 			$sales_no=$_SESSION['sales_no'];	
 			$sales_info=get_sales_info_by_sales_no($sales_no);
 			$info=get_meal_info_by_id($selected_item);
-			$selected_item=$info['id'];
+			$selected_item=$info['meal_no'];
             $stock=$info['meal_name'];
             $price=$info['price'];
 			$item_total=(1*$price);

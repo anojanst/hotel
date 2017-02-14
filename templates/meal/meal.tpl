@@ -26,6 +26,12 @@
                                 <form name="meal_type_form" role="form" action="meal.php?job=save" method="post">
                                     <div class="row" style="margin-bottom: 10px; margin-left: 20px;">
                                         <div class="col-lg-12">
+                                            Meal No
+                                            <input class="form-control" name="meal_no" value="{$meal_no}" required placeholder="Meal No">
+                                        </div>                                
+                                    </div>
+                                    <div class="row" style="margin-bottom: 10px; margin-left: 20px;">
+                                        <div class="col-lg-12">
                                             Meal Type
                                             <input class="form-control" name="meal" value="{$meal}" required placeholder="Meal Type">
                                         </div>                                

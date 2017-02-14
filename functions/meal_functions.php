@@ -1,11 +1,11 @@
 <?php
-function save_meals($meal) {
+function save_meals($meal,$meal_no) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db ( $conn, $dbname );
-	$query = "INSERT INTO meal_type (id, meal)
-	VALUES ('', '$meal')";
+	$query = "INSERT INTO meal_type (id, meal_no, meal)
+	VALUES ('','$meal_no', '$meal')";
 	
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 	
@@ -20,6 +20,7 @@ function list_meals() {
                   <thead>
                        <tr>
                            <th>Edit</th>
+                           <th>Meal No</th>
 						   <th>Meal Type</th>
                            <th>Delete</th>
                        </tr>
@@ -30,7 +31,7 @@ function list_meals() {
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
 		
 		echo '<td><a href="meal.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
-					
+		<td>' . $row [meal_nos] . '</td>			
 		<td>' . $row [meal] . '</td>	
 		<td><a href="meal.php?job=delete&id=' . $row [id] . '" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"><i class="fa fa-times fa-2x"></i></a></td>
 	
@@ -62,13 +63,14 @@ function get_meals_info($id) {
 
 
 
-function update_meals($id, $meal) {
+function update_meals($id, $meal,$meal_no) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	mysqli_select_db ($conn, $dbname );
 	$query = "UPDATE meal_type SET
-	meal='$meal'
+	meal='$meal',
+    meal_no='$meal_no'
 	WHERE id='$id'";
 	
 	mysqli_query ($conn, $query );
@@ -110,13 +112,13 @@ function list_meal() {
 }
 
 
-function save_meal_details( $meal, $meal_name, $size, $price) {
+function save_meal_details( $meal_no, $meal_name, $size, $price) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db ( $conn, $dbname );
-	$query = "INSERT INTO meal(id, meal, meal_name, size, price)
-	VALUES ('', '$meal', '$meal_name', '$size', '$price')";
+	$query = "INSERT INTO meal(id, meal_no, meal_name, size, price)
+	VALUES ('', '$meal_no', '$meal_name', '$size', '$price')";
 	
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 	
@@ -131,7 +133,7 @@ function list_meal_details() {
                   <thead>
                        <tr>
                            <th>Edit</th>
-						   <th>Meal Type</th>
+						   <th>Meal No</th>
                            <th>Meal Name</th>
                            <th>Size</th>
                            <th>Price</th>
@@ -145,7 +147,7 @@ function list_meal_details() {
 		
 		echo '<td><a href="meal_detail.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
 					
-		<td>' . $row [meal] . '</td>
+		<td>' . $row [meal_no] . '</td>
         <td>' . $row [meal_name] . '</td>
         <td>' . $row [size] . '</td>
         <td>' . $row [price] . '</td>
@@ -179,13 +181,13 @@ function get_meal_details_info($id) {
 
 
 
-function update_meal_details ( $id, $meal, $meal_name, $size, $price ) {
+function update_meal_details ( $id, $meal_no, $meal_name, $size, $price ) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	mysqli_select_db ($conn, $dbname );
 	$query = "UPDATE meal SET
-	meal='$meal',
+	meal_no='$meal_no',
     meal_name='$meal_name',
     size='$size',
     price='$price'
@@ -237,11 +239,11 @@ function list_meal_for_sale(){
 }
 
 
-function get_meal_info_by_id($id) {
+function get_meal_info_by_id($meal_no) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	$result = mysqli_query($conn, "SELECT * FROM meal WHERE id='$id'");
+	$result = mysqli_query($conn, "SELECT * FROM meal WHERE meal_no='$meal_no'");
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 		return $row;
 	}

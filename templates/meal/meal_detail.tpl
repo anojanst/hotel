@@ -26,26 +26,13 @@
 			
 				<div class="panel-body">
 					<form name="rooms_form" role="form" action="meal_detail.php?job=save" method="post">
-			  
-						
-							<div class="row" style="margin-bottom: 10px; margin-left: 20px;">
-
+						<div class="row" style="margin-bottom: 10px; margin-left: 20px;">
                             <div class="row" style="margin-bottom: 10px;">
-								<div class="col-lg-12">
-									Meal Type
-									<select class="form-control"  name="meal" required placeholder="Meal Type" >
-		                    		{if $meal}
-										<option value="{$meal}">{$meal}</option>
-									{else}
-										<option value="" disabled selected>Meal</option>
-									{/if}
-									{section name=meal loop=$meal_names}
-									<option  value="{$meal_names[meal]}">{$meal_names[meal]}</option>
-									{/section}
-								</select>
+                                <div class="col-lg-12">
+                                    Meal No
+                                    <input class="form-control" name="meal_no" value="{$meal_no}" required placeholder="Meal No">
                                 </div>                                
-							</div>
-							
+                            </div>
                             <div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
 									Meal Name

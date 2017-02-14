@@ -33,17 +33,8 @@
 				<form name="select_item_form"  action="sales.php?job=select" method="post" >
 
 					<div class="col-lg-3">
-						<select name="meal_type" id="meal_type" class="form-control" required >
-							<option value="" disabled selected>Meal Name</option>
-							{php}list_meal_type_for_sale();{/php}                              
-						</select>
-					</div>
-
-					<div class="col-lg-3">
-						<select name="meal" id="meal" class="form-control" required >
-							<option disabled selected>Please select the meal type first</option>                         
-						</select>
-					</div>
+                        <input type="text" class="form-control" name="meal_no" value="{$meal_no}" required placeholder="Meal No" tabindex="3"/>
+                    </div>
 					<div class="col-lg-4">
 						<button type="submit"  class="btn btn-danger" name="ok" style="margin-right: 11px;" value="Submit"  tabindex="6">Submit</button>
 											

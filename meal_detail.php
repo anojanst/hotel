@@ -15,7 +15,6 @@ $module_no = 11;
 if ($_SESSION ['login'] == 1) {
 	if (check_access ( $module_no, $_SESSION ['user_id'] ) == 1) {
 		if ($_REQUEST ['job'] == "meal_type_form") {
-			$smarty->assign('meal_names', list_meal());
 			$smarty->assign ( 'page', "Meals" );
 			$smarty->display ( 'meal/meal_detail.tpl' );
 			
@@ -23,23 +22,22 @@ if ($_SESSION ['login'] == 1) {
 			if ($_REQUEST ['ok'] == 'Update') {
 				
 				$id = $_SESSION ['id'];			
-    			$meal=$_POST ['meal'];
+    			$meal_no=$_POST ['meal_no'];
                 $meal_name=$_POST ['meal_name'];
                 $size=$_POST ['size'];
                 $price=$_POST ['price'];
 				
-				update_meal_details ( $id, $meal, $meal_name, $size, $price );
-				$smarty->assign('meal_names', list_meal());
+				update_meal_details ( $id, $meal_no, $meal_name, $size, $price );
+				
 			} else {
 				
-    			$meal=$_POST ['meal'];
+    			$meal_no=$_POST ['meal_no'];
                 $meal_name=$_POST ['meal_name'];
                 $size=$_POST ['size'];
                 $price=$_POST ['price'];
 				
-				save_meal_details( $meal, $meal_name, $size, $price);
+				save_meal_details( $meal_no, $meal_name, $size, $price);
 				
-								
 			}
             $smarty->assign('meal_names', list_meal());
 			$smarty->assign ( 'page', "Meals" );
@@ -49,25 +47,23 @@ if ($_SESSION ['login'] == 1) {
 			$_SESSION ['id'] = $id = $_REQUEST ['id'];
 			$info = get_meal_details_info($id);
 			
-			$smarty->assign ( 'meal', $info ['meal'] );
+			$smarty->assign ( 'meal_no', $info ['meal_no'] );
             $smarty->assign ( 'meal_name', $info ['meal_name'] );
             $smarty->assign ( 'size', $info ['size'] );
-            $smarty->assign ( 'price', $info ['price'] );
-			$smarty->assign('meal_names', list_meal());			
+            $smarty->assign ( 'price', $info ['price'] );		
 			$smarty->assign ( 'edit', 'on' );			
 			$smarty->assign ( 'page', "Meals" );
 			$smarty->display ( 'meal/meal_detail.tpl' );
 			
 		} elseif ($_REQUEST ['job'] == "delete") {
-			delete_meal_detail ( $_REQUEST ['id'] );
-			$smarty->assign('meal_names', list_meal());
+			delete_meal_detail ( $_REQUEST ['id']);
 			$smarty->assign ( 'page', "Meals" );
 			$smarty->display ( 'meal/meal_detail.tpl' );
 		} 
 		
 		
 		else {
-			$smarty->assign('meal_names', list_meal());
+			
 			$smarty->assign ( 'page', "Meals" );
 			$smarty->display ( 'meal/meal_detail.tpl' );
 		}
