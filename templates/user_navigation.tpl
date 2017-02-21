@@ -45,14 +45,13 @@
 									<a href="bar.php"><i class="fa fa-glass"></i><span>Bar</span></a>
 								</li>			
 							 </ul>
-
 				</li>
+                
 				<li class="treeview">
 					<a href="#"><i class="fa fa-cubes"></i><span>System Management </span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
 							<ul class="treeview-menu">
 								<li><a href='staff_manage.php'><i class="fa fa-cubes"></i> Staff Management </span></a></li>
-
 								<li class="scroll">
 									<a href="modules.php"><i class="fa fa-th"></i><span>Module Management</span></a>
 								</li>	
@@ -60,7 +59,6 @@
                                     <a href="tax.php"><i class="fa fa-money"></i><span>Tax</span></a>
                                 </li>		
 							 </ul>
-
 				</li>
                 
 				<li class="treeview">
@@ -81,9 +79,8 @@
 
 								<li class="scroll">
 									<a href="room.php"><i class="fa fa-building"></i><span>Room</span></a>
-								</li>								
-
-
+								</li>
+                                
 								<li class="scroll">
 									<a href="room.php?job=room_view_by_status"><i class="fa fa-building"></i><span>Rooms by Status</span></a>
 								</li>								
@@ -107,11 +104,11 @@
                                         <i class="fa fa-angle-left pull-right"></i></span></a>
                                             <ul class="treeview-menu">
                                                 <li class="scroll">
-                                                       <a href="meal.php"><i class="fa fa-cutlery"></i><span> Meal Type</span></a>
+                                                        <a href="meal_detail.php"><i class="fa fa-cutlery"></i><span> Meal Menu</span></a>
                                                 </li>
-                                                <li class="scroll">
-                                                        <a href="meal_detail.php"><i class="fa fa-cutlery"></i><span> Meal Detail</span></a>
-                                                </li>	
+                                                 <li class="scroll">
+                                                       <a href="meal.php"><i class="fa fa-cutlery"></i><span>Bill Of Material</span></a>
+                                                </li>
                                             </ul>
                                                                             
                                 </li>
@@ -125,8 +122,7 @@
                                                 <li class="scroll">
                                                         <a href="liquor_detail.php"><i class="fa fa-glass"></i><span> Liquor Detail</span></a>
                                                 </li>	
-                                            </ul>
-                                                                            
+                                            </ul>                         
                                 </li>
                             </ul>
                 </li>

@@ -32,18 +32,9 @@
 
                             <div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
-									Liquor Type
-									<select class="form-control"  name="liquor" required placeholder="Liquor Type" >
-		                    		{if $liquor}
-										<option value="{$liquor}">{$liquor}</option>
-									{else}
-										<option value="" disabled selected>Liquor</option>
-									{/if}
-									{section name=liquor_type loop=$liquor_names}
-									<option  value="{$liquor_names[liquor_type]}">{$liquor_names[liquor_type]}</option>
-									
-									{/section}
-								</select>
+									Liquor No
+                                    <input class="form-control" name="liquor_no" value="{$liquor_no}" required placeholder="Liquor No">
+								
                                 </div>                                
 							</div>
 							

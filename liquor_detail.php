@@ -15,7 +15,6 @@ $module_no = 1;
 if ($_SESSION ['login'] == 1) {
 	if (check_access ( $module_no, $_SESSION ['user_id'] ) == 1) {
 		if ($_REQUEST ['job'] == "liquor_detail_form") {
-			$smarty->assign('liquor_names', list_liquor());
 			$smarty->assign ( 'page', "Liquor" );
 			$smarty->display ( 'liquor/liquor_detail.tpl' );
 			
@@ -23,27 +22,26 @@ if ($_SESSION ['login'] == 1) {
 			if ($_REQUEST ['ok'] == 'Update') {
 				
 				$id = $_SESSION ['id'];			
-    			$liquor=$_POST ['liquor'];
+    			$liquor_no=$_POST ['liquor_no'];
                 $liquor_name=$_POST ['liquor_name'];
                 $price_25=$_POST ['price_25'];
                 $price_50=$_POST ['price_50'];
                 $price=$_POST ['price'];
 				
-				update_liquor_details ( $id, $liquor, $liquor_name, $price_25, $price_50, $price );
+				update_liquor_details ( $id, $liquor_no, $liquor_name, $price_25, $price_50, $price );
 			
 			} else {
 				
-    			$liquor=$_POST ['liquor'];
+    			$liquor_no=$_POST ['liquor_no'];
                 $liquor_name=$_POST ['liquor_name'];
                 $price_25=$_POST ['price_25'];
                 $price_50=$_POST ['price_50'];
                 $price=$_POST ['price'];
 				
-				save_liquor_details( $liquor, $liquor_name, $price_25, $price_50, $price);
+				save_liquor_details( $liquor_no, $liquor_name, $price_25, $price_50, $price);
 				
 								
 			}
-            $smarty->assign('liquor_names', list_liquor());
 			$smarty->assign ( 'page', "Liquors" );
 			$smarty->display ( 'liquor/liquor_detail.tpl' );
 			
@@ -51,7 +49,7 @@ if ($_SESSION ['login'] == 1) {
 			$_SESSION ['id'] = $id = $_REQUEST ['id'];
 			$info = get_liquor_details_info($id);
 			
-			$smarty->assign ( 'liquor', $info ['liquor_type'] );
+			$smarty->assign ( 'liquor_no', $info ['liquor_no'] );
             $smarty->assign ( 'liquor_name', $info ['liquor'] );
             $smarty->assign ( 'price', $info ['price'] );            
             $smarty->assign ( 'price_25', $info ['price_25'] );            
@@ -63,14 +61,12 @@ if ($_SESSION ['login'] == 1) {
 			
 		} elseif ($_REQUEST ['job'] == "delete") {
 			delete_liquor_detail ( $_REQUEST ['id'] );
-            $smarty->assign('liquor_names', list_liquor());
 			$smarty->assign ( 'page', "Liquors" );
 			$smarty->display ( 'liquor/liquor_detail.tpl' );
 		} 
 		
 		
 		else {
-            $smarty->assign('liquor_names', list_liquor());
 			$smarty->assign ( 'page', "Liquor" );
 			$smarty->display ( 'liquor/liquor_detail.tpl' );
 		}

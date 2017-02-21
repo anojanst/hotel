@@ -109,13 +109,13 @@ function list_liquor() {
 }
 
 
-function save_liquor_details( $liqure, $liqure_name, $price_25, $price_50, $price) {
+function save_liquor_details( $liquor_no, $liquor_name, $price_25, $price_50, $price) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db ( $conn, $dbname );
-	$query = "INSERT INTO liquor(id, liquor_type, liquor, price_25, price_50, price)
-	VALUES ('', '$liqure', '$liqure_name', '$price_25', '$price_50', '$price')";
+	$query = "INSERT INTO liquor(id, liquor_no, liquor, price_25, price_50, price)
+	VALUES ('', '$liquor_no', '$liquor_name', '$price_25', '$price_50', '$price')";
 	echo $query;
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 	
@@ -130,8 +130,8 @@ function list_liquor_details() {
                   <thead>
                        <tr>
                            <th>Edit</th>
-						   <th>Liqure Type</th>
-                           <th>Liqure Name</th>
+						   <th>Liquor No</th>
+                           <th>Liquor Name</th>
                            <th>Price 25</th>
                            <th>Price 50</th>
                            <th>Price Full</th>
@@ -145,7 +145,7 @@ function list_liquor_details() {
 		
 		echo '<td><a href="liquor_detail.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
 					
-		<td>' . $row [liquor_type] . '</td>
+		<td>' . $row [liquor_no] . '</td>
         <td>' . $row [liquor] . '</td>
         <td>' . $row [price_25] . '</td>
         <td>' . $row [price_50] . '</td>
@@ -180,13 +180,13 @@ function get_liquor_details_info($id) {
 
 
 
-function update_liquor_details ($id, $liquor, $liquor_name, $price_25, $price_50, $price) {
+function update_liquor_details ($id, $liquor_no, $liquor_name, $price_25, $price_50, $price) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	mysqli_select_db ($conn, $dbname );
 	$query = "UPDATE liquor SET
-	liquor_type='$liquor',
+	liquor_no='$liquor_no',
     liquor='$liquor_name',
     price_25='$price_25',
     price_50='$price_50',
@@ -227,11 +227,11 @@ function list_liquor_for_sale(){
 }
 
 
-function get_liquor_info_by_id($id) {
+function get_liquor_info_by_id($liquor_no) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	$result = mysqli_query($conn, "SELECT * FROM liquor WHERE id='$id'");
+	$result = mysqli_query($conn, "SELECT * FROM liquor WHERE liquor_no='$liquor_no'");
 	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
 		return $row;
 	}

@@ -1,6 +1,6 @@
 {include file="print_header.tpl"}
 {include file="user_header.tpl"}
-<div style="width: 120mm; padding: 3mm; margin-top: -30px;">
+<div style="width: 120mm; padding: 3mm;">
 	<div class="row">
 		<div class="col-xs-12" style="text-align: center; font-size: 38px;">
 			<strong>ASVIKA HOTEL (PVT) LTD. </strong>

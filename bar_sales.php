@@ -42,7 +42,7 @@ if ($_SESSION['login'] == 1) {
 		}
 		
 		elseif ($_REQUEST['job']=='select'){
-			$selected_item=$_POST['liquor'];
+			$selected_item=$_POST['liquor_no'];
 					
 			if (!isset($_SESSION['bar_sales_no'])) {
 				$_SESSION['bar_sales_no']=$bar_sales_no=get_bar_sales_no();
@@ -58,7 +58,7 @@ if ($_SESSION['login'] == 1) {
 			$bar_sales_no=$_SESSION['bar_sales_no'];	
 			$bar_sales_info=get_bar_sales_info_by_bar_sales_no($bar_sales_no);
 			$info=get_liquor_info_by_id($selected_item);
-			$selected_item=$info['id'];            
+			$selected_item=$info['liquor_no'];            
 			$size=$_POST['size'];
 			$stock=$info['liquor'].' ('. $size .')';
 			

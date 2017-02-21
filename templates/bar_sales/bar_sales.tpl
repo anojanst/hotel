@@ -33,23 +33,8 @@
 				<form name="select_item_form"  action="bar_sales.php?job=select" method="post" >
 
 					<div class="col-lg-2">
-						<select name="liquor_type" id="liquor_type" class="form-control" required >
-							<option value="" disabled selected>Liquor Type</option>
-							{php}list_liquor_type_for_bar_sale();{/php}                              
-						</select>
-					</div>
-
-					<div class="col-lg-2">
-						<select name="liquor" id="liquor" class="form-control" required >
-							<option disabled selected>select the liquor type first</option>                         
-						</select>
-					</div>
-					
-					<div class="col-lg-2">
-						<select name="size" id="size" class="form-control" required >
-							<option disabled selected>select the liquor type first</option>                         
-						</select>
-					</div>
+                        <input type="text" class="form-control" name="liquor_no" value="{$liquor_no}" required placeholder="Liquor No" tabindex="3"/>
+                    </div>
 					<div class="col-lg-4">
 						<button type="submit"  class="btn btn-danger" name="ok" style="margin-right: 11px;" value="Submit"  tabindex="6">Submit</button>
 											

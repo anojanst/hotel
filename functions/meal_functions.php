@@ -1,17 +1,17 @@
 <?php
-function save_meals($meal,$meal_no) {
+function save_bill_of_material($meal_name,$size,$item,$qty,$price) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db ( $conn, $dbname );
-	$query = "INSERT INTO meal_type (id, meal_no, meal)
-	VALUES ('','$meal_no', '$meal')";
+	$query = "INSERT INTO bill_of_material (id,meal_name, size,item,qty,price)
+	VALUES ('','$meal_name', '$size','$item','$qty','$price')";
 	
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 	
 	
 }
-function list_meals() {
+function list_bill_of_material() {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
@@ -20,23 +20,27 @@ function list_meals() {
                   <thead>
                        <tr>
                            <th>Edit</th>
-                           <th>Meal No</th>
-						   <th>Meal Type</th>
+                           <th>Meal Name</th>
+						   <th>Size</th>
+                           <th>Item</th>
+                           <th>Qty</th>
+                           <th>Price</th>
                            <th>Delete</th>
                        </tr>
                   </thead>
                   <tbody valign="top">';
 	$i = 1;
-	$result = mysqli_query ( $conn, "SELECT * FROM meal_type" );
+	$result = mysqli_query ( $conn, "SELECT * FROM bill_of_material" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
 		
-		echo '<td><a href="meal.php?job=edit&id=' . $row [id] . '"  ><i class="fa fa-edit fa-2x"></i></a></td>
-		<td>' . $row [meal_nos] . '</td>			
-		<td>' . $row [meal] . '</td>	
-		<td><a href="meal.php?job=delete&id=' . $row [id] . '" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"><i class="fa fa-times fa-2x"></i></a></td>
-	
+		echo '<td><a href="meal.php?job=edit&id='.$row [id].'"  ><i class="fa fa-edit fa-2x"></i></a></td>
+		<td>' . $row [meal_name] . '</td>
+        <td>' . $row [size] . '</td>
+        <td>' . $row [item] . '</td>
+        <td>' . $row [qty] . '</td>	
+		<td>' . $row [price] . '</td>	
+		<td><a href="meal.php?job=delete&id='.$row [id].'" onclick="javascript:return confirm(\'Are you sure you want to delete this entry?\')"><i class="fa fa-times fa-2x"></i></a></td>	
 		</tr>';
-		
 		$i ++;
 	}
 	
@@ -46,11 +50,11 @@ function list_meals() {
 	
 	
 }
-function get_meals_info($id) {
+function get_bill_of_material_info($id) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	$result = mysqli_query ($conn, "SELECT * FROM meal_type WHERE id='$id'" );
+	$result = mysqli_query ($conn, "SELECT * FROM bill_of_material WHERE id='$id'" );
 	
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) 
 
@@ -63,14 +67,17 @@ function get_meals_info($id) {
 
 
 
-function update_meals($id, $meal,$meal_no) {
+function update_bill_of_material ( $id,$meal_name,$size,$item,$qty,$price) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	mysqli_select_db ($conn, $dbname );
-	$query = "UPDATE meal_type SET
-	meal='$meal',
-    meal_no='$meal_no'
+	$query = "UPDATE bill_of_material SET
+	meal_name='$meal_name',
+    size='$size',
+    item='$item',
+    qty='$qty',
+    price='$price'
 	WHERE id='$id'";
 	
 	mysqli_query ($conn, $query );
@@ -80,12 +87,12 @@ function update_meals($id, $meal,$meal_no) {
 
 
 
-function delete_meal($id) {
+function delete_bill_of_material($id) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db ($conn, $dbname );
-	$query = "DELETE FROM meal_type 
+	$query = "DELETE FROM bill_of_material 
 	WHERE id='$id'";
 	
 	mysqli_query ($conn, $query );
@@ -249,4 +256,18 @@ function get_meal_info_by_id($meal_no) {
 	}
 	include 'conf/closedb.php';
 
+}
+
+function list_meal_menu(){
+    include 'conf/config.php';
+	include 'conf/opendb.php';
+    
+    $result = mysqli_query($conn, "SELECT * FROM meal");
+	while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+         
+		echo'<option value="'.$row[meal_name].'">'.$row[meal_name].'</option>';
+	}
+	include 'conf/closedb.php';
+
+    
 }
