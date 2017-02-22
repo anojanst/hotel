@@ -128,14 +128,14 @@ function get_total_sales($sales_no){
 	include 'conf/closedb.php';
 }
 
-function add_sales_item($selected_item, $stock, $price, $sales_no, $item_total, $order_type, $ref_no, $booking_ref){
+function add_sales_item($selected_item, $meal_type, $stock, $price, $sales_no, $item_total, $order_type, $ref_no, $booking_ref){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	$date = date("Y-m-d");
 
-	$query = "INSERT INTO sales_has_items (id, meal_id, meal_name, price, date, sales_no, quantity, user_name, total, order_type, ref_no, booking_ref)
-	VALUES ('', '$selected_item', '$stock', '$price', '$date', '$sales_no', '1', '$_SESSION[user_name]', '$item_total', '$order_type', '$ref_no', '$booking_ref')";
+	$query = "INSERT INTO sales_has_items (id, meal_id, meal_name, meal_type, price, date, sales_no, quantity, user_name, total, order_type, ref_no, booking_ref)
+	VALUES ('', '$selected_item', '$stock', '$meal_type', '$price', '$date', '$sales_no', '1', '$_SESSION[user_name]', '$item_total', '$order_type', '$ref_no', '$booking_ref')";
 	mysqli_query($conn, $query) or die (mysqli_error($conn));
 
 	include 'conf/closedb.php';
@@ -316,24 +316,39 @@ function print_sales_item($sales_no){
 		
 		if($_SESSION[service_charge]=="Skip"){
 			
-			$result2=mysqli_query($conn, "SELECT * FROM tax WHERE percentage!='0' AND tax_type!='Service Charge'");
-		}
-		else{
-			$result2=mysqli_query($conn, "SELECT * FROM tax WHERE percentage!='0'");
-		}
-		while($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC))
-		{
-			$tax_total = $discount_amount*($row2[percentage]/100);
+		$result2=mysqli_query($conn, "SELECT * FROM tax WHERE percentage!='0' AND tax_type!='Service Charge'");
+		
+		$tax_total = $discount_amount*($row2[percentage]/100);
 			
-			echo'<tr  style="line-height: 30px;">
+		echo'<tr  style="line-height: 30px;">
 					<td></td>
 					<td>'.$row2[tax_type].'('.$row2[percentage].'%)</td>
 					<td></td>
 					<td align="right">'.number_format($tax_total,2).'</td>
 				</tr>';
-			$full_total += $tax_total;
-			$net_total = $full_total + $discount_amount;
+		$full_total += $tax_total;
+		$net_total = $full_total + $discount_amount;
+		
 		}
+		else{
+			
+			$result2=mysqli_query($conn, "SELECT * FROM tax WHERE percentage!='0'");
+			while($row2 = mysqli_fetch_array($result2, MYSQLI_ASSOC))
+			{
+			
+				$tax_total = $discount_amount*($row2[percentage]/100);
+					
+				echo'<tr  style="line-height: 30px;">
+					<td></td>
+					<td>'.$row2[tax_type].'('.$row2[percentage].'%)</td>
+					<td></td>
+					<td align="right">'.number_format($tax_total,2).'</td>
+				</tr>';
+				$full_total += $tax_total;
+				$net_total = $full_total + $discount_amount;
+			}
+		}
+		
 		echo'<tr  style="line-height: 30px;">
             <td></td>
             <td>Grand Total</td>
@@ -765,6 +780,28 @@ function get_sales_item_id($sales_no) {
 	{
 		return $row['MAX(id)'];
 	}
+
+	include 'conf/closedb.php';
+}
+
+function update_stock_sales($sales_no){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+	
+
+	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE meal_type='Other' AND sales_no='$sales_no' AND cancel_status='0'");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		$info=get_store_info($row[meal_name]);
+		$new_qty=$info['qty']-$row['quantity'];
+		
+		$query = "UPDATE store SET
+		qty='$new_qty'
+		WHERE item='$row[meal_name]'";
+		mysqli_query($conn, $query);
+	}
+
+
 
 	include 'conf/closedb.php';
 }

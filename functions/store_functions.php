@@ -1,11 +1,11 @@
 <?php
-function save_store($item, $price, $resale) {
+function save_store($item, $qty,$price, $resale) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	mysqli_select_db ( $conn, $dbname );
-	$query = "INSERT INTO store (id, item, price, resale)
-	VALUES ('', '$item', '$price', '$resale')";
+	$query = "INSERT INTO store (id,item, qty,price, resale)
+	VALUES ('', '$item', '$qty', '$price', '$resale')";
 	
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 	
@@ -34,6 +34,7 @@ function list_store() {
                   <thead>
                        <tr>
                            <th>Item</th>
+						   <th>Qty</th>
 						   <th>Price</th>
 						   <th>Resale</th>
                            <th>Delete</th>
@@ -46,6 +47,8 @@ function list_store() {
 		
 		echo '
 		<td>' . $row [item] . '</td>
+		
+		<td>' . $row [qty] . '</td>
 		
 		<td>' . $row [price] . '</td>
 		
@@ -157,7 +160,7 @@ function list_store_for_bar() {
 function list_store_for_sale() {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
-	
+	echo 1;
 	
 	$result = mysqli_query ( $conn, "SELECT * FROM store WHERE resale='Yes'" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {

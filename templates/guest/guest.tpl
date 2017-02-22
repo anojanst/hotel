@@ -86,7 +86,7 @@
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
 										<strong>Email</strong>									
-										<input class="form-control" name="email" value="{$email}" required placeholder="Email">
+										<input class="form-control" name="email" value="{$email}" placeholder="Email">
 								</div>                                
 							</div>
 
@@ -107,7 +107,7 @@
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
 										<strong>NIC</strong>									
-										<input class="form-control" name="nic" value="{$nic}" required placeholder="NIC">
+										<input class="form-control" name="nic" value="{$nic}" placeholder="NIC">
 								</div>                                
 							</div>
 

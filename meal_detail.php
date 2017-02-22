@@ -8,7 +8,7 @@ include 'functions/room_type_functions.php';
 include 'functions/room_functions.php';
 include 'functions/facility_functions.php';
 include 'functions/meal_functions.php';
-
+include 'functions/store_functions.php';
 
 $module_no = 11;
 

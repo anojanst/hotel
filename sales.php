@@ -4,6 +4,7 @@ include 'functions/meal_functions.php';
 include 'functions/sales_functions.php';
 include 'functions/modules_functions.php';
 include 'functions/user_functions.php';
+include 'functions/store_functions.php';
 include 'functions/ledger_functions.php';
 
 
@@ -44,7 +45,12 @@ if ($_SESSION['login'] == 1) {
 		}
 		
 		elseif ($_REQUEST['job']=='select'){
+<<<<<<<
 			$selected_item=$_POST['meal_no'];
+=======
+			$selected_item=$_POST['meal'];
+			$meal_type=$_POST['meal_type'];
+>>>>>>>
 					
 			if (!isset($_SESSION['sales_no'])) {
 				$_SESSION['sales_no']=$sales_no=get_sales_no();
@@ -69,7 +75,7 @@ if ($_SESSION['login'] == 1) {
 				$booking_ref=get_booking_ref_for_restaurant_order($ref_no);
 			}
 				
-			add_sales_item($selected_item, $stock, $price, $_SESSION['sales_no'],$item_total, $order_type, $ref_no, $booking_ref);
+			add_sales_item($selected_item, $meal_type, $stock, $price, $_SESSION['sales_no'],$item_total, $order_type, $ref_no, $booking_ref);
 			$total_to_ledger=($price)-($discount);
 
 			$smarty->assign('customer_name',"$sales_info[customer_name]");
@@ -228,8 +234,14 @@ if ($_SESSION['login'] == 1) {
 					$booking_ref=get_booking_ref_for_restaurant_order($ref_no);
 				}
 			
+<<<<<<<
 				save_sales($sales_no, $date, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge);
 				add_sales_ledger($sales_no);
+=======
+				save_sales($sales_no, $date, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge);
+				//add_sales_ledger($sales_no);
+				update_stock_sales($sales_no);
+>>>>>>>
 			}
 			else {
 	

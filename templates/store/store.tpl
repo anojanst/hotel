@@ -16,9 +16,12 @@
   		<div class="nav-tabs-custom">
   			<div class="tab-content">
    				<div class="row">
-     			   <div class="col-lg-12">
+     			   <div class="col-lg-9">
                      <h2><strong>Store</strong></h2>
-                    </div>		 
+                    </div>
+				   <div class="col-lg-3">
+                     <a href="taken_from_store.php" class="btn btn-sm btn-danger">Issue Item</a>
+                    </div>	
                     <div class="row">
                         <div class="col-lg-4" style="margin-top: 10px;">					
                             <div class="panel-body">
@@ -30,6 +33,14 @@
                                                <input class="form-control" name="item" value="{$item}" required placeholder="Item">
                                             </div>                                
                                         </div>
+
+										<div class="row" style="margin-bottom: 10px;">
+                                            <div class="col-lg-12">
+                                                Quantity
+                                               <input class="form-control" name="qty" value="{$qty}" required placeholder="Qty">
+                                            </div>                                
+                                        </div>
+
 										<div class="row" style="margin-bottom: 10px;">
                                             <div class="col-lg-12">
                                                Price

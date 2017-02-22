@@ -59,7 +59,7 @@
 					<div class="col-lg-2">
 						<select class="form-control" name="measure_type" required>
 							<option value="" disable selected>Measure Type</option>
-							<option value="P">Piece</option>
+							<option value="P">Unit</option>
 							<option value="B">Box</option>
 							<option value="D">Dozen</option>
 							<option value="m">M</option>

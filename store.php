@@ -14,9 +14,10 @@ if ($_SESSION ['login'] == 1) {
 	if (check_access ( $module_no, $_SESSION ['user_id'] ) == 1) {
 		if ($_REQUEST ['job'] == "save") {
 			$item = $_POST ['item'];
+			$qty = $_POST ['qty'];
 			$price = $_POST ['price'];			
 			$resale = $_POST ['resale'];
-			save_store($item, $price, $resale);
+			save_store($item, $qty,$price, $resale);
 			
 			$smarty->assign ('page', "Store");
 			$smarty->display ('store/store.tpl');
