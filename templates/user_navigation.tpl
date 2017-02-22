@@ -172,7 +172,6 @@
                  </li>
 				<li class="scroll">
 					<a href="login.php?job=logout"><i class="fa fa-sign-out"></i> <span> Logout</span></a>
-
 				</li>
 			</ul>           
 		</section>

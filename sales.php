@@ -4,6 +4,8 @@ include 'functions/meal_functions.php';
 include 'functions/sales_functions.php';
 include 'functions/modules_functions.php';
 include 'functions/user_functions.php';
+include 'functions/ledger_functions.php';
+
 
 $module_no = 14;
 
@@ -106,7 +108,7 @@ if ($_SESSION['login'] == 1) {
 			$item_info=get_meal_info_from_sales_has_items($id, $sales_no);
 				
 			update_sales_item($id, $quantity, $item_total, $price, $sales_no);
-			//update_sales_item_ledger($vehicle_id ,$sales_no);
+			update_sales_item_ledger($vehicle_id ,$sales_no);
 			
 	
 			$smarty->assign('customer_name',"$sales_info[customer_name]");
@@ -177,7 +179,7 @@ if ($_SESSION['login'] == 1) {
 			//$item_info=get_meal_info_from_sales_has_items($info['meal_id'], $_SESSION['sales_no']);
 	
 			cancel_item($id);
-			//delete_sales_items_ledger($id);
+			delete_sales_items_ledger($id);
 	
 			$sales_no=$_SESSION['sales_no'];
 			$sales_info=get_sales_info_by_sales_no($sales_no);
@@ -227,7 +229,7 @@ if ($_SESSION['login'] == 1) {
 				}
 			
 				save_sales($sales_no, $date, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge);
-				//add_sales_ledger($sales_no);
+				add_sales_ledger($sales_no);
 			}
 			else {
 	
@@ -239,11 +241,11 @@ if ($_SESSION['login'] == 1) {
 				$sales_no=$_POST['sales_no'];
 				$total=get_total_sales($_SESSION['sales_no']);
 				update_sales($id, $sales_no, $customer_name, $prepared_by, $remarks, $total, $updated_by);
-				//update_sales_ledger($sales_no);
+				update_sales_ledger($sales_no);
 				unset($_SESSION['edit']);
 			}
 	
-		//	update_inventory_after_sales($_SESSION['sales_no']);
+			//update_inventory_after_sales($_SESSION['sales_no']);
 			update_saved_sales($_SESSION['sales_no']);
 			$_SESSION['print_no']=$_SESSION['sales_no'];
 			unset($_SESSION['sales_no']);
@@ -283,8 +285,8 @@ if ($_SESSION['login'] == 1) {
 	
 			calncel_items_for_sales_no($sales_no_for_delete);
 			cancel_sales($id);
-			//delete_sales_ledger($sales_no_for_delete);
-			//delete_all_sales_items_ledger($sales_no_for_delete);
+            delete_sales_ledger($sales_no_for_delete);
+			delete_all_sales_items_ledger($sales_no_for_delete);
 	
 			$smarty->assign('search_mode',"on");
 			unset($_SESSION['sales_no']);

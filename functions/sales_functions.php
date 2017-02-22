@@ -704,7 +704,7 @@ function get_sales_info_booking_ref($booking_ref){
 
 
 
-function update_sales($id, $sales_no, $date, $customer_name, $prepared_by, $remarks, $total, $updated_by){
+function update_sales($id, $sales_no, $customer_name, $prepared_by, $remarks, $total, $updated_by){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
@@ -715,7 +715,6 @@ function update_sales($id, $sales_no, $date, $customer_name, $prepared_by, $rema
 	sales_no='$sales_no',
 	date='$date',
 	customer_name='$customer_name',
-	customer_amount='$customer_amount',
 	prepared_by='$prepared_by',
 	remarks='$remarks',
 	total='$total',
