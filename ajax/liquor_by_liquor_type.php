@@ -5,11 +5,11 @@ include '../conf/opendb.php';
 
 	$choice = $_GET['choice'];
 
-	$query = "SELECT * FROM meal WHERE meal LIKE '$choice%'";
+	$query = "SELECT * FROM liquor WHERE liquor_type LIKE '$choice%'";
 	echo $query;
 	$result = mysqli_query($conn, $query);
-		echo "<option disabled selected>Select meal type</option>";
+		echo "<option disabled selected>Select liquor</option>";
 	while ($row = mysqli_fetch_array($result)) {
-   		echo '<option value="'.$row[id].'">' . $row[meal_name] . '</option>';
+   		echo '<option value="'.$row[id].'">' . $row[liquor] . '</option>';
 	}
 ?>

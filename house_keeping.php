@@ -118,9 +118,8 @@ if ($_SESSION ['login'] == 1) {
 		
 
 		else {
-			$smarty->assign ( 'room_types', list_room_type() );
-			$smarty->assign ( 'page', "Rooms" );
-			$smarty->display ( 'room/room.tpl' );
+			$smarty->assign ( 'page', "House Keeping" );
+			$smarty->display ( 'house_keeping/house_keeping_home.tpl' );
 		}
 }
 else{

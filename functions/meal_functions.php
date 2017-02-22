@@ -217,7 +217,7 @@ function list_meal_type_for_sale(){
 	$result=mysqli_query($conn, "SELECT * FROM meal_type ORDER BY id DESC");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		echo'   <option value="'.$row[id].'">'.$row[meal].'</option>';
+		echo'   <option value="'.$row[meal].'">'.$row[meal].'</option>';
 	}
 	include 'conf/closedb.php';
 
@@ -230,7 +230,7 @@ function list_meal_for_sale(){
 	$result=mysqli_query($conn, "SELECT * FROM meal ORDER BY id DESC");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-    echo'   <option value="'.$row[id].'">'.$row[meal_name].'('.$row[size].')</option>';
+    echo'   <option value="'.$row[id].'">'.$row[meal_name].'</option>';
     }
     include 'conf/closedb.php';
     

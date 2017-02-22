@@ -18,29 +18,30 @@
   			  <div class="tab-content">
    				 <div class="row">
      			   <div class="col-lg-12">
-                     <h2><strong>Meals </strong></h2>
+                     <h2><strong>Liquors</strong></h2>
                		</div>
 		 
 	<div class="row">
 		<div class="col-lg-6" style="margin-top: 10px;">			
 			
 				<div class="panel-body">
-					<form name="rooms_form" role="form" action="meal_detail.php?job=save" method="post">
+					<form name="liquor_detail_form" role="form" action="liquor_detail.php?job=save" method="post">
 			  
 						
 							<div class="row" style="margin-bottom: 10px; margin-left: 20px;">
 
                             <div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
-									Meal Type
-									<select class="form-control"  name="meal" required placeholder="Meal Type" >
-		                    		{if $meal}
-										<option value="{$meal}">{$meal}</option>
+									Liquor Type
+									<select class="form-control"  name="liquor" required placeholder="Liquor Type" >
+		                    		{if $liquor}
+										<option value="{$liquor}">{$liquor}</option>
 									{else}
-										<option value="" disabled selected>Meal</option>
+										<option value="" disabled selected>Liquor</option>
 									{/if}
-									{section name=meal loop=$meal_names}
-									<option  value="{$meal_names[meal]}">{$meal_names[meal]}</option>
+									{section name=liquor_type loop=$liquor_names}
+									<option  value="{$liquor_names[liquor_type]}">{$liquor_names[liquor_type]}</option>
+									
 									{/section}
 								</select>
                                 </div>                                
@@ -48,39 +49,36 @@
 							
                             <div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
-									Meal Name Type or Select
-									<input class="form-control" name="meal_name" value="{$meal_name}" placeholder="Meal Name">
-								
-									
-									<select class="form-control" name="meal_name">
-										<option value="" disable selected>Select Item</option>
-										{php}list_store_for_sale();{/php}
+									Liquor Name
+									<select class="form-control" name="liquor_name" required>
+										{if $liquor_name}
+											<option value="{$liquor_name}">{$liquor_name}</option>
+										{else}
+											<option value="" disabled selected>Liquor</option>
+										{/if}
+										{php}list_store_for_bar();{/php}
 									</select>
 								</div>                                
 							</div>
                             
                              <div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
-									Size
-									<select class="form-control" name="size" value="{$size}">
-										{if $size}
-											<option value="{$size}">{$size}</option>
-                                        {else}
-											<option value="" disabled selected> Size</option>
-										{/if}
-                                            <option value="--"> -- </option>
-											<option value="S"> S </option>
-											<option value="M"> M</option>
-                                            <option value="L"> L </option>
-											
-									</select>
+									25ml Price
+									<input class="form-control" name="price_25" value="{$price_25}" placeholder="25ml Price">
+								</div>                                
+							</div>
+                             
+                              <div class="row" style="margin-bottom: 10px;">
+								<div class="col-lg-12">
+									50ml Price
+									<input class="form-control" name="price_50" value="{$price_50}"  placeholder="50ml Price">
 								</div>                                
 							</div>
                             
                             <div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-12">
-									Price
-									<input class="form-control" name="price" value="{$price}" required placeholder="Price">
+									Full Bottle Price
+									<input class="form-control" name="price" value="{$price}" required placeholder="Full Bottle Price">
 								</div>                                
 							</div>
                             
@@ -115,14 +113,14 @@
     <div class="tab-content">
     <div class="row">
         <div class="col-lg-12">
-            <h4><strong>List Meal</strong></h4>
+            <h4><strong>List liquor</strong></h4>
         </div>
     </div>
     
     
     <div class="row">
         <div class="col-xs-12">
-                {php} list_meal_details(); {/php}
+                {php} list_liquor_details(); {/php}
             </div>
         </div>
     </div>

@@ -1,6 +1,6 @@
 {include file="print_header.tpl"}
 {include file="user_header.tpl"}
-<div style="width: 120mm; padding: 3mm;">
+<div style="width: 120mm; padding: 3mm; margin-top: -30px;">
 	<div class="row">
 		<div class="col-xs-12" style="text-align: center; font-size: 38px;">
 			<strong>ASVIKA HOTEL (PVT) LTD. </strong>
@@ -24,7 +24,7 @@
 	
 	<div class="row" style="margin-top: 25px;">
 		<div class="col-xs-6">
-			<strong>Sales No : </strong>{$sales_no}
+			<strong>Bar Sales No : </strong>{$bar_sales_no}
 		</div>
 		<div class="col-xs-6">
 			<strong>Date : </strong>{$date}	
@@ -33,7 +33,7 @@
 	<div class="row">
 		<div class="col-xs-12">
 			
-			{php}print_sales_item($_SESSION['print_no']);{/php}
+			{php}print_bar_sales_item($_SESSION['print_no']);{/php}
 			
 		</div>
 	</div>
@@ -44,5 +44,5 @@
 	</div>
 </div>
 <div>
-<a href="restaurant.php"><button class="btn btn-success">New Sales</button></a>
+<a href="bar.php"><button class="btn btn-success">New Sales</button></a>
 </div>

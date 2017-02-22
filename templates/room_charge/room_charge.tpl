@@ -61,9 +61,9 @@
 													{else}
                                                     <option value="" disabled selected>Meal</option>
                                                     {/if}
-													<option value="Fried Rice">Fried Rice</option>
-													<option value="Briyani">Briyani</option>
-													<option value="Chicken devel">Chicken devel</option>
+													<option value="Full meal">Full meal</option>
+													<option value="Half meal"> Half meal </option>
+													<option value="Family pack">Family pack</option>
 												
                                                 </select>
                                             </div>                                

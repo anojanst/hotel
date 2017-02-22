@@ -48,15 +48,18 @@
 			<div class="row">
 				<form name="purchase_item_form" action="purchase_order.php?job=purchase_item" method="post" class="product">
 					<div class="col-lg-3">		 
-						<input type="text" class="form-control" name="purchase_item" id="purchase_item" value="{$purchase_item}" placeholder="Item" required/>									
+						<select class="form-control" name="purchase_item" required>
+							<option value="" disable selected>Select Item</option>
+							{php}list_store_for_purchase();{/php}
+						</select>
 					</div>
-					<div class="col-lg-1">
+					<div class="col-lg-2">
 						<input type="text" class="form-control" name="qty" value="{$qty}" placeholder="Qty" required/>
 					</div>
-					<div class="col-lg-1">
+					<div class="col-lg-2">
 						<select class="form-control" name="measure_type" required>
 							<option value="" disable selected>Measure Type</option>
-							<option value="P">Piece</option>
+							<option value="P">Unit</option>
 							<option value="B">Box</option>
 							<option value="D">Dozen</option>
 							<option value="m">M</option>
@@ -65,14 +68,11 @@
 							<option value="l">Liters</option>
 						</select>
 					</div>
-					<div class="col-lg-2">
+					<div class="col-lg-3">
 						<input  type="text" class="form-control" name="buying_price" value="{$buying_price}" placeholder="buying Price" required/>										
 					</div>
-					<div class="col-lg-1">
+					<div class="col-lg-2">
 						<input class="form-control btn btn-success" type="submit" name="ok" value="Add"/>
-					</div>
-					<div class="col-lg-4">
-						
 					</div>
 				</form>
 			</div>

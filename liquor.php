@@ -8,56 +8,57 @@ include 'functions/room_type_functions.php';
 include 'functions/room_functions.php';
 include 'functions/facility_functions.php';
 include 'functions/meal_functions.php';
+include 'functions/liquor_functions.php';
 
 
-$module_no = 10;
+$module_no =22;
 
 if ($_SESSION ['login'] == 1) {
 	if (check_access ( $module_no, $_SESSION ['user_id'] ) == 1) {
-		if ($_REQUEST ['job'] == "meal_type_form") {
+		if ($_REQUEST ['job'] == "liquor_type_form") {
 			
-			$smarty->assign ( 'page', "Meals" );
-			$smarty->display ( 'meal/meal.tpl' );
+			$smarty->assign ( 'page', "Liquors" );
+			$smarty->display ( 'liquor/liquor_type.tpl' );
 			
 		} elseif ($_REQUEST ['job'] == "save") {
 			if ($_REQUEST ['ok'] == 'Update') {
 				
 				$id = $_SESSION ['id'];			
-    			$meal=$_POST ['meal'];
-				update_meals ( $id, $meal );
+    			$liquor=$_POST ['liquor'];
+				update_liquors ( $id, $liquor );
 			} else {
 				
-    			$meal=$_POST ['meal'];
-				save_meals( $meal);
+    			$liquor=$_POST ['liquor'];
+				save_liquors($liquor);
 			}
-			$smarty->assign ( 'page', "Meals" );
-			$smarty->display ( 'meal/meal.tpl' );
+			$smarty->assign ( 'page', "Liquors" );
+			$smarty->display ( 'liquor/liquor.tpl' );
 			
 		} elseif ($_REQUEST ['job'] == "edit") {
 			$_SESSION ['id'] = $id = $_REQUEST ['id'];
-			$info = get_meals_info($id);
+			$info = get_liquors_info($id);
 			
-			$smarty->assign ( 'meal', $info ['meal'] );
+			$smarty->assign ( 'liquor', $info ['liquor_type'] );
 						
 			$smarty->assign ( 'edit', 'on' );			
-			$smarty->assign ( 'page', "Meals" );
-			$smarty->display ( 'meal/meal.tpl' );
+			$smarty->assign ( 'page', "Liquors" );
+			$smarty->display ( 'liquor/liquor.tpl' );
 			
 		} elseif ($_REQUEST ['job'] == "delete") {
-			delete_meal ( $_REQUEST ['id'] );
+			delete_liquor ( $_REQUEST ['id'] );
 			
-			$smarty->assign ( 'page', "Meals" );
-			$smarty->display ( 'meal/meal.tpl' );
+			$smarty->assign ( 'page', "Liquors" );
+			$smarty->display ( 'liquor/liquor.tpl' );
 		} 
 		else {
 
-			$smarty->assign ( 'page', "Meals" );
-			$smarty->display ( 'meal/meal.tpl' );
+			$smarty->assign ( 'page', "Liquors" );
+			$smarty->display ( 'liquor/liquor.tpl' );
 		}
 }
 else{
 	$smarty->assign ( 'error_report', "on" );
-	$smarty->assign ( 'error_message', "Dear $_SESSION[user_name], you don't have permission to Meal Type Management." );
+	$smarty->assign ( 'error_message', "Dear $_SESSION[user_name], you don't have permission to Liquor Type Management." );
 	$smarty->assign ( 'page', "Access Error" );
 	$smarty->display ( 'user_home/access_error.tpl' );
 }

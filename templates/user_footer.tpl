@@ -37,9 +37,26 @@
 	$(function() {
 	
 		$("#meal_type").change(function() {
-		  $("#meal").load("ajax/meal_by_meal_type.php?choice=" + encodeURIComponent($("#meal_type").val()));
-					
+		  $("#meal").load("ajax/meal_by_meal_type.php?choice=" + encodeURIComponent($("#meal_type").val()));					
 		});
 	});
 </script>
 
+<script>
+	$(function() {
+	
+		$("#liquor_type").change(function() {
+		  $("#liquor").load("ajax/liquor_by_liquor_type.php?choice=" + encodeURIComponent($("#liquor_type").val()));
+		  $("#size").load("ajax/size_by_liquor_type.php?choice=" + encodeURIComponent($("#liquor_type").val()));					
+		});
+	});
+</script>
+
+<script>
+	$(function() {
+	
+		$("#order_type").change(function() {
+		  $("#ref_no").load("ajax/ref_no_by_order_type.php?choice=" + encodeURIComponent($("#order_type").val()));					
+		});
+	});
+</script>

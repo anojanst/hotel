@@ -3,7 +3,17 @@
     <!-- Main content -->
 
 <section class="content">
-    <div class="col-lg-6 col-xs-12">
+    <div class="col-lg-12 col-xs-12">
+        <div class="box box-success box-solid">
+            <div class="box-header">
+                <i class="fa fa-building"></i>
+                    <h3 class="box-title">Bar</h3>
+            </div>
+			
+        </div>
+    </div>
+	
+	<div class="col-lg-6 col-xs-12">
         <div class="box box-danger box-solid">
             <div class="box-header with-border">
                 <i class="fa fa-building"></i>
@@ -24,7 +34,7 @@
                 <h3 class="box-title">New Order</h3>
             </div>
             <div class="box-body">
-                <form name="select_item_form"  action="sales.php?job=order_type" method="post" >
+                <form name="select_item_form"  action="bar_sales.php?job=order_type" method="post" >
 					<div class="row">
                         <div class="col-lg-12">
                             <strong>Order Type</strong>

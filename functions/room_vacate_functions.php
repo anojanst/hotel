@@ -210,7 +210,7 @@ function room_vacate_bill($booking_ref, $room_no){
              				<div class="row">
              		 <div class="col-lg-12">
                 <div class="col-lg-6">  </div>
-                <div class="col-lg-3">   <a href="room_vacate.php?job=room_pay&occupied_days='.$occupied_days.'&room_charge='.$total_room_charge.'&request_charges='.$request_total.'&sales_bills='.$sales_total.'"><button  type="submit"  class=" btn btn-block btn-danger"> Pay Now </button></a> </div>
+                <div class="col-lg-3">   <a href="room_vacate.php?job=room_pay&booking_ref='.$booking_ref.'&occupied_days='.$occupied_days.'&room_charge='.$total_room_charge.'&request_charges='.$request_total.'&sales_bills='.$sales_total.'"><button  type="submit"  class=" btn btn-block btn-danger"> Pay Now </button></a> </div>
               	<div class="col-lg-3">  </div>
 				</div>  
             </div>
@@ -259,44 +259,50 @@ function get_charge_info_by_room_type($room_cat) {
 
 }
 
-function print_room_vacate_bill(){
+function print_room_vacate_bill($booking_ref){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 
 	$date=date('Y-m-d');
+
+	$result=mysqli_query($conn, "SELECT * FROM room_has_bill WHERE booking_ref='$booking_ref'" );
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
 		
-	
-	echo'<table style="width: 65%;" class="table-responsive table-bordered table-striped dt-responsive">
+		echo'<table style="width: 65%;" class="table-responsive table-bordered table-striped dt-responsive">
 		<tr>
 			<th> </th>
 			<th> </th>
 			<th> </th>
 		</tr>';
-
-	echo'<tr style="line-height: 30px;">
+		
+		echo'<tr style="line-height: 30px;">
             <td> </td>
             <td>Total</td>
-            <td align="right"> </td>
+            <td align="right"> '.$_REQUEST['room_charge'].'</td>
         </tr>
-            		            		
+		
 		<tr  style="line-height: 30px;">
             <td></td>
             <td>Amount after Discount</td>
             <td align="right"> </td>
         </tr>';
-	
-
-	echo'<tr  style="line-height: 30px;">
+		
+		
+		echo'<tr  style="line-height: 30px;">
             <td></td>
             <td>Net Amount</td>
             <td align="right"> </td>
-        </tr>';
-		
-
+        </tr>';		
+	
+	
+	}
+	
 	echo'</table>';
 	include 'conf/closedb.php';
 
-
 }
+
+
 

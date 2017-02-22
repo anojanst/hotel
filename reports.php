@@ -63,7 +63,7 @@ if ($_SESSION['login'] == 1) {
             $module_no= 18;
             if (check_access ($module_no, $_SESSION ['user_id'] ) == 1) {
                 $smarty->assign('page', "Report");
-                $smarty->display('reports/booked_days_report.tpl');
+                $smarty->display('reports/occupied_days_report.tpl');
             }
             else {
                 $user_name = $_SESSION['user_name'];
@@ -126,6 +126,15 @@ if ($_SESSION['login'] == 1) {
             $smarty->assign('search_mode', "on");
             $smarty->assign('page', "Purchase Order");
             $smarty->display('reports/purchased_items.tpl');
+        }
+         elseif ($_REQUEST['job']== 'purchased_item_vice'){
+            $_SESSION['purchased_item']=$purchased_item=$_POST['purchased_item'];
+            $_SESSION['from_date']=$from_date=$_POST['from_date'];
+            $_SESSION['to_date']=$to_date=$_POST['to_date'];
+            
+            $smarty->assign('search_mode', "on");
+            $smarty->assign('page', "Purchase");
+            $smarty->display('reports/purchased_item_report.tpl');
         }
         elseif ($_REQUEST['job']== 'sales_items'){
             $_SESSION['sales_no']=$sales_no=$_REQUEST['sales_no'];

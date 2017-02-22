@@ -109,7 +109,7 @@ function list_room_request_grid() {
 				<div class="col-lg-3 col-xs-6">
 					<div class="info-box">
 
-						<a href="room_info.php?job=room_info&room_no=' . $row [room_no] . '"  >
+						<a href="#"  >
 			            	<span class="info-box-icon bg-lime">'.$row['room_no'].'</span>
 						</a>
 
