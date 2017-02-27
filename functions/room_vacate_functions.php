@@ -22,7 +22,7 @@ function list_occupied_rooms() {
 					<div class="info-box">
 	
 						<a href="room_info.php?job=room_info&room_no=' . $row [room_no] . '"  >
-			            	<span class="info-box-icon bg-'.$color.'">'.$row['room_no'].'</span>
+			            	<span class="info-box-icon bg-'.$color.'">'.$row[room_no].'</span>
 						</a>
 	
 			            <div class="info-box-content">
@@ -34,7 +34,6 @@ function list_occupied_rooms() {
 		}
 		else{
 			$color="green";
-	
 	
 		}
 	
@@ -260,7 +259,6 @@ function print_room_vacate_bill($booking_ref){
 
 
 	$date=date('Y-m-d');
-
 	$result=mysqli_query($conn, "SELECT * FROM room_has_bill WHERE booking_ref='$booking_ref'" );
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{

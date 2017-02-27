@@ -39,16 +39,6 @@
 									<input class="form-control" name="room_type" value="{$room_type}" required placeholder="Room Type">
 								</div>                                
 							</div>
-
-							<div class="row" style="margin-bottom: 10px;">
-								<div class="col-lg-12">
-									Price
-									  <input class="form-control" name="price" value="{$price}" required placeholder="Price">
-	                  
-								</div>                                
-							</div>
-
-						
 				 <div class="row">
 					<div class="col-lg-6">
 			 

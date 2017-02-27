@@ -130,11 +130,23 @@
 				<li class="scroll">
 					<a href="call.php"><i class="fa fa-phone"></i><span> Calls </span></a>
 				</li>
+                <li class="scroll">
+                    <a href="purchase_order.php"><i class="fa fa-shopping-cart"></i><span>Purchase</span></a>
+                </li>
 				
-				<li class="scroll">
-					<a href="purchase_order.php"><i class="fa fa-shopping-cart"></i><span>Expenses</span></a>
-				</li>
-
+                <li class="treeview">
+                    <a href="#"><i class="fa fa-money"></i><span>Expenses</span><span class="pull-right-container">
+						<i class="fa fa-angle-left pull-right"></i></span></a>
+							<ul class="treeview-menu">
+                                <li class="scroll">
+                                    <a href="expense.php"><i class="fa fa-shopping-cart"></i><span>Expenses Type</span></a>
+                                </li>
+                                <li class="scroll">
+                                    <a href="expense.php?job=expense_charge"><i class="fa fa-shopping-cart"></i><span>Expenses Charge</span></a>
+                                </li>
+                            </ul>
+                </li>
+                            
 				<li class="scroll">
 					<a href="house_keeping.php?job=house_keeping"><i class="fa fa-hospital-o"></i><span>House Keeping</span></a>
 				</li>

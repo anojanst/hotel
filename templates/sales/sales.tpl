@@ -30,7 +30,7 @@
 				{/if}
 			</div>
 			<div class="row">				
-				<form name="select_item_form"  action="sales.php?job=select" method="post" >
+				<form name="select_item_form"  action="sales.php?job=select" method="post">
 
 					<div class="col-lg-3">
                         <input type="text" class="form-control" name="meal_no" value="{$meal_no}" required placeholder="Meal No" tabindex="3"/>
