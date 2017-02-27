@@ -237,7 +237,7 @@ function room_request_bill($request_ref){
             <div class="row">   		
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5">  </div>
-                <div class="col-lg-6" style="padding-top: 10px;"> <font size="5">  <button type="submit" class="btn btn-block btn-danger"> Pay Now </button> </font> </div>
+                <div class="col-lg-6" style="padding-top: 10px;"> <font size="5">  <button type="submit" class="btn btn-block btn-danger"> Update </button> </font> </div>
               </div>';
 			}	
 			echo'   		

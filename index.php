@@ -1,9 +1,11 @@
+
 <?php
 require_once 'conf/smarty-conf.php';
 include 'functions/room_type_functions.php';
 include 'functions/room_functions.php';
 include 'functions/facility_functions.php';
 include 'functions/sales_functions.php';
+include 'functions/user_functions.php';
 
 if ($_SESSION['login']==1){
 	$smarty->assign('user_name',"$_SESSION[user_name]");
@@ -12,5 +14,5 @@ if ($_SESSION['login']==1){
 }
 else{
 	$smarty->assign('page',"Home");
-	$smarty->display ( 'login.tpl' );
+	$smarty->display ('login.tpl' );
 }

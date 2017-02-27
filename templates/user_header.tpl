@@ -31,3 +31,4 @@
 <title>Hotel Management | {$page}</title>
 </head>
 
+<body>
