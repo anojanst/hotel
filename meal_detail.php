@@ -24,22 +24,19 @@ if ($_SESSION ['login'] == 1) {
 				$id = $_SESSION ['id'];			
     			$meal_no=$_POST ['meal_no'];
                 $meal_name=$_POST ['meal_name'];
-                $size=$_POST ['size'];
                 $price=$_POST ['price'];
 				
-				update_meal_details ( $id, $meal_no, $meal_name, $size, $price );
+				update_meal_details ( $id, $meal_no, $meal_name, $price );
 				
 			} else {
 				
     			$meal_no=$_POST ['meal_no'];
                 $meal_name=$_POST ['meal_name'];
-                $size=$_POST ['size'];
                 $price=$_POST ['price'];
 				
-				save_meal_details( $meal_no, $meal_name, $size, $price);
+				save_meal_details( $meal_no, $meal_name, $price);
 				
 			}
-            $smarty->assign('meal_names', list_meal());
 			$smarty->assign ( 'page', "Meals" );
 			$smarty->display ( 'meal/meal_detail.tpl' );
 			
@@ -49,7 +46,6 @@ if ($_SESSION ['login'] == 1) {
 			
 			$smarty->assign ( 'meal_no', $info ['meal_no'] );
             $smarty->assign ( 'meal_name', $info ['meal_name'] );
-            $smarty->assign ( 'size', $info ['size'] );
             $smarty->assign ( 'price', $info ['price'] );		
 			$smarty->assign ( 'edit', 'on' );			
 			$smarty->assign ( 'page', "Meals" );

@@ -36,9 +36,9 @@
                         <input type="text" class="form-control" name="meal_no" value="{$meal_no}" required placeholder="Meal No" tabindex="3"/>
                     </div>
 					<div class="col-lg-4">
-						<button type="submit"  class="btn btn-danger" name="ok" style="margin-right: 11px;" value="Submit"  tabindex="6">Submit</button>
-											
+						<button type="submit"  class="btn btn-danger" name="ok" style="margin-right: 11px;" value="Submit"  tabindex="6">Submit</button>											
 					</div>
+                    <div class="col-lg-5"></div>
 				</form>
 			</div>
 			<div class="row">
@@ -88,7 +88,11 @@
 							<option value="Keep" >Keep</option>
 							<option value="Skip" >Skip</option>
 						</select>
-						
+						<select class="form-control"  name="payment" value = "{$payment}" tabindex="1">
+							<option value="cash" >Cash</option>
+							<option value="card" >Card</option>
+                            <option value="pending" >Pending</option>
+						</select>
 						<div id="cus_amount"></div>
 						<div id="balance"></div>
 						<button  type="submit"  class="btn btn-success col-lg-12" name="ok" style="margin-right: 11px;" value="Save"  tabindex="6">Finish the Bill & Print</button>					

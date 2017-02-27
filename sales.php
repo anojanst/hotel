@@ -45,13 +45,9 @@ if ($_SESSION['login'] == 1) {
 		}
 		
 		elseif ($_REQUEST['job']=='select'){
-<<<<<<<
 			$selected_item=$_POST['meal_no'];
-=======
-			$selected_item=$_POST['meal'];
-			$meal_type=$_POST['meal_type'];
->>>>>>>
-					
+            
+
 			if (!isset($_SESSION['sales_no'])) {
 				$_SESSION['sales_no']=$sales_no=get_sales_no();
 				$order_type=$_SESSION['order_type'];
@@ -67,6 +63,8 @@ if ($_SESSION['login'] == 1) {
 			$sales_info=get_sales_info_by_sales_no($sales_no);
 			$info=get_meal_info_by_id($selected_item);
 			$selected_item=$info['meal_no'];
+            $size=$info['size'];
+            
             $stock=$info['meal_name'];
             $price=$info['price'];
 			$item_total=(1*$price);
@@ -75,8 +73,9 @@ if ($_SESSION['login'] == 1) {
 				$booking_ref=get_booking_ref_for_restaurant_order($ref_no);
 			}
 				
-			add_sales_item($selected_item, $meal_type, $stock, $price, $_SESSION['sales_no'],$item_total, $order_type, $ref_no, $booking_ref);
+			add_sales_item($selected_item, $stock, $size, $price, $_SESSION['sales_no'],$item_total, $order_type, $ref_no, $booking_ref);
 			$total_to_ledger=($price)-($discount);
+            add_sales_items_ledger($_SESSION['sales_no'],$selected_item , $total_to_ledger);
 
 			$smarty->assign('customer_name',"$sales_info[customer_name]");
 			$smarty->assign('date',"$sales_info[date]");
@@ -114,7 +113,7 @@ if ($_SESSION['login'] == 1) {
 			$item_info=get_meal_info_from_sales_has_items($id, $sales_no);
 				
 			update_sales_item($id, $quantity, $item_total, $price, $sales_no);
-			update_sales_item_ledger($vehicle_id ,$sales_no);
+			update_sales_item_ledger($id ,$sales_no);
 			
 	
 			$smarty->assign('customer_name',"$sales_info[customer_name]");
@@ -219,7 +218,8 @@ if ($_SESSION['login'] == 1) {
 				$remarks=$_POST['remarks'];
 				$customer_name=$_POST['customer_name'];
 				$discount_type=$_POST['discount_type'];
-				$discount=$_POST['discount'];				
+				$discount=$_POST['discount'];
+                $payment=$_POST['payment'];
 				$prepared_by=$_POST['prepared_by'];
 				$sales_no=$_POST['sales_no'];			
 				$service_charge=$_POST['service_charge'];
@@ -233,15 +233,11 @@ if ($_SESSION['login'] == 1) {
 				if($order_type=="Order From Room"){
 					$booking_ref=get_booking_ref_for_restaurant_order($ref_no);
 				}
-			
-<<<<<<<
-				save_sales($sales_no, $date, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge);
+	
+				save_sales($sales_no, $date, $customer_name,$discount_type, $discount,$payment, $prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge);
 				add_sales_ledger($sales_no);
-=======
-				save_sales($sales_no, $date, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge);
-				//add_sales_ledger($sales_no);
-				update_stock_sales($sales_no);
->>>>>>>
+				//update_stock_sales($sales_no);
+               
 			}
 			else {
 	

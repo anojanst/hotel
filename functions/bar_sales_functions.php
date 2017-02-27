@@ -427,14 +427,14 @@ function update_saved_bar_sales($bar_sales_no){
 }
 
 
-function save_bar_sales($bar_sales_no, $date, $customer_name,$discount_type, $discount,$prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge){
+function save_bar_sales($bar_sales_no, $date, $customer_name,$discount_type, $discount, $payment,$prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	$date = date("Y-m-d");
 	
-	$query = "INSERT INTO bar_sales (id, bar_sales_no, customer_name, discount_type, discount, prepared_by, remarks, date, total, due, order_type, ref_no, booking_ref, service_charge)
-	VALUES ('', '$bar_sales_no', '$customer_name','$discount_type','$discount', '$prepared_by', '$remarks', '$date', '$total', '$total', '$order_type', '$ref_no', '$booking_ref', '$service_charge')";
+	$query = "INSERT INTO bar_sales (id, bar_sales_no, customer_name, discount_type, discount, prepared_by, remarks, date, total, due, order_type, ref_no, booking_ref, service_charge,payment)
+	VALUES ('', '$bar_sales_no', '$customer_name','$discount_type','$discount', '$prepared_by', '$remarks', '$date', '$total', '$total', '$order_type', '$ref_no', '$booking_ref', '$service_charge', '$payment')";
 	mysqli_query($conn, $query) or die (mysqli_error($conn));
 
 	include 'conf/closedb.php';
@@ -768,5 +768,51 @@ function get_bar_sales_item_id($bar_sales_no) {
 		return $row['MAX(id)'];
 	}
 
+	include 'conf/closedb.php';
+}
+
+function update_stock_bar_sales($bar_sales_no){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+	
+
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE sales_no='$bar_sales_no' AND cancel_status='0'");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		$info=get_store_info($row[liquor]);
+		$new_qty=$info['qty']-$row['quantity'];
+		
+		$query = "UPDATE store SET
+		qty='$new_qty'
+		WHERE item='$row[liquor]'";
+		mysqli_query($conn, $query);
+	}
+
+
+
+	include 'conf/closedb.php';
+}
+
+function get_bar_sales_info_by_sales_no($bar_sales_no){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales WHERE sales_no='$bar_sales_no'");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		return $row;
+	}
+	include 'conf/closedb.php';
+}
+
+function get_product_info_from_bar_sales_has_items($id, $bar_sales_no){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$result=mysqli_query($conn, "SELECT * FROM bar_sales_has_items WHERE liquor_id='$id' AND bar_sales_no='$bar_sales_no'");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		return $row;
+	}
 	include 'conf/closedb.php';
 }

@@ -23,26 +23,32 @@ if ($_SESSION ['login'] == 1) {
 			if ($_REQUEST ['ok'] == 'Update') {
 				
 				$id = $_SESSION ['id'];
+                $meal_no= $_SESSION ['meal_no']; 
                 $meal_name=$_POST ['meal_name'];
                 $size=$_POST['size'];
                 $item=$_POST['item'];
                 $qty=$_POST['qty'];
                 $price=$_POST['price'];
-				update_bill_of_material ( $id,$meal_name,$size,$item,$qty,$price);
+				update_bill_of_material ( $id,$meal_no,$meal_name,$size,$item,$qty,$price);
 			} else {
 				
                 $meal_name=$_POST ['meal_name'];
+                $meal_info=get_meal_info_by_name($meal_name);
+                $meal_no=$meal_info['meal_no'];
                 $size=$_POST['size'];
                 $item=$_POST['item'];
                 $qty=$_POST['qty'];
                 $price=$_POST['price'];
-				save_bill_of_material($meal_name,$size,$item,$qty,$price);
+				save_bill_of_material($meal_no,$meal_name,$size,$item,$qty,$price);
 			}
+            
+			$smarty->assign ( 'meal_name', "$meal_name" );
 			$smarty->assign ( 'page', "Meals" );
 			$smarty->display ( 'meal/meal.tpl' );
 			
 		} elseif ($_REQUEST ['job'] == "edit") {
 			$_SESSION ['id'] = $id = $_REQUEST ['id'];
+            $_SESSION ['meal_no'] = $meal_no = $_REQUEST ['meal_no'];
 			$info = get_bill_of_material_info($id);
 			
 			$smarty->assign ( 'meal_name', $info ['meal_name'] );

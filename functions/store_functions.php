@@ -125,19 +125,13 @@ function get_store_info($item) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	
 	$result = mysqli_query ( $conn, "SELECT * FROM store WHERE item='$item'" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
 		return $row;
 		
 		
 	}
-	
-	
-	
 }
-
-
 
 
 function list_store_for_bar() {
@@ -204,3 +198,4 @@ function reduce_stock($item, $qty){
 
 	include 'conf/closedb.php';
 }
+

@@ -38,25 +38,6 @@
                                                 <input class="form-control" name="meal_name" value="{$meal_name}" required placeholder="Meal Name">
                                             </div>                                
                                         </div>
-                                        
-                                         <div class="row" style="margin-bottom: 10px;">
-                                            <div class="col-lg-12">
-                                                Size
-                                                <select class="form-control" name="size" value="{$size}">
-                                                    {if $size}
-                                                        <option value="{$size}">{$size}</option>
-                                                    {else}
-                                                        <option value="" disabled selected> Size</option>
-                                                    {/if}
-                                                        <option value="--"> -- </option>
-                                                        <option value="S"> S </option>
-                                                        <option value="M"> M</option>
-                                                        <option value="L"> L </option>
-                                                        
-                                                </select>
-                                            </div>                                
-                                        </div>
-                                        
                                         <div class="row" style="margin-bottom: 10px;">
                                             <div class="col-lg-12">
                                                 Price

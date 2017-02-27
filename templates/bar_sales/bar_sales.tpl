@@ -32,22 +32,15 @@
 			<div class="row">				
 				<form name="select_item_form"  action="bar_sales.php?job=select" method="post" >
 
-					<div class="col-lg-2">
-						<select name="liquor_type" id="liquor_type" class="form-control" required >
-							<option value="" disabled selected>Liquor Type</option>
-							{php}list_liquor_type_for_bar_sale();{/php}                              
-						</select>
-					</div>
-
-					<div class="col-lg-2">
-						<select name="liquor" id="liquor" class="form-control" required >
-							<option disabled selected>select the liquor type first</option>                         
-						</select>
-					</div>
-					
+					<div class="col-lg-3">
+                        <input type="text" class="form-control" name="liquor_no" value="{$liquor_no}" required placeholder="Liquor No" tabindex="3"/>
+                    </div>
 					<div class="col-lg-2">
 						<select name="size" id="size" class="form-control" required >
-							<option disabled selected>select the liquor type first</option>                         
+							<option disabled selected>select the Quantity first</option>
+                            <option value="25ml">25ml</option>
+                            <option value="50ml">50ml</option>
+                            <option value="full">Full Bottle</option>
 						</select>
 					</div>
 					<div class="col-lg-4">
@@ -86,7 +79,7 @@
 				</div>
 				<div class="col-lg-3" style="margin-top: 20px;">
 					<form class="product" name="bar_sales_form" action="bar_sales.php?job=bar_sales" method="post" >
-						<input type="text" class="form-control" name="bar_sales_no" value="{$bar_sales_no}" required readonly="readonly" placeholder="Bar_sales No" tabindex="3"/>
+						<input type="text" class="form-control" name="bar_sales_no" value="{$bar_sales_no}" required readonly="readonly" placeholder="Bar Sales No" tabindex="3"/>
 						<input type="text" class="form-control" name="customer_name" placeholder="Customer" tabindex="4"/>
 						<select class="form-control"  name="discount_type" value = "{$dicount_type}" tabindex="1">
 							<option value="" disabled selected>Discount Type</option>
@@ -102,6 +95,11 @@
 							<option value="" disabled selected>Service Charge</option>
 							<option value="Keep" >Keep</option>
 							<option value="Skip" >Skip</option>
+						</select>
+                        <select class="form-control"  name="payment" value = "{$payment}" tabindex="1">
+							<option value="cash" >Cash</option>
+							<option value="card" >Card</option>
+                            <option value="pending" >Pending</option>
 						</select>
 						<div id="cus_amount"></div>
 						<div id="balance"></div>

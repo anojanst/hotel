@@ -128,14 +128,14 @@ function get_total_sales($sales_no){
 	include 'conf/closedb.php';
 }
 
-function add_sales_item($selected_item, $meal_type, $stock, $price, $sales_no, $item_total, $order_type, $ref_no, $booking_ref){
+function add_sales_item($selected_item, $stock, $size, $price, $sales_no, $item_total, $order_type, $ref_no, $booking_ref){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	$date = date("Y-m-d");
 
-	$query = "INSERT INTO sales_has_items (id, meal_id, meal_name, meal_type, price, date, sales_no, quantity, user_name, total, order_type, ref_no, booking_ref)
-	VALUES ('', '$selected_item', '$stock', '$meal_type', '$price', '$date', '$sales_no', '1', '$_SESSION[user_name]', '$item_total', '$order_type', '$ref_no', '$booking_ref')";
+	$query = "INSERT INTO sales_has_items (id, meal_id, meal_name, size, price, date, sales_no, quantity, user_name, total, order_type, ref_no, booking_ref)
+	VALUES ('', '$selected_item', '$stock', '$size','$price', '$date', '$sales_no', '1', '$_SESSION[user_name]', '$item_total', '$order_type', '$ref_no', '$booking_ref')";
 	mysqli_query($conn, $query) or die (mysqli_error($conn));
 
 	include 'conf/closedb.php';
@@ -441,14 +441,14 @@ function update_saved_sales($sales_no){
 }
 
 
-function save_sales($sales_no, $date, $customer_name,$discount_type, $discount,$prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge){
+function save_sales($sales_no, $date, $customer_name,$discount_type, $discount,$payment,$prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 
 	$date = date("Y-m-d");
 	
-	$query = "INSERT INTO sales (id, sales_no, customer_name, discount_type, discount, prepared_by, remarks, date, total, due, order_type, ref_no, booking_ref, service_charge)
-	VALUES ('', '$sales_no', '$customer_name','$discount_type','$discount', '$prepared_by', '$remarks', '$date', '$total', '$total', '$order_type', '$ref_no', '$booking_ref', '$service_charge')";
+	$query = "INSERT INTO sales (id, sales_no, customer_name, discount_type, discount, prepared_by, remarks, date, total, due, order_type, ref_no, booking_ref, service_charge, payment)
+	VALUES ('', '$sales_no', '$customer_name','$discount_type','$discount', '$prepared_by', '$remarks', '$date', '$total', '$total', '$order_type', '$ref_no', '$booking_ref', '$service_charge','$payment')";
 	mysqli_query($conn, $query) or die (mysqli_error($conn));
 
 	include 'conf/closedb.php';
@@ -725,7 +725,6 @@ function update_sales($id, $sales_no, $customer_name, $prepared_by, $remarks, $t
 
 	$date = date("Y-m-d");
 
-	mysqli_select_db($conn_for_changing_db, $dbname);
 	$query = "UPDATE sales SET
 	sales_no='$sales_no',
 	date='$date',
@@ -746,7 +745,6 @@ function  calncel_items_for_sales_no($sales_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	mysqli_select_db($conn_for_changing_db, $dbname);
 	$query = "UPDATE sales_has_items SET
 	cancel_status='1',
 	canceled_by='$_SESSION[user_name]',
@@ -761,7 +759,6 @@ function cancel_sales($id){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	mysqli_select_db($conn_for_changing_db, $dbname);
 	$query = "UPDATE sales SET
 	cancel_status='1',
 	canceled_by='$_SESSION[user_name]'
@@ -789,19 +786,23 @@ function update_stock_sales($sales_no){
 	include 'conf/opendb.php';
 	
 
-	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE meal_type='Other' AND sales_no='$sales_no' AND cancel_status='0'");
+	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE sales_no='$sales_no' AND cancel_status='0'");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		$info=get_store_info($row[meal_name]);
-		$new_qty=$info['qty']-$row['quantity'];
 		
-		$query = "UPDATE store SET
-		qty='$new_qty'
-		WHERE item='$row[meal_name]'";
-		mysqli_query($conn, $query);
 	}
+    
+	include 'conf/closedb.php';
+}
 
+function get_product_info_from_sales_has_items($id, $sales_no){
+	include 'conf/config.php';
+	include 'conf/opendb.php';
 
-
+	$result=mysqli_query($conn, "SELECT * FROM sales_has_items WHERE meal_id='$id' AND sales_no='$sales_no'");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		return $row;
+	}
 	include 'conf/closedb.php';
 }

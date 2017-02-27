@@ -4,6 +4,7 @@ include 'functions/liquor_functions.php';
 include 'functions/bar_sales_functions.php';
 include 'functions/modules_functions.php';
 include 'functions/user_functions.php';
+include 'functions/ledger_functions.php';
 
 include 'functions/store_functions.php';
 $module_no = 14;
@@ -43,7 +44,7 @@ if ($_SESSION['login'] == 1) {
 		}
 		
 		elseif ($_REQUEST['job']=='select'){
-			$selected_item=$_POST['liquor'];
+			$selected_item=$_POST['liquor_no'];
 			
 					
 			if (!isset($_SESSION['bar_sales_no'])) {
@@ -60,14 +61,15 @@ if ($_SESSION['login'] == 1) {
 			$bar_sales_no=$_SESSION['bar_sales_no'];	
 			$bar_sales_info=get_bar_sales_info_by_bar_sales_no($bar_sales_no);
 			$info=get_liquor_info_by_id($selected_item);
-			$selected_item=$info['id'];            
+			$selected_item=$info['id'];
 			$size=$_POST['size'];
 			$stock=$info['liquor'].' ('. $size .')';
+           
 			
-			if($size=="25 ml"){
+			if($size=="25ml"){
 				$price=$info['price_25'];
 			}
-			elseif($size=="50 ml"){
+			elseif($size=="50ml"){
 				$price=$info['price_50'];
 			}
 			else{
@@ -80,9 +82,10 @@ if ($_SESSION['login'] == 1) {
 				$booking_ref=get_booking_ref_for_restaurant_order($ref_no);
 			}
 				
-			add_bar_sales_item($selected_item, $size, $stock, $info['liquor'], $price, $_SESSION['bar_sales_no'],$item_total, $order_type, $ref_no, $booking_ref);
+			add_bar_sales_item($selected_item, $size, $stock, $price, $_SESSION['bar_sales_no'],$item_total, $order_type, $ref_no, $booking_ref);
 			$total_to_ledger=($price)-($discount);
-
+            add_bar_sales_items_ledger($_SESSION['bar_sales_no'],$selected_item , $total_to_ledger);
+            
 			$smarty->assign('customer_name',"$bar_sales_info[customer_name]");
 			$smarty->assign('date',"$bar_sales_info[date]");
 			$smarty->assign('remarks',"$bar_sales_info[remarks]");
@@ -119,7 +122,7 @@ if ($_SESSION['login'] == 1) {
 			$item_info=get_liquor_info_from_bar_sales_has_items($id, $bar_sales_no);
 				
 			update_bar_sales_item($id, $quantity, $item_total, $price, $bar_sales_no);
-			//update_bar_sales_item_ledger($vehicle_id ,$bar_sales_no);
+			update_bar_sales_item_ledger($id ,$bar_sales_no);
 			
 	
 			$smarty->assign('customer_name',"$bar_sales_info[customer_name]");
@@ -190,7 +193,7 @@ if ($_SESSION['login'] == 1) {
 			//$item_info=get_liquor_info_from_bar_sales_has_items($info['liquor_id'], $_SESSION['bar_sales_no']);
 	
 			cancel_item($id);
-			//delete_bar_sales_items_ledger($id);
+			delete_bar_sales_items_ledger($id);
 	
 			$bar_sales_no=$_SESSION['bar_sales_no'];
 			$bar_sales_info=get_bar_sales_info_by_bar_sales_no($bar_sales_no);
@@ -224,7 +227,8 @@ if ($_SESSION['login'] == 1) {
 				$remarks=$_POST['remarks'];
 				$customer_name=$_POST['customer_name'];
 				$discount_type=$_POST['discount_type'];
-				$discount=$_POST['discount'];				
+				$discount=$_POST['discount'];
+                $payment=$_POST['payment'];
 				$prepared_by=$_POST['prepared_by'];
 				$bar_sales_no=$_POST['bar_sales_no'];				
 				$service_charge=$_POST['service_charge'];
@@ -239,9 +243,9 @@ if ($_SESSION['login'] == 1) {
 					$booking_ref=get_booking_ref_for_restaurant_order($ref_no);
 				}
 			
-				save_bar_sales($bar_sales_no, $date, $customer_name,$discount_type, $discount, $prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge);
-				//add_bar_sales_ledger($bar_sales_no);
-				update_stock_bar_sales($bar_sales_no);
+				save_bar_sales($bar_sales_no, $date, $customer_name,$discount_type, $discount,$payment, $prepared_by, $remarks, $total, $order_type, $ref_no, $booking_ref, $service_charge);
+				add_bar_sales_ledger($bar_sales_no);
+				//update_stock_bar_sales($bar_sales_no);
 			}
 			else {
 	

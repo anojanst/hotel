@@ -1,21 +1,68 @@
-
-{include file="header.tpl"}
 {include file="user_header.tpl"}
-	
-	<div id="adbox" style="height: 400px;">
-		<div style="margin-top: 80px; padding-top: 10px; width: 300px; height: 200px; background: #FBFBF0; border-radius: 1px; box-shadow: 0px 0px 0px 8px rgba(0,0,0,0.3); z-index: 9; font-family: arial;"> 
-			<form name="login" action="login.php?job=login" method="post" class="login">
-				<br />
-				<center><input type="text" name="user_name" value="{$user_name}"required placeholder="Username"/></center>
-				<center><input type="password" name="password" value="{$password}" required placeholder="Password"/></center><br />
-				<center><input type="submit" name="ok" value="Login" /></center><br />
-				<center>
-										<a href='forget.php'>Forget Password</a>
-					
-				</center><br />
-			</form>
+	{if $error_report=='on'}
+		<div class="error_report" style="margin-top: 10px; width: 99%;">
+			<strong>{$error_message}</strong>
 		</div>
-	</div>
+		{/if}
+	<body class="hold-transition login-page" style="background-image: url(images/bg.jpg)"">
+<div class="login-box">
+  <div class="login-logo">
+    <a href="index.php"><b>Hotel</b>Management</a>
+  </div>
+  <!-- /.login-logo -->
+  <div class="login-box-body">
+    <p class="login-box-msg">Sign in to start your session</p>
 
-{include file="footer.tpl"}
-{include file="user_footer.tpl"}
+    <form  action="login.php?job=login" method="post">
+      <div class="form-group has-feedback">
+        <input type="text" name="user_name" class="form-control" placeholder="User Name">
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+      </div>
+      <div class="form-group has-feedback">
+        <input type="password" name="password" class="form-control" placeholder="Password">
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+      </div>
+      <div class="row">
+        <div class="col-xs-8">
+          <div class="checkbox icheck">
+            <label>
+              <input type="checkbox"> Remember Me
+            </label>
+          </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-xs-4">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Sign In</button>
+        </div>
+        <!-- /.col -->
+      </div>
+    </form>
+
+    
+    <!-- /.social-auth-links -->
+
+    <a href="#">I forgot my password</a><br>
+
+  </div>
+  <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 2.2.3 -->
+<script src="js/jquery-2.2.3.min.js"></script>
+<!-- Bootstrap 3.3.6 -->
+<script src="js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="js/icheck.min.js"></script>
+<script>
+  $(function () {
+    $('input').iCheck({
+      checkboxClass: 'icheckbox_square-blue',
+      radioClass: 'iradio_square-blue',
+      increaseArea: '20%' // optional
+    });
+  });
+</script>
+</body>
+</html>
+
