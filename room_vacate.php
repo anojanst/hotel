@@ -45,16 +45,19 @@ if ($_SESSION ['login'] == 1) {
 			
 			$occupied_days= $_REQUEST['occupied_days'];
 			
+			$discount=$_POST['discount'];
+			$damage=$_POST['damage'];
 			$date=date('Y-m-d');
 			
 			$caller_info= get_caller_info_by_booking_id($booking_ref);
 			$booking_info= get_booking_date_info_by_booking_ref($booking_ref);
 			
-			save_room_bill($room_no, $booking_ref, $caller_info['caller_name'],$booking_info['from_date'],$date, $occupied_days, $room_charge, $request_charges, $sales_bills);
+			save_room_bill($room_no, $booking_ref, $caller_info['caller_name'],$booking_info['from_date'],$date, $occupied_days, $room_charge, $request_charges, $sales_bills, $discount, $damage);
 			cancel_booking ($booking_ref);
 			//cancel_booking_has_caller($_REQUEST ['booking_ref']);
 			cancel_room_status($booking_ref, $room_no);
 				
+			$smarty->assign('date',"$date");	
 			$smarty->assign ( 'page', "Bill" );
 			$smarty->display ( 'room_vacate/room_vacate_print.tpl' );
 				

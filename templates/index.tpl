@@ -1,5 +1,4 @@
-
-{include file="header.tpl"}
+{include file="user_header.tpl"}
 {include file="user_header.tpl"}
 	
 	<div id="adbox" style="height: 400px;">
@@ -17,5 +16,4 @@
 		</div>
 	</div>
 
-{include file="footer.tpl"}
 {include file="user_footer.tpl"}

@@ -4,6 +4,7 @@ include 'functions/user_functions.php';
 include 'functions/room_functions.php';
 include 'functions/room_type_functions.php';
 include 'functions/facility_functions.php';
+
 if ($_REQUEST['job']=="login"){
 
 	$login=$_POST['user_name'];

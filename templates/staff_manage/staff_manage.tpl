@@ -36,7 +36,6 @@
 		 </div>
 	</section>
 </div>
-{include file="footer.tpl"}
 {include file="user_footer.tpl"}
 	{literal}
 	
