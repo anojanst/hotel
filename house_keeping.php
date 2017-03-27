@@ -8,6 +8,7 @@ include 'functions/room_type_functions.php';
 include 'functions/room_functions.php';
 include 'functions/facility_functions.php';
 include 'functions/house_keeping_functions.php';
+include 'functions/ledger_functions.php';
 
 
 $module_no = 7;
@@ -41,21 +42,35 @@ if ($_SESSION ['login'] == 1) {
 			
 			//complete_cus_req($id);
 			$_SESSION ['request_ref']=$request_ref=$_REQUEST['request_ref'];
-			
+            
 			$smarty->assign ( 'page', "House Keeping" );
 			$smarty->display ( 'house_keeping/house_keeping_bill.tpl' );
 		}
 		
 		elseif ($_REQUEST ['job'] == "request_billing") {
-			
-			$request_ref=$_REQUEST['request_ref'];	
-			$request_charge=$_POST['request_charge'];
-			
-			update_room_request_price($request_ref,$request_charge);
-						
-			$smarty->assign ( 'page', "House Keeping" );
-			$smarty->display ( 'house_keeping/house_keeping_bill.tpl' );
-		}
+                
+                $_SESSION['id']=$id=$_REQUEST['id'];
+                $request_ref=$_REQUEST['request_ref'];	
+                $request_charge=$_POST['request_charge'];
+                
+                update_room_request_price($request_ref,$request_charge);
+                add_room_request_ledger($request_ref,$request_charge);
+                
+                
+                $smarty->assign ( 'page', "House Keeping" );
+                $smarty->display ( 'house_keeping/house_keeping_bill.tpl' );
+            
+            
+        }     
+        elseif ($_REQUEST ['job'] == "back") {
+            
+           cancel_room_request($_SESSION['id']);
+           
+           $smarty->assign ( 'page', "House Keeping" );
+           $smarty->display ( 'house_keeping/house_keeping_home.tpl' );
+           
+        }
+		
 		
 		
 		elseif ($_REQUEST ['job'] == "save") {
@@ -70,7 +85,7 @@ if ($_SESSION ['login'] == 1) {
 				
 				$smarty->assign ( 'request_types', list_request_type() );
 				update_room_request ($id, $room_no ,$request, $detail);
-				
+                	
 			}
 	 
 			 else {
@@ -84,7 +99,6 @@ if ($_SESSION ['login'] == 1) {
 				
 				$_SESSION ['request_ref']= $request_ref= get_request_ref();
 				save_room_request($id, $room_no ,$request, $request_ref,$detail, $booking_ref);
-				
 				
 				$smarty->assign ( 'occupied_rooms', list_occupied_rooms_for_request() );
 				$smarty->assign ( 'request_types', list_request_type() );

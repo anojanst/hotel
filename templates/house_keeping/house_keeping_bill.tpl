@@ -55,12 +55,14 @@ $(function() {
 
 					<section class="invoice">
 						<div class="row">
-        					<div class="col-xs-12">
+        					<div class="col-xs-6">
           						<h2 class="page-header">
             					<i class="fa fa-globe"></i> House Keeping
-            					
           						</h2>
         					</div>
+                            <div class="col-xs-6">
+                                 <a href="house_keeping.php?job=back"  style="width:60px; margin-left: 15cm;" class="btn btn-block btn-danger">Back</a>
+                            </div>
       					</div>
   
       					<div class="row invoice-info">

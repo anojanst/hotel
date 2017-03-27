@@ -25,10 +25,10 @@
 	
 	<div class="row" style="margin-top: 25px;">
 		<div class="col-xs-6">
-			<strong>Sales No : </strong>
+			<!-- <strong>Sales No : </strong> -->
 		</div>
-		<div class="col-xs-6">
-			<strong>Date : </strong>{$date}	
+		<div class="col-xs-6" style="text-align: right;">
+			<strong >Date : </strong>{$date}	
 		</div>
 	</div>
 	<div class="row">
@@ -43,5 +43,6 @@
 			<h3>Thank You. Come Again!</h3>
 		</div>
 	</div>
+    <a href="front_desk.php" class="no-print btn btn-success">Back</a>
 </div>
 <div>

@@ -24,7 +24,7 @@
                 </div>
 	
 				<div class="panel-body">
-					<form role="form" action="staff_manage.php?job=add" method="post" class="product" enctype="multipart/form-data">
+					<form role="form" action="admin_manage.php?job=add" method="post" class="product" enctype="multipart/form-data">
 
 							<div class="row" style="margin-bottom: 10px;">
 								<div class="col-lg-6">

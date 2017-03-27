@@ -4,6 +4,7 @@ include'functions/purchase_order_functions.php';
 include'functions/store_functions.php';
 include'functions/modules_functions.php';
 include'functions/employees_functions.php';
+include'functions/ledger_functions.php';
 
 
 $module_no= 14;
@@ -25,7 +26,9 @@ if ($_SESSION['login'] == 1) {
             $user_name=$_SESSION['user_name'];
     
             save_purchase_item($purchase_order_no,$purchase_item,$quantity,$buying_price,$user_name,$measure_type);
-            
+            $total = $quantity*$buying_price;
+            add_purchase_order_item_ledger($_SESSION['purchase_order_no'],$purchase_item , $total);
+           
             $smarty->assign('purchase_order_no', "$_SESSION[purchase_order_no]");
             $smarty->assign('prepared_by', "$_SESSION[user_name]");
             $smarty->assign('total', "$total");
@@ -36,6 +39,10 @@ if ($_SESSION['login'] == 1) {
             $id = $_REQUEST['id'];
             $purchase_order_no = $_SESSION['purchase_order_no'];
             delete_purchase_item($id);
+            delete_purchase_order_item_ledger($id);
+            $smarty->assign('purchase_order_no', "$_SESSION[purchase_order_no]");
+            $smarty->assign('prepared_by', "$_SESSION[user_name]");
+            $smarty->assign('total', "$total");
             $smarty->assign('page', "Purchase Order");
             $smarty->display('purchase_order/purchase_order.tpl');
         }
@@ -51,7 +58,7 @@ if ($_SESSION['login'] == 1) {
                     save_purchase_order($purchase_order_no, $supplier_name, $prepared_by, $total);
 					
 					update_stock($purchase_order_no);
-                            //add_purchase_order_ledger($purchase_order_no);
+                    add_purchase_order_ledger($purchase_order_no);
                 }
                 else {
     
@@ -62,6 +69,7 @@ if ($_SESSION['login'] == 1) {
                     $purchase_order_no = $_POST['purchase_order_no'];
                     $total = get_total($_SESSION['purchase_order_no']);
                     update_purchase_order($id, $purchase_order_no, $supplier_name, $prepared_by, $total, $updated_by);
+                    update_purchase_order_ledger($purchase_order_no);
                     unset ($_SESSION['edit']);
                 }
     

@@ -109,7 +109,10 @@ function cancel_booking($booking_ref) {
 	include 'conf/opendb.php';
 
 	mysqli_select_db ($conn, $dbname );
-	$query = "DELETE FROM booking WHERE booking_ref='$booking_ref'";
+	$query = "UPDATE booking SET
+	from_date='$newdate'
+	WHERE booking_ref='$booking_ref'";
+
 
 	mysqli_query ($conn, $query );
 

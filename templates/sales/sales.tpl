@@ -65,10 +65,11 @@
 								<th></th>
 							</tr>
 						</tbody>
-						
-						
 					</table>
+
+					<a href="sales.php?job=kot" class="btn btn-success">KOT</a>
 				</div>
+
 				<div class="col-lg-3" style="margin-top: 20px;">
 					<form class="product" name="sales_form" action="sales.php?job=sales" method="post" >
 						<input type="text" class="form-control" name="sales_no" value="{$sales_no}" required readonly="readonly" placeholder="Sales No" tabindex="3"/>

@@ -44,7 +44,7 @@ function save_purchase_item($purchase_order_no,$purchase_item,$quantity,$buying_
     else{
         $total = $quantity*$buying_price;
     }
-	mysqli_select_db($conn_for_changing_db, $dbname);
+	
 	$query = "INSERT INTO purchase_order_has_items (id,purchase_item, quantity, measure_type, buying_price, date, purchase_order_no, user_name, total)
 	VALUES ('','$purchase_item', '$quantity','$measure_type', '$buying_price', '$date', '$purchase_order_no', '$user_name', '$total')";
 	mysqli_query($conn, $query) or die (mysqli_error($conn));
@@ -98,7 +98,6 @@ function delete_purchase_item($id){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	mysqli_select_db($conn_for_changing_db, $dbname);
 	$query = "UPDATE purchase_order_has_items SET
 	cancel_status='1',
 	canceled_by='$_SESSION[user_name]'
@@ -112,7 +111,7 @@ function update_saved($purchase_order_no){
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
-	mysqli_select_db($conn_for_changing_db, $dbname);
+	
 	$query = "UPDATE purchase_order_has_items SET
 	saved='1'
 	WHERE purchase_order_no='$purchase_order_no'";
@@ -166,7 +165,7 @@ function save_purchase_order($purchase_order_no, $supplier_name, $prepared_by, $
 
 	$date = date("Y-m-d");
 	
-	mysqli_select_db($conn_for_changing_db, $dbname);
+	
 	$query = "INSERT INTO purchase_order (id, purchase_order_no, supplier_name, prepared_by, date, total)
 	VALUES ('', '$purchase_order_no', '$supplier_name', '$prepared_by', '$date', '$total')";
 	mysqli_query($conn, $query) or die (mysqli_error($conn));
@@ -369,8 +368,8 @@ function cancel_purchase_order($id){
 }
 
 function get_purchase_order_item_id($purchase_order_no) {
-	include 'functions/config.php';
-	include 'functions/opendb.php';
+	include 'conf/config.php';
+	include 'conf/opendb.php';
 
 	$result=mysqli_query($conn, "SELECT MAX(id) FROM purchase_order_has_items WHERE  cancel_status='0' ");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))

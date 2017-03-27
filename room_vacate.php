@@ -8,6 +8,7 @@ include 'functions/room_vacate_functions.php';
 include 'functions/room_functions.php';
 include 'functions/facility_functions.php';
 include 'functions/sales_functions.php';
+include 'functions/ledger_functions.php';
 
 $module_no = 10;
 
@@ -42,6 +43,7 @@ if ($_SESSION ['login'] == 1) {
 			$request_charges= $_REQUEST['request_charges'];
 			
 			$sales_bills= $_REQUEST['sales_bills'];
+            $bar_sales_bills=$_REQUEST['bar_sales_bills'];
 			
 			$occupied_days= $_REQUEST['occupied_days'];
 			
@@ -52,10 +54,12 @@ if ($_SESSION ['login'] == 1) {
 			$caller_info= get_caller_info_by_booking_id($booking_ref);
 			$booking_info= get_booking_date_info_by_booking_ref($booking_ref);
 			
-			save_room_bill($room_no, $booking_ref, $caller_info['caller_name'],$booking_info['from_date'],$date, $occupied_days, $room_charge, $request_charges, $sales_bills, $discount, $damage);
-			cancel_booking ($booking_ref);
+			save_room_bill($room_no, $booking_ref, $caller_info['caller_name'],$booking_info['from_date'],$date, $occupied_days, $room_charge, $request_charges, $sales_bills,$bar_sales_bills, $discount, $damage);
+			//cancel_booking ($booking_ref);
 			//cancel_booking_has_caller($_REQUEST ['booking_ref']);
 			cancel_room_status($booking_ref, $room_no);
+            add_room_charge_ledger($booking_ref);
+            add_room_ledger($booking_ref);
 				
 			$smarty->assign('date',"$date");	
 			$smarty->assign ( 'page', "Bill" );

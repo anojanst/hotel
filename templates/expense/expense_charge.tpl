@@ -23,7 +23,7 @@
 		<div class="tab-content">
 			<div class="row">
 				<div class="col-lg-12">
-					<h3><strong>Purchase Order</strong></h3>
+					<h3><strong>Expense Charge</strong></h3>
 				</div>
 			</div>
 			<div class="row">				
@@ -34,11 +34,15 @@
 				{/if}			
 			</div><br/>
 			<div class="row">
-				<form name="purchase_item_form" action="expense.php?job=expenses" method="post" class="product">
-					<div class="col-lg-3">		 
-						<select class="form-control" name="purchase_item" required>
-							<option value="" disable selected>Select Item</option>
-							{php}select_expense_type();{/php}
+				<form name="purchase_item_form" action="expense_charge.php?job=save" method="post" class="product">
+					<div class="col-lg-3">
+						<select class="form-control" name="expense_type" value="{$expense_type}" required>
+                        {if $expense_type}
+                        <option value="{$expense_type}" >{$expense_type}</option>
+                        {else}
+                            <option value="" disabled selected>Select Expense</option>
+						{/if}	
+                            {php}select_expense_type();{/php}
 						</select>
 					</div>
 					<div class="col-lg-4">
@@ -46,33 +50,34 @@
 					</div>
 					
 					<div class="col-lg-3">
-						<input  type="text" class="form-control" name="buying_price" value="{$buying_price}" placeholder="buying Price" required/>										
+						<input  type="text" class="form-control" name="price" value="{$price}" placeholder="Price" required/>										
 					</div>
 					<div class="col-lg-2">
-						<input class="form-control btn btn-success" type="submit" name="ok" value="Add"/>
+                        {if $edit=='on'}
+                            <button type="submit" name="ok" value="Update" class="btn btn-block btn-success">Update</button>                              
+                        {else}
+                            <button type="submit" name="ok" value="Save" class="btn btn-block btn-success">Add</button>
+                         </div>
+                        {/if}
 					</div>
 				</form>
 			</div>
 			<div class="row">
-        <div class="col-lg-12">
-          {php}list_item_by_purchase_order($_SESSION['purchase_order_no']);{/php}						
-        </div>			
-			</div><br><br>	
-			<div class="row">
-				<form name="purchase_form" action="purchase_order.php?job=purchase" method="post" class="product">
-				<div class="col-lg-12">	
-					<input style="width: 400px;" type="text" class="form-control" name="purchase_order_no" value="{$purchase_order_no}" placeholder="Purchase Order No" required readonly="readonly"/>
-					<input style="width: 400px;" type="text" class="form-control" name="supplier_name" placeholder="Supplier" value="{$supplier_name}" required />
-					<input style="width: 400px;" type="text" class="form-control"name="prepared_by" placeholder="Prepared By" value="{$prepared_by}"  required readonly="readonly"/>					
-					{if $edit_mode=='on'}
-					<input type="text" name="updated_by" value="{$updated_by}" placeholder="Updated By" required readonly="readonly"/>
-					{/if}
-					{if $edit_mode=='on'}
-					<input class="pull-left" type="submit" name="ok" value="Update"/>
-					{else}
-					<input class="pull-left" type="submit" name="ok" value="Save"/>
-					{/if}
-					</div>
+                <div class="col-lg-12">
+                  {php}list_expense_charge($_SESSION['expense_no']);{/php}						
+                </div>			
+			</div><br>
+            <div class="row">
+				<form name="purchase_form" action="expense_charge.php?job=expense" method="post" class="product">
+                    <div class="col-lg-12">	
+                        <input style="width: 400px;" type="text" class="form-control" name="expense_no" value="{$expense_no}" placeholder="Expense No" required readonly="readonly"/>
+                        <input style="width: 400px;" type="text" class="form-control" name="supplier_name" placeholder="Supplier" value="{$supplier_name}" required />
+                        <input style="width: 400px;" type="text" class="form-control"name="prepared_by" placeholder="Prepared By" value="{$prepared_by}"  required readonly="readonly"/>					
+                        {if $edit_mode=='on'}
+                        <input type="text" name="updated_by" value="{$updated_by}" placeholder="Updated By" required readonly="readonly"/>
+                        {/if}
+                        <input class="pull-left" type="submit" name="ok" value="Save"/>
+                    </div>
 				</form>					
 			</div>
 		</div>

@@ -24,11 +24,9 @@
         </nav>
     </header>
 
-<div class="content-wrapper">
 	<aside class="main-sidebar">
     	<section class="sidebar">
 			<ul class="sidebar-menu">
-				
                 <li class="treeview">
 					<a href="#"><i class="fa fa-dashboard"></i><span>Dashboard </span><span class="pull-right-container">
 						<i class="fa fa-angle-left pull-right"></i></span></a>
@@ -142,7 +140,7 @@
                                     <a href="expense.php"><i class="fa fa-shopping-cart"></i><span>Expenses Type</span></a>
                                 </li>
                                 <li class="scroll">
-                                    <a href="expense.php?job=expense_charge"><i class="fa fa-shopping-cart"></i><span>Expenses Charge</span></a>
+                                    <a href="expense_charge.php"><i class="fa fa-shopping-cart"></i><span>Expenses Charge</span></a>
                                 </li>
                             </ul>
                 </li>
@@ -189,3 +187,4 @@
 		</section>
 	</aside>
 
+<div class="content-wrapper">

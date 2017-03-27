@@ -154,16 +154,16 @@ echo'
                 ';
 			
 			$i = 1;
-			$result = mysqli_query ( $conn, "SELECT * FROM sales WHERE booking_ref='$booking_ref'" );
+			$result = mysqli_query ( $conn, "SELECT * FROM sales WHERE booking_ref='$booking_ref' AND payment='pending'" );
 			while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) )
 			{
 				echo'
 					<tr>
 			
 						<td>'.$row[sales_no].'</td>
-						<td style="margin-left: 50px;" >  '.number_format($row[total],2).' </td>
+						<td style="margin-left: 50px;" >  '.number_format($row[net_total],2).' </td>
 					</tr>';
-				$sales_total+=$row[total];
+				$sales_total+=$row[net_total];
 			}
 			echo'
 					<tr>
@@ -177,45 +177,84 @@ echo'
 		</div>
 		</div>
 		';
-
-			$total=$request_total+$sales_total+$total_room_charge;
-             echo'	<div class="row">
-				    	<div class="col-lg-12">
-					    	<div class="col-lg-3"> <font size="5"> <strong> Total Amount </font> </div>
-					    	<div class="col-lg-3"> <font size="5">  '.number_format($total,2).' </font> </div>
-				    	</div>
-			    	</div><br/>
-				<form role="form" action="room_vacate.php?job=room_pay&total='.$total.'&booking_ref='.$booking_ref.'&occupied_days='.$occupied_days.'&room_charge='.$total_room_charge.'&request_charges='.$request_total.'&sales_bills='.$sales_total.'" method="post" class="product" enctype="multipart/form-data">
-										
-					<div class="row">
-				    	<div class="col-lg-12">
-					    	<div class="col-lg-3"> <font size="5"> <strong> Discount </font> </div>
-					    	<div class="col-lg-3"> <font size="5"> <input class="form-control" name="discount"  placeholder="Discount Amount">
-							 </font> </div>
-				    	</div>
-			    	</div><br/>
-					<div class="row">
-				    	<div class="col-lg-12">
-					    	<div class="col-lg-3"> <font size="5"> <strong> Damage </font> </div>
-					    	<div class="col-lg-3"> <font size="5"> <input class="form-control" name="damage"  placeholder="Damage Amount">
-							 </font> </div>
-				    	</div>
-			    	</div><br/>
-             	<div class="row">
-             		 <div class="col-lg-12">
-							<div class="col-lg-3">  </div>
-							<div class="col-lg-3"> <button  type="submit" class=" btn btn-block btn-danger"> Checkout </button></div>
-					</div>  
+    echo' <div class="row">
+    <div class="col-lg-6">
+		<div class="box">
+            <div class="box-header">
+              <font size="5"> <strong> Bar Sales bills  </font>
             </div>
-       	</form>         		                		
-      </div>
-     </div>';  
-     }        		
-             		
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-striped">
+					<tr>
+			
+						<th>Bar Sales No</th>
+						<th>Price</th>
+					</tr>
+                ';
+			
+			$i = 1;
+			$result = mysqli_query ( $conn, "SELECT * FROM bar_sales WHERE booking_ref='$booking_ref' AND payment='pending'" );
+			while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) )
+			{
+				echo'
+					<tr>
+			
+						<td>'.$row[bar_sales_no].'</td>
+						<td style="margin-left: 50px;" >  '.number_format($row[net_total],2).' </td>
+					</tr>';
+				$bar_sales_total+=$row[net_total];
+			}
+			echo'
+					<tr>
+						<td><strong>Total</strong></td>
+						<td>  '.number_format($bar_sales_total,2).' </td>
+					</tr>
+			
+              		</table>
+            	</div>
+          	</div>
+		</div>
+		';
 
-		
-		
-	
+			$total=$request_total+$sales_total+$total_room_charge+$bar_sales_total;
+                echo'<div class="col-lg-6">
+                       <div class="row">
+                           <div class="col-lg-12">
+                               <div class="col-lg-6"> <font size="5"> <strong> Total Amount </font> </div>
+                               <div class="col-lg-6"> <font size="5">  '.number_format($total,2).' </font> </div>
+                           </div>
+                       </div><br/>
+                <form role="form" action="room_vacate.php?job=room_pay&total='.$total.'&booking_ref='.$booking_ref.'&occupied_days='.$occupied_days.'&room_charge='.$total_room_charge.'&request_charges='.$request_total.'&sales_bills='.$sales_total.'&bar_sales_bills='.$bar_sales_total.'" method="post" class="product" enctype="multipart/form-data">
+                                           
+                       <div class="row">
+                           <div class="col-lg-12">
+                               <div class="col-lg-6"> <font size="5"> <strong> Discount </font> </div>
+                               <div class="col-lg-6"> <font size="5"> <input class="form-control" name="discount"  placeholder="Discount Amount"></font> </div>
+                               
+                           </div>
+                       </div><br/>
+                       <div class="row">
+                           <div class="col-lg-12">
+                               <div class="col-lg-6"> <font size="5"> <strong> Damage </font> </div>
+                               <div class="col-lg-6"> <font size="5"> <input class="form-control" name="damage"  placeholder="Damage Amount">
+                                </font> </div>
+                                
+                           </div>
+                       </div><br/>
+                    <div class="row">
+                        <div class="col-lg-12">
+                               <div class="col-lg-6">  </div>
+                               <div class="col-lg-6"> <button  type="submit" class=" btn btn-block btn-danger"> Checkout </button></div>
+                               
+                        </div>  
+                    </div>
+                </form>         		                		
+            </div>
+         </div>
+         </div>
+         </div>';  
+     }        		
 	//cancel_booking ( $_REQUEST ['booking_ref'] );
 	//cancel_booking_has_caller($_REQUEST ['booking_ref']);
 	//cancel_room_status($_REQUEST ['booking_ref'], $_REQUEST ['room_no']);
@@ -223,15 +262,14 @@ echo'
 	
 }
 
-function save_room_bill($room_no, $booking_ref, $caller_name,$from_date,$date, $occupied_days, $room_charge, $request_charges, $sales_bills , $discount, $damage ) {
+function save_room_bill($room_no, $booking_ref, $caller_name,$from_date,$date, $occupied_days, $room_charge, $request_charges, $sales_bills , $bar_sales_bills, $discount, $damage ) {
 	include 'conf/config.php';
 	include 'conf/opendb.php';
 	
 	$full_total =( $room_charge + $request_charges + $sales_bills +$damage ) - $discount;
-	mysqli_select_db ( $conn, $dbname );
 	
-	$query = "INSERT INTO room_has_bill (id, booking_ref,caller_name,from_date, to_date, occupied_days, room_charge,request_charges, sales_bills, full_total, discount , damage)
-	VALUES ('', '$booking_ref', '$caller_name','$from_date','$date', '$occupied_days', '$room_charge','$request_charges', '$sales_bills','$full_total', '$discount', '$damage')";
+	$query = "INSERT INTO room_has_bill (id, booking_ref,room_no,caller_name,from_date, to_date, occupied_days, room_charge,request_charges, sales_bills, bar_sales_bills, full_total, discount , damage)
+	VALUES ('', '$booking_ref','$room_no', '$caller_name','$from_date','$date', '$occupied_days', '$room_charge','$request_charges', '$sales_bills', '$bar_sales_bills','$full_total', '$discount', '$damage')";
 
 	mysqli_query ($conn, $query ) or die ( mysqli_connect_error () );
 
@@ -263,7 +301,7 @@ function print_room_vacate_bill($booking_ref){
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
 		
-		echo'<table style="width: 65%; margin-left: 50px;" class="table-responsive table-bordered table-striped dt-responsive">
+		echo'<table style="width: 100%;" class="table-responsive table-bordered table-striped dt-responsive">
 		<tr>
 			<th> </th>
 			<th> </th>
@@ -280,6 +318,11 @@ function print_room_vacate_bill($booking_ref){
             <td>Sales</td>
             <td align="right"> '.$row[sales_bills].'</td>
         </tr>
+        <tr style="line-height: 30px;">
+            <td> </td>
+            <td>Bar Sales</td>
+            <td align="right"> '.$row[bar_sales_bills].'</td>
+        </tr>
 		<tr style="line-height: 30px;">
             <td> </td>
             <td>Room Request Charges</td>
@@ -288,15 +331,15 @@ function print_room_vacate_bill($booking_ref){
 		<tr style="line-height: 30px;">
             <td> </td>
             <td>Discount</td>
-            <td align="right"> - '.$row[discount].'</td>
+            <td align="right"> ('.$row[discount].')</td>
         </tr>
 		<tr style="line-height: 30px;">
             <td> </td>
             <td>Damage</td>
-            <td align="right"> + '.$row[damage].'</td>
+            <td align="right"> '.$row[damage].'</td>
         </tr>';
 		
-		$net_total=($row[room_charge]+$row[sales_bills]+$row[request_charges]+$row[damage])-$row[discount];
+		$net_total=($row[room_charge]+$row[bar_sales_bills]+$row[sales_bills]+$row[request_charges]+$row[damage])-$row[discount];
 		
 		echo '<tr  style="line-height: 30px;">
             <td></td>

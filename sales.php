@@ -266,7 +266,23 @@ if ($_SESSION['login'] == 1) {
 			$smarty->assign('page',"sales");
 			$smarty->display('sales/print.tpl');
 		}
-	
+        elseif ($_REQUEST['job']=='kot'){
+		    $sales_no=$_SESSION['sales_no'];
+            $date = date("Y-m-d");
+
+            $smarty->assign('date',"$date");
+            $smarty->assign('org_name',"$_SESSION[org_name]");
+            $smarty->assign('sales_no',"$_SESSION[sales_no]");
+            $smarty->assign('page',"sales");
+            $smarty->display('sales/kot_print.tpl');
+        }
+        elseif ($_REQUEST['job']=='back'){
+            $sales_no=$_SESSION['sales_no'];
+            kot_status($sales_no);
+
+            $smarty->assign('page',"sales");
+            $smarty->display('sales/sales.tpl');
+        }
 		elseif ($_REQUEST['job']=='must_new'){
 			unset($_SESSION['edit']);
 			unset($_SESSION['sales_no']);

@@ -802,7 +802,7 @@ function add_purchase_order_ledger($purchase_order_no) {
 	$result=mysqli_query($conn, "SELECT * FROM purchase_order WHERE purchase_order_no = '$purchase_order_no' AND cancel_status='0' ORDER BY id DESC");
 	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
 	{
-		$date=$row['purchase_order_date'];
+		$date=$row[date];
 		$flag='PURCHASE ORDER';
 		$ref_no=$row['purchase_order_no'];
 		$narration=addslashes($row['supplier_name']);
@@ -1001,4 +1001,160 @@ function delete_bar_sales_items_ledger($id) {
 	mysqli_query($conn, $query);
 	include 'conf/closedb.php';
 
+}
+
+function add_expense_charge_ledger($expense_no, $expense_type, $price) {
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$info=get_expense_charge_by_id($expense_no);
+    $id=$info['id'];
+	$date=date("Y-m-d");
+	$flag='EXPENSE';
+	$account=$expense_type;
+	$narration='EXPENSE';
+	
+	
+	$query = "INSERT INTO ledger (account, date, flag, ref_no, narration, debit, credit, cheque_no, remarks)
+	VALUES ('$account', '$date', '$flag', '$id', '$narration', '', '$price', '', '$purchase_order_no')";
+	mysqli_query($conn, $query) or die (mysqli_error($conn));
+
+	include 'conf/closedb.php';
+}
+
+function update_expense_charge_ledger($id ,$expense_no) {
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$item_info=get_info_from_expense_has_items($id, $expense_no);
+	$account=$id;
+	$date=$item_info['date'];
+	$flag='EXPENSE';
+	$total=$item_info['price'];
+	$id=$item_info['id'];
+	$narration='EXPENSE';
+
+	
+	$query = "UPDATE ledger SET
+	account='$account',
+	date='$date',	
+	flag='$flag',
+	narration='$narration',
+	credit='$total', 	
+	remarks='$expense_no'
+	WHERE ref_no='$id' AND flag='EXPENSE' AND remarks='$expense_no' AND cancel_status='0'";
+	mysqli_query($conn, $query);
+
+	include 'conf/closedb.php';
+}
+
+function delete_expense_charge_ledger($id) {
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$query = "DELETE FROM ledger WHERE flag='EXPENSE' AND ref_no='$id'";
+	mysqli_query($conn, $query);
+
+	include 'conf/closedb.php';
+}
+
+function add_total_expense_ledger($expense_no) {
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$result=mysqli_query($conn, "SELECT * FROM expense WHERE expense_no = '$expense_no' AND cancel_status='0' ORDER BY id DESC");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		$date=$row[date];
+		$flag='TOTAL_EXPENSE';
+		$ref_no=$row['expense_no'];
+		$narration=addslashes($row['supplier_name']);
+		$total=$row['total'];
+		$account='TOTAL_EXPENSE';
+		//customer
+
+		$query2 = "INSERT INTO ledger (account, date, flag, ref_no, narration, debit, credit, cheque_no, remarks)
+		VALUES ('$narration', '$date', '$flag', '$ref_no', '$account', '$total', '', '', '')";
+		mysqli_query($conn, $query2) or die (mysqli_error($conn));
+
+	}
+
+	include 'conf/closedb.php';
+
+}
+
+function add_room_charge_ledger($booking_ref) {
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$result=mysqli_query($conn, "SELECT * FROM room_has_bill WHERE booking_ref = '$booking_ref' ORDER BY id DESC");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		$date=date('Y-m-d');
+		$flag='ROOM_CHARGE';
+		$ref_no=$row[booking_ref];
+        $caller_info=get_caller_info_by_booking_id($row[booking_ref]);
+		$guest_info=get_guest_info_by_booking_id($row[booking_ref]);
+        if($caller_info[caller_name]){
+		$narration=addslashes($caller_info[caller_name]);
+        }
+        else{
+           $narration=addslashes($guest_info[guest_name]); 
+        }
+		$total=$row['room_charge'];
+		$account='ROOM_CHARGE';
+		//customer
+
+		$query2 = "INSERT INTO ledger (account, date, flag, ref_no, narration, debit, credit, cheque_no, remarks)
+		VALUES ('$narration', '$date', '$flag', '$ref_no', '$account', '$total', '', '', '$booking_ref')";
+		mysqli_query($conn, $query2) or die (mysqli_error($conn));
+
+	}
+
+	include 'conf/closedb.php';
+}
+function add_room_ledger($booking_ref) {
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$result=mysqli_query($conn, "SELECT * FROM room_has_bill WHERE booking_ref = '$booking_ref' ORDER BY id DESC");
+	while($row = mysqli_fetch_array($result, MYSQLI_ASSOC))
+	{
+		$date=date('Y-m-d');
+		$flag='ROOM';
+		$ref_no=$row[booking_ref];
+		$total=$row['room_charge'];
+		$account='ROOM';
+        $narration=$row[room_no];
+		//customer
+
+		$query2 = "INSERT INTO ledger (account, date, flag, ref_no, narration, debit, credit, cheque_no, remarks)
+		VALUES ('$narration', '$date', '$flag', '$ref_no', '$account', '', '$total', '', '$booking_ref')";
+		mysqli_query($conn, $query2) or die (mysqli_error($conn));
+
+	}
+
+	include 'conf/closedb.php';
+}
+
+function add_room_request_ledger($request_ref,$request_charge) {
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$info=get_info_by_request_ref($request_ref);
+   
+	$date=date("Y-m-d");
+	$flag='ROOM_REQUEST';
+	$account=$info['room_no'];
+	$narration='ROOM_REQUEST';
+	$flag1='house_keeping';
+	
+	$query = "INSERT INTO ledger (account, date, flag, ref_no, narration, debit, credit, cheque_no, remarks)
+	VALUES ('$account', '$date', '$flag', '$request_ref', '$narration', '', '$request_charge', '', '$request_ref')";
+	mysqli_query($conn, $query) or die (mysqli_error($conn));
+    
+    $query2 = "INSERT INTO ledger (account, date, flag, ref_no, narration, debit, credit, cheque_no, remarks)
+	VALUES ('house_keeping', '$date', '$flag1', '$request_ref', '$flag1', '$request_charge', '', '', '$request_ref')";
+	mysqli_query($conn, $query2) or die (mysqli_error($conn));
+	include 'conf/closedb.php';
 }

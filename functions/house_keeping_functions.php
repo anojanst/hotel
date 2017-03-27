@@ -18,7 +18,7 @@ function list_room_requests() {
                   </thead>
                   <tbody valign="top">';
 	$i = 1;
-	$result = mysqli_query ( $conn, "SELECT * FROM room_requests" );
+	$result = mysqli_query ( $conn, "SELECT * FROM room_requests WHERE cancel_status='0'" );
 	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) ) {
 		
 		echo '	
@@ -117,7 +117,7 @@ function list_room_request_grid() {
 			            	<span class="info-box-text">'.$row[request].'</span>
               				<span class="info-box-number">'.$row[detail].'</span>
               						
-						 	<a href="house_keeping.php?job=complete_request&request_ref='.$row[request_ref].'">	<button  type="button" class="btn btn-block btn-danger"> Completed Request </button> </a>
+						 	<a href="house_keeping.php?job=complete_request&request_ref='.$row[request_ref].'&id='.$row[id].'">	<button  type="button" class="btn btn-block btn-danger"> Completed Request </button> </a>
             			</div>
 
             		</div>
@@ -224,12 +224,13 @@ function room_request_bill($request_ref){
               </div> 
               		
                 		
-           <form name="rooms_type_form" role="form" action="house_keeping.php?job=request_billing&request_ref='.$row['request_ref'].'" method="post">     		
+           <form name="rooms_type_form" role="form" action="house_keeping.php?job=request_billing&request_ref='.$row['request_ref'].'&id='.$row[id].'" method="post">     		
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5"> <strong> Charge </strong> </font> </div>';
 		if($row[price]>0){
 		 echo'<div class="col-lg-6"> <font size="5">  '.$row['price'].' </font> </div>';
-			}else{
+			}
+            else{
            	echo'
                 <div class="col-lg-6"> <input class="form-control" name="request_charge"  required placeholder="Rs"> </div>
               </div>
@@ -237,7 +238,7 @@ function room_request_bill($request_ref){
             <div class="row">   		
               <div class="col-lg-12">
                 <div class="col-lg-6"> <font size="5">  </div>
-                <div class="col-lg-6" style="padding-top: 10px;"> <font size="5">  <button type="submit" class="btn btn-block btn-danger"> Update </button> </font> </div>
+                <div class="col-lg-6" style="padding-top: 10px;"> <font size="5">  <input type="submit" name="ok" class="btn btn-block btn-danger" value="Update"></font> </div>
               </div>';
 			}	
 			echo'   		
@@ -280,5 +281,33 @@ function update_room_request_price($request_ref,$request_charge) {
 	WHERE request_ref='$request_ref'";
 
 	mysqli_query ($conn, $query );
+
+}
+
+function get_info_by_request_ref($request_ref){
+    include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	$result = mysqli_query ($conn, "SELECT * FROM room_requests WHERE request_ref='$request_ref'" );
+
+	while ( $row = mysqli_fetch_array ( $result, MYSQLI_ASSOC ) )
+
+	{
+		return $row;
+	}
+    
+}
+
+function cancel_room_request ($id) {
+	include 'conf/config.php';
+	include 'conf/opendb.php';
+
+	mysqli_select_db ($conn, $dbname );
+	$query = "UPDATE room_requests SET
+	cancel_status='1'
+	WHERE id='$id'";
+
+	mysqli_query ($conn, $query );
+
 
 }

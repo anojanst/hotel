@@ -806,3 +806,65 @@ function get_product_info_from_sales_has_items($id, $sales_no){
 	}
 	include 'conf/closedb.php';
 }
+
+function  kot_status($sales_no){
+    include 'conf/config.php';
+    include 'conf/opendb.php';
+
+    $query = "UPDATE sales_has_items SET
+	kot_status='1'
+	WHERE sales_no='$sales_no'";
+
+    mysqli_query($conn, $query);
+
+    include 'conf/closedb.php';
+}
+
+function kot_print($sales_no)
+{
+    include 'conf/config.php';
+    include 'conf/opendb.php';
+
+    echo '<table style="width: 100%;" class="table-responsive table-bordered table-striped dt-responsive">
+		<tr>
+			<th>No</th>
+			<th>Description</th>
+			<td align="right"><strong>Qty</strong></td>
+			
+		</tr>';
+
+    $i=1;
+    $result = mysqli_query($conn, "SELECT * FROM sales_has_items WHERE sales_no='$sales_no' AND cancel_status='0' AND kot_status='0' ORDER BY id ASC");
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+        echo '<tr>
+            <td>'.$i.'</td>
+            <td> ' . $row[meal_name]. '</td>
+            <td>' . $row[quantity] . '</td>
+            </tr>';
+
+        $i +=1;
+    }
+
+    echo'</table>';
+}
+function get_ref_by_sales_no($sales_no){
+    include 'conf/config.php';
+    include 'conf/opendb.php';
+
+    $result = mysqli_query($conn, "SELECT * FROM sales_has_items WHERE sales_no='$sales_no' AND cancel_status='0' AND kot_status='0' ORDER BY id ASC");
+    while ($row = mysqli_fetch_array($result, MYSQLI_ASSOC)) {
+
+        switch($row[order_type]) {
+            case 'Order From Room':
+                echo '<strong>Ref : </strong>Room No ' . $row[ref_no] . '';
+                return;
+            case 'Dine In':
+                echo '<strong>Ref : </strong>Table' . $row[ref_no] . '';
+                return;
+            default :
+                echo '<strong>Ref : </strong>' . $row[order_type] . '</td>';
+                return;
+        }
+    }
+}

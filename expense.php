@@ -20,20 +20,14 @@ if ($_SESSION ['login'] == 1) {
 				update_expense_type ($id, $expense_type);
 			}
             else {
-				
-				$expense_type = $_POST ['expense_type'];
+					$expense_type = $_POST ['expense_type'];
 				
 				save_expense_type ($expense_type);
 			}
             $smarty->assign ( 'page', "Expense" );
 			$smarty->display ( 'expense/expense.tpl' );
         }
-        elseif ($_REQUEST ['job'] == "expense_charge") {
-			
-			
-			$smarty->assign ('page', "Expense");
-			$smarty->display ('expense/expense_charge.tpl');
-        }
+       
         elseif ($_REQUEST ['job'] == "edit") {
 			$_SESSION ['id'] = $id = $_REQUEST ['id'];
 			$info = get_expense_type_by_id ( $id );

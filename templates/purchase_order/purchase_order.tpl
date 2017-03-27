@@ -63,7 +63,6 @@
 							<option value="B">Box</option>
 							<option value="D">Dozen</option>
 							<option value="m">M</option>
-							<option value="g">g</option>
 							<option value="kg" >Kg</option>
 							<option value="l">Liters</option>
 						</select>

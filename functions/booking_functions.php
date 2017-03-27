@@ -83,8 +83,8 @@ function list_booking() {
 		else{
 			echo'<td>'.$guest_info[guest_name].'</td>';
 		}
-		echo $caller_info[phone];
-		echo 11;
+        
+        
 		if($caller_info[phone]){
 			echo'<td>'.$caller_info[phone].'</td>';
 		}
