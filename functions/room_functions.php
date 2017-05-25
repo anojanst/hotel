@@ -211,7 +211,7 @@ function list_available_rooms_in_home(){
 				<div class="col-lg-4 col-xs-4">
 					<div class="info-box">
 			
-						<a href="room_info.php?job=room_info&room_no=' . $row [room_no] . '"  >
+						<a href="room_info.php?job=room_info&room_no='.$row [room_no].'"  >
 			            	<span class="info-box-icon bg-'.$color.'">'.$row['room_no'].'</span>
 						</a>
 			

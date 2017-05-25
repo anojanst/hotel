@@ -37,11 +37,10 @@
 	</section>
 </div>
 {include file="user_footer.tpl"}
-	{literal}
-	
-			<script>
-			 $(function () {
-				 $("#example1").DataTable();
-			 });
-		</script>
-	{/literal}
+{literal}
+	<script>
+        $(function () {
+            $("#example1").DataTable();
+        });
+	</script>
+{/literal}
