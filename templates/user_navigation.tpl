@@ -42,7 +42,7 @@
 								<li class="scroll">
 									<a href="bar.php"><i class="fa fa-glass"></i><span>Bar</span></a>
 								</li>			
-							 </ul>
+							</ul>
 				</li>
                 
 				<li class="treeview">
@@ -56,7 +56,7 @@
 								<li class="scroll">
                                     <a href="tax.php"><i class="fa fa-money"></i><span>Tax</span></a>
                                 </li>		
-							 </ul>
+							</ul>
 				</li>
                 
 				<li class="treeview">
@@ -88,7 +88,7 @@
 								</li> 								
 	
 								<li class="scroll">
-									<a href="facility.php"><i class="fa fa-bed"></i><span>Facility</span></a
+									<a href="facility.php"><i class="fa fa-bed"></i><span>Facility</span></a>
 								</li>										
 							</ul>	
 				</li>

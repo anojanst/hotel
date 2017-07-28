@@ -35,7 +35,8 @@ if ($_SESSION['login'] == 1) {
 			}
 			$sales_info=get_sales_info_by_sales_no($sales_no);
 			$item_info=get_meal_info_from_sales_has_items($id, $sales_no);
-			
+			echo 1;
+			echo  $id;
 			$smarty->assign('sales_no',"$_SESSION[sales_no]");			
 			$smarty->assign('prepared_by',"$_SESSION[user_name]");
 			$smarty->assign('total',get_total_sales($_SESSION['sales_no']));

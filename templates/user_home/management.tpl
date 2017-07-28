@@ -103,7 +103,7 @@
             </div>
 
 				<div class="box-body">
-					<h4>Total Rooms <small class="label pull-right bg-aqua">{php} $total_rooms = total_rooms_count(); echo $total_rooms;{/php}</small></h4>
+                    <h4>Total Rooms <small class="label pull-right bg-aqua">{php} $total_rooms = total_rooms_count(); echo $total_rooms;{/php}</small></h4>
 					<h4>Occupied <small class="label pull-right bg-red">{php}$occupied_rooms = occupied_rooms_count(); echo $occupied_rooms;{/php}</small></h4>
 					<h4>Booked <small class="label pull-right bg-yellow">{php}$booked_rooms=booked_rooms_count(); echo $booked_rooms;{/php}</small></h4>
 					<h4>Under Maintainance <small class="label pull-right bg-navy">{php}$maintainance_rooms=maintainance_rooms_count(); echo $maintainance_rooms;{/php}</small></h4>
